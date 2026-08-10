@@ -10,6 +10,8 @@ export const navLinks = [
 export const profile = {
   name: "Andhika Andriana Putra",
   firstName: "Andhika",
+  lastName: "Putra",
+  nameParts: ["Andhika", "Andriana", "Putra"],
   headLinePrimary: "Fullstack",
   headLineSecondary: "Developer",
   eyebrow: "✦ Available for work",
@@ -20,18 +22,13 @@ export const profile = {
 };
 
 export const about = {
-  heading: "About Me",
-  role: "Fullstack Developer",
-  location: "Indonesia",
-  email: "email@kamu.com",
-  status: "Open to work",
-  name: "Andhika Andriana Putra",
-  intro:
-    "Halo! Saya Andhika Andriana Putra, Fullstack Developer yang fokus membangun aplikasi web modern — dari desain antarmuka yang bersih hingga logika backend yang solid.",
-  bio: [
-    "Saya senang mengubah ide menjadi produk digital yang nyata, mudah digunakan, dan dirawat dengan baik. Berpengalaman di ekosistem JavaScript/TypeScript di sisi frontend maupun backend.",
-    "Selain coding, saya terus belajar desain dan arsitektur perangkat lunak agar setiap project yang saya kerjakan tidak hanya berfungsi, tapi juga terasa elegan.",
-  ],
+  paragraph:
+    "Fresh Graduate SMK Rekayasa Perangkat Lunak dengan passion di bidang fullstack development dan UI modern. Berfokus pada pembuatan website clean, responsif, dan visual yang kuat untuk menghadirkan pengalaman digital yang optimal.",
+  quote: "Turning ideas into clean, modern, and meaningful digital experiences.",
+  // Taruh foto di public/assets/profile.png, atau ubah path ini.
+  photo: "",
+  // Ganti dengan link Google Drive / file CV kamu.
+  cvUrl: "#",
 };
 
 export const projects = [

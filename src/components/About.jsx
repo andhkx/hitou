@@ -1,155 +1,185 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import { Mail, MapPin, Briefcase, CircleDot } from "lucide-react";
-import SplitText from "./reactbits/TextAnimations/SplitText/SplitText.jsx";
-import { about, profile } from "@/data/portfolio";
+import { ArrowUpRight, Award, Code2, FileText, Globe } from "lucide-react";
+import { about, profile, projects, certificates } from "@/data/portfolio";
 
-const EASE = [0.16, 1, 0.3, 1];
+const EASE = [0.22, 1, 0.36, 1];
 
-const STATS = [
-  { icon: Briefcase, label: "Role", value: about.role },
-  { icon: MapPin, label: "Location", value: about.location },
-  { icon: Mail, label: "Email", value: about.email },
-];
+const STAT_ICONS = [Code2, Award, Globe];
 
 export default function About() {
   const reduce = useReducedMotion();
 
+  const stats = [
+    { icon: STAT_ICONS[0], value: String(projects.length), title: "PROJECTS" },
+    { icon: STAT_ICONS[1], value: String(certificates.length), title: "CERTIFICATES" },
+    { icon: STAT_ICONS[2], value: String(projects.length + certificates.length), title: "COMPLETED WORKS" },
+  ];
+
+  const scrollToPortfolio = () => {
+    document.getElementById("portfolio")?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 35, filter: "blur(8px)" },
+    show: {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: { duration: 1, ease: EASE },
+    },
+  };
+
   return (
     <section
       id="about"
-      className="w-full max-w-[1450px] mx-auto px-8 md:px-12 lg:px-20 pt-24 pb-24 text-white relative z-10"
+      className="w-full min-h-[100dvh] flex items-start px-6 pt-[60px] pb-[30px] md:pt-20 md:pr-[60px] md:pl-[120px] relative z-10 text-white"
     >
-      <motion.div
-        initial={reduce ? false : { opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.4 }}
-        transition={{ duration: 0.9, ease: EASE }}
-        className="mb-12"
-      >
-        {reduce ? (
-          <h1 className="text-4xl md:text-6xl font-extrabold tracking-[-0.03em]">About Me</h1>
-        ) : (
-          <SplitText
-            text="About Me"
-            tag="h1"
-            className="text-4xl md:text-6xl font-extrabold tracking-[-0.03em] leading-[1.05]"
-            duration={0.9}
-            delay={35}
-            from={{ opacity: 0, y: 60, rotate: 6 }}
-            to={{ opacity: 1, y: 0, rotate: 0 }}
-            splitType="chars"
-            textAlign="left"
-          />
-        )}
-      </motion.div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_0.85fr] gap-8 lg:gap-12 items-start">
-        <div>
-          <motion.h2
-            initial={reduce ? false : { opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.9, ease: EASE, delay: 0.1 }}
-            className="text-[clamp(24px,3.5vw,40px)] font-bold leading-[1.15] tracking-[-0.02em] mb-6"
-          >
-            {about.name}
-          </motion.h2>
-
+      <div className="w-full">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
           <motion.div
-            initial={reduce ? false : { opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.9, ease: EASE, delay: 0.2 }}
-            className="mb-6"
+            initial={reduce ? false : "hidden"}
+            whileInView="show"
+            viewport={{ once: false, margin: "-80px" }}
+            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.16 } } }}
+            className="w-full max-w-[600px]"
           >
-            {reduce ? (
-              <p className="text-[15px] text-secondary leading-[1.9] max-w-[520px]">{about.intro}</p>
-            ) : (
-              <SplitText
-                text={about.intro}
-                tag="p"
-                className="text-[15px] text-secondary leading-[1.9] max-w-[520px]"
-                duration={0.8}
-                delay={25}
-                from={{ opacity: 0, y: 24 }}
-                to={{ opacity: 1, y: 0 }}
-                splitType="words"
-                textAlign="left"
-                threshold={0.2}
-              />
-            )}
+            <motion.div variants={itemVariants} className="mb-4">
+              <span className="font-mono text-[12px] text-muted tracking-[0.2em]">
+                ABOUT ME
+              </span>
+            </motion.div>
+
+            <motion.div variants={itemVariants}>
+              <div className="text-[clamp(32px,5vw,46px)] font-extrabold leading-[1.03] text-foreground">
+                {profile.nameParts.map((part) => (
+                  <div key={part}>{part}</div>
+                ))}
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={reduce ? false : { opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, margin: "-80px" }}
+              transition={{ duration: 1.1, delay: 0.2, ease: EASE }}
+            >
+              <p className="mt-[18px] text-[14px] text-secondary leading-[1.75] max-w-[490px]">
+                {about.paragraph}
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={reduce ? false : { opacity: 0, scale: 0.94 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: false, margin: "-80px" }}
+              transition={{ duration: 0.9, delay: 0.3, ease: EASE }}
+            >
+              <p className="mt-[18px] px-[25px] py-3 rounded-[10px] border border-border bg-card text-[12px] italic text-foreground/80 inline-block w-fit leading-relaxed">
+                &ldquo;{about.quote}&rdquo;
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={reduce ? false : "hidden"}
+              whileInView="show"
+              viewport={{ once: false, margin: "-80px" }}
+              variants={{ hidden: {}, show: { transition: { staggerChildren: 0.16 } } }}
+              className="flex gap-2.5 mt-[18px] flex-wrap"
+            >
+              <motion.a
+                variants={itemVariants}
+                href={about.cvUrl || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ textDecoration: "none" }}
+              >
+                <button
+                  type="button"
+                  className="flex items-center gap-1.5 px-[18px] py-2.5 rounded-lg border border-white bg-white text-black text-[13px] font-semibold cursor-pointer transition-transform duration-300 hover:-translate-y-0.5 hover:scale-[1.03] hover:opacity-90"
+                >
+                  <FileText size={14} aria-hidden="true" />
+                  Download CV
+                </button>
+              </motion.a>
+              <motion.button
+                variants={itemVariants}
+                type="button"
+                onClick={scrollToPortfolio}
+                className="flex items-center gap-1.5 px-[18px] py-2.5 rounded-lg border border-white bg-transparent text-white text-[13px] font-semibold cursor-pointer transition-opacity duration-300 hover:opacity-85"
+              >
+                <ArrowUpRight size={14} aria-hidden="true" />
+                View Projects
+              </motion.button>
+            </motion.div>
           </motion.div>
 
-          <div className="space-y-4 max-w-[520px]">
-            {about.bio.map((paragraph, i) => (
-              <motion.p
-                key={i}
-                initial={reduce ? false : { opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 0.9, ease: EASE, delay: 0.15 * i }}
-                className="text-[14px] text-white/55 leading-[1.9]"
-              >
-                {paragraph}
-              </motion.p>
-            ))}
-          </div>
+          <motion.div
+            initial={reduce ? false : { opacity: 0, x: 70, rotate: 2 }}
+            whileInView={{ opacity: 1, x: 0, rotate: 0 }}
+            viewport={{ once: false, margin: "-80px" }}
+            transition={{ duration: 1.2, ease: EASE }}
+            className="hidden lg:flex w-[48%] justify-end"
+          >
+            <div className="p-3 rounded-full border border-border -translate-x-20">
+              {about.photo ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={about.photo}
+                  alt="Profile"
+                  width={240}
+                  height={240}
+                  className="w-[240px] h-[240px] rounded-full object-cover block"
+                />
+              ) : (
+                <div className="w-[240px] h-[240px] rounded-full bg-card flex items-center justify-center">
+                  <span className="text-6xl font-extrabold text-muted tracking-tight">
+                    {profile.firstName[0]}
+                    {profile.lastName[0]}
+                  </span>
+                </div>
+              )}
+            </div>
+          </motion.div>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-4">
-          {STATS.map((stat, i) => (
+        <motion.div
+          initial={reduce ? false : "hidden"}
+          whileInView="show"
+          viewport={{ once: false, margin: "-80px" }}
+          variants={{ hidden: {}, show: { transition: { staggerChildren: 0.16 } } }}
+          className="grid mt-9 grid-cols-1 md:grid-cols-3 gap-[18px]"
+        >
+          {stats.map((stat) => (
             <motion.div
-              key={stat.label}
-              initial={reduce ? false : { opacity: 0, y: 40, scale: 0.97 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ duration: 0.9, ease: EASE, delay: 0.1 * (i + 1) }}
-              className="rounded-2xl border border-white/15 bg-black/20 p-6 transition-all duration-300 hover:bg-black/30 hover:border-white/20"
+              key={stat.title}
+              variants={{
+                hidden: { opacity: 0, scale: 0.92, y: 25 },
+                show: {
+                  opacity: 1,
+                  scale: 1,
+                  y: 0,
+                  transition: { duration: 0.85, ease: EASE },
+                },
+              }}
+              whileHover={reduce ? undefined : { scale: 1.03 }}
+              onClick={scrollToPortfolio}
+              className="relative p-[18px] rounded-2xl border border-border bg-card cursor-pointer"
             >
-              <div className="flex items-center gap-2 mb-3">
-                <stat.icon size={15} className="text-white/40" aria-hidden="true" />
-                <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-white/40">
-                  {stat.label}
-                </p>
+              <div className="w-[34px] h-[34px] rounded-full border border-border flex items-center justify-center mb-2.5">
+                <stat.icon size={16} className="text-foreground/70" aria-hidden="true" />
               </div>
-              {stat.label === "Email" ? (
-                <a
-                  href={`mailto:${stat.value}`}
-                  className="text-[15px] font-bold leading-tight hover:text-white transition-colors break-all"
-                >
-                  {stat.value}
-                </a>
-              ) : (
-                <p className="text-[15px] font-bold leading-tight">{stat.value}</p>
-              )}
+              <div className="absolute top-4 right-4 text-[18px] font-bold text-foreground">
+                {stat.value}
+              </div>
+              <div className="text-[11px] tracking-[0.08em] text-secondary">{stat.title}</div>
+              <div className="absolute bottom-3.5 right-3.5 text-foreground/50">
+                <ArrowUpRight size={15} aria-hidden="true" />
+              </div>
             </motion.div>
           ))}
-
-          <motion.div
-            initial={reduce ? false : { opacity: 0, y: 40, scale: 0.97 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.9, ease: EASE, delay: 0.4 }}
-            className="rounded-2xl border border-white/15 bg-black/20 p-6 flex flex-col justify-center gap-3 hover:bg-black/30 hover:border-white/20 transition-all duration-300"
-          >
-            <div className="flex items-center gap-2.5">
-              <CircleDot size={15} className="text-emerald-400" aria-hidden="true" />
-              <p className="text-[15px] font-bold">{about.status}</p>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {profile.heroTags.slice(0, 4).map((tag) => (
-                <span
-                  key={tag}
-                  className="font-mono text-[10px] text-secondary border border-white/10 rounded-full px-2.5 py-1"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </motion.div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

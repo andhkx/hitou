@@ -1,5 +1,9 @@
+// React Compiler is incompatible with @react-three/fiber rendering; the
+// memoized commits drop the WebGL scene (flash then blank canvas).
+// @ts-ignore
+"use no memo";
 "use client";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Component, useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, extend, useFrame } from "@react-three/fiber";
 import { useGLTF, useTexture, Environment, Lightformer } from "@react-three/drei";
 import { BallCollider, CuboidCollider, Physics, RigidBody, useRopeJoint, useSphericalJoint } from "@react-three/rapier";
@@ -26,6 +30,52 @@ const BLANK_PIXEL =
 const FRONT_UV_RECT = { x: 0, y: 0, w: 0.5, h: 0.755 };
 const BACK_UV_RECT = { x: 0.5, y: 0, w: 0.5, h: 0.757 };
 
+class LanyardBoundary extends Component {
+  state = { failed: false };
+
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+
+  componentDidCatch(error) {
+    console.error("[Lanyard]", error);
+  }
+
+  render() {
+    if (this.state.failed) return <StaticCard />;
+    return this.props.children;
+  }
+}
+
+function StaticCard() {
+  return (
+    <div className="relative z-0 w-full h-full flex justify-center items-center">
+      <Canvas dpr={[1, 1.5]} gl={{ alpha: true }} camera={{ position: [0, 0, 6], fov: 20 }}>
+        <ambientLight intensity={Math.PI} />
+        <directionalLight position={[0, 0, 5]} intensity={2} />
+        <SpinCard />
+      </Canvas>
+    </div>
+  );
+}
+
+function SpinCard() {
+  const ref = useRef();
+  useFrame((_, delta) => {
+    if (!ref.current) return;
+    ref.current.rotation.x += delta * 0.35;
+    ref.current.rotation.y += delta * 0.5;
+  });
+  return (
+    <group ref={ref}>
+      <mesh>
+        <boxGeometry args={[2.2, 3.1, 0.05]} />
+        <meshPhysicalMaterial color="#232323" clearcoat={1} clearcoatRoughness={0.15} roughness={0.6} metalness={0.6} />
+      </mesh>
+    </group>
+  );
+}
+
 export default function Lanyard({
   position = [0, 0, 30],
   gravity = [0, -40, 0],
@@ -47,12 +97,13 @@ export default function Lanyard({
 
   return (
     <div className="relative z-0 w-full h-full flex justify-center items-center transform scale-100 origin-center">
-      <Canvas
-        camera={{ position: position, fov: fov }}
-        dpr={[1, isMobile ? 1.5 : 2]}
-        gl={{ alpha: transparent }}
-        onCreated={({ gl }) => gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)}
-      >
+      <LanyardBoundary>
+        <Canvas
+          camera={{ position: position, fov: fov }}
+          dpr={[1, isMobile ? 1.5 : 2]}
+          gl={{ alpha: transparent }}
+          onCreated={({ gl }) => gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)}
+        >
         <ambientLight intensity={Math.PI} />
         <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60}>
           <Band
@@ -64,7 +115,7 @@ export default function Lanyard({
             lanyardWidth={lanyardWidth}
           />
         </Physics>
-        <Environment blur={0.75}>
+        <Environment>
           <Lightformer
             intensity={2}
             color="white"
@@ -94,7 +145,8 @@ export default function Lanyard({
             scale={[100, 10, 1]}
           />
         </Environment>
-      </Canvas>
+        </Canvas>
+      </LanyardBoundary>
     </div>
   );
 }
@@ -127,13 +179,18 @@ function Band({
   const frontTex = useTexture(frontImage || BLANK_PIXEL);
   const backTex = useTexture(backImage || BLANK_PIXEL);
 
+  const baseMaterial = materials.base ?? Object.values(materials).find((m) => m.map) ?? null;
+  const cardGeometry = nodes.card?.geometry ?? null;
+
   // Composite the front/back images into the card's texture atlas (front = left
   // half, back = right half). Each image is drawn aspect-preserving (no stretch).
   const cardMap = useMemo(() => {
-    const baseMap = materials.base.map;
+    if (!baseMaterial) return null;
+    const baseMap = baseMaterial.map;
     if (!frontImage && !backImage) return baseMap;
 
     const baseImg = baseMap.image;
+    if (!baseImg) return baseMap;
     const W = baseImg.width;
     const H = baseImg.height;
     const canvas = document.createElement("canvas");
@@ -172,7 +229,7 @@ function Band({
     composite.anisotropy = 16;
     composite.needsUpdate = true;
     return composite;
-  }, [frontImage, backImage, imageFit, frontTex, backTex, materials.base.map]);
+  }, [frontImage, backImage, imageFit, frontTex, backTex, baseMaterial]);
 
   const [curve] = useState(() => {
     const c = new THREE.CatmullRomCurve3([
@@ -277,18 +334,36 @@ function Band({
               drag(new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation())))
             )}
           >
-            <mesh geometry={nodes.card.geometry}>
-              <meshPhysicalMaterial
-                map={cardMap}
-                map-anisotropy={16}
-                clearcoat={isMobile ? 0 : 1}
-                clearcoatRoughness={0.15}
-                roughness={0.9}
-                metalness={0.8}
-              />
-            </mesh>
-            <mesh geometry={nodes.clip.geometry} material={materials.metal} material-roughness={0.3} />
-            <mesh geometry={nodes.clamp.geometry} material={materials.metal} />
+            {cardGeometry ? (
+              <mesh geometry={cardGeometry}>
+                <meshPhysicalMaterial
+                  map={cardMap}
+                  map-anisotropy={16}
+                  clearcoat={isMobile ? 0 : 1}
+                  clearcoatRoughness={0.15}
+                  roughness={0.9}
+                  metalness={0.8}
+                />
+              </mesh>
+            ) : (
+              <mesh>
+                <boxGeometry args={[0.8, 1.125, 0.01]} />
+                <meshPhysicalMaterial
+                  color="#1a1a1a"
+                  map={cardMap}
+                  clearcoat={isMobile ? 0 : 1}
+                  clearcoatRoughness={0.15}
+                  roughness={0.9}
+                  metalness={0.8}
+                />
+              </mesh>
+            )}
+            {nodes.clip?.geometry && (
+              <mesh geometry={nodes.clip.geometry} material={materials.metal} material-roughness={0.3} />
+            )}
+            {nodes.clamp?.geometry && (
+              <mesh geometry={nodes.clamp.geometry} material={materials.metal} />
+            )}
           </group>
         </RigidBody>
       </group>
