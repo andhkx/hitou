@@ -116,6 +116,41 @@ export default function Contact() {
                 Send Message
               </button>
             </form>
+          </div>
+        </Reveal>
+
+        <Reveal reduce={reduce} x={40}>
+          <div className="rounded-[28px] md:rounded-[34px] border border-white/10 bg-white/5 backdrop-blur-xl p-5 md:p-8 h-full">
+            <h3 className="text-xl md:text-2xl font-semibold mb-1">Direct Contact</h3>
+            <p className="text-xs md:text-sm text-white/40 mb-6">Prefer email? Reach me directly anytime.</p>
+            <div className="space-y-4">
+              <a
+                href={`mailto:${contactInfo.email}`}
+                className="flex items-center gap-4 rounded-2xl border border-white/10 bg-black/20 p-4 transition-all duration-200 hover:border-white/20 hover:bg-white/[0.04]"
+              >
+                <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
+                  <Mail size={18} className="text-white/70" aria-hidden="true" />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-xs text-white/40">Email</p>
+                  <p className="text-sm font-medium truncate">{contactInfo.email}</p>
+                </div>
+              </a>
+              <div className="flex items-center gap-4 rounded-2xl border border-white/10 bg-black/20 p-4">
+                <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
+                  <MapPin size={18} className="text-white/70" aria-hidden="true" />
+                </div>
+                <div>
+                  <p className="text-xs text-white/40">Location</p>
+                  <p className="text-sm font-medium">{contactInfo.location}</p>
+                </div>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
+                <p className="text-sm text-white/50 leading-relaxed">
+                  Open to full-time & freelance opportunities. Usually respond within 24 hours.
+                </p>
+              </div>
+            </div>
 
             <div className="border-t border-white/10 pt-5 mt-6">
               <p className="text-sm text-white/55 mb-4">Connect With Me</p>
@@ -173,41 +208,6 @@ export default function Contact() {
                     </div>
                   </a>
                 ))}
-              </div>
-            </div>
-          </div>
-        </Reveal>
-
-        <Reveal reduce={reduce} x={40}>
-          <div className="rounded-[28px] md:rounded-[34px] border border-white/10 bg-white/5 backdrop-blur-xl p-5 md:p-8 h-full">
-            <h3 className="text-xl md:text-2xl font-semibold mb-1">Direct Contact</h3>
-            <p className="text-xs md:text-sm text-white/40 mb-6">Prefer email? Reach me directly anytime.</p>
-            <div className="space-y-4">
-              <a
-                href={`mailto:${contactInfo.email}`}
-                className="flex items-center gap-4 rounded-2xl border border-white/10 bg-black/20 p-4 transition-all duration-200 hover:border-white/20 hover:bg-white/[0.04]"
-              >
-                <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
-                  <Mail size={18} className="text-white/70" aria-hidden="true" />
-                </div>
-                <div className="min-w-0">
-                  <p className="text-xs text-white/40">Email</p>
-                  <p className="text-sm font-medium truncate">{contactInfo.email}</p>
-                </div>
-              </a>
-              <div className="flex items-center gap-4 rounded-2xl border border-white/10 bg-black/20 p-4">
-                <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
-                  <MapPin size={18} className="text-white/70" aria-hidden="true" />
-                </div>
-                <div>
-                  <p className="text-xs text-white/40">Location</p>
-                  <p className="text-sm font-medium">{contactInfo.location}</p>
-                </div>
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                <p className="text-sm text-white/50 leading-relaxed">
-                  Open to full-time & freelance opportunities. Usually respond within 24 hours.
-                </p>
               </div>
             </div>
           </div>

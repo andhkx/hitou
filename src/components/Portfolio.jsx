@@ -33,6 +33,15 @@ const tabVariants = {
   exit: { opacity: 0, y: -14, scale: 0.985 },
 };
 
+function SafeImg({ src, alt, className, fallback }) {
+  const [err, setErr] = useState(false);
+  if (err || !src) return fallback;
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img src={src} alt={alt} className={className} loading="lazy" onError={() => setErr(true)} />
+  );
+}
+
 export default function Portfolio() {
   const reduce = useReducedMotion();
   const [tab, setTab] = useState("projects");
@@ -94,6 +103,18 @@ export default function Portfolio() {
                   transition={{ duration: 0.6, delay: 0.08 * i, ease: EASE }}
                   className="group rounded-[24px] border border-white/10 bg-white/[0.04] backdrop-blur-xl p-6 flex flex-col gap-4 transition-all duration-300 hover:bg-white/[0.06] hover:border-white/20 hover:scale-[1.01]"
                 >
+                  <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-black/20 aspect-video mb-4">
+                    <SafeImg
+                      src={p.image}
+                      alt={p.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      fallback={
+                        <div className="w-full h-full flex items-center justify-center">
+                          <Folder size={22} className="text-white/20" />
+                        </div>
+                      }
+                    />
+                  </div>
                   <div className="flex items-center justify-between">
                     <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
                       <Folder size={18} className="text-white/70" />
@@ -151,8 +172,17 @@ export default function Portfolio() {
                   transition={{ duration: 0.6, delay: 0.07 * i, ease: EASE }}
                   className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-5 transition-all duration-300 hover:bg-white/[0.06] hover:border-white/20"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
-                    <Award size={18} className="text-white/70" />
+                  <div className="w-12 h-12 rounded-lg overflow-hidden border border-white/10 bg-black/20 shrink-0">
+                    <SafeImg
+                      src={c.image}
+                      alt={c.title}
+                      className="w-full h-full object-cover"
+                      fallback={
+                        <div className="w-full h-full flex items-center justify-center">
+                          <Award size={18} className="text-white/50" />
+                        </div>
+                      }
+                    />
                   </div>
                   <div className="flex-1 min-w-0">
                     <h3 className="text-[15px] font-semibold truncate">{c.title}</h3>

@@ -25,8 +25,8 @@ export const about = {
   paragraph:
     "Fresh Graduate SMK Rekayasa Perangkat Lunak dengan passion di bidang fullstack development dan UI modern. Berfokus pada pembuatan website clean, responsif, dan visual yang kuat untuk menghadirkan pengalaman digital yang optimal.",
   quote: "Turning ideas into clean, modern, and meaningful digital experiences.",
-  // Taruh foto di public/assets/profile.png, atau ubah path ini.
-  photo: "",
+  // Foto di public/assets/profile.jpg — ganti path ini kalau nama filenya beda.
+  photo: "/assets/profile.jpg",
   // Ganti dengan link Google Drive / file CV kamu.
   cvUrl: "#",
 };
@@ -40,6 +40,8 @@ export const projects = [
     year: "2026",
     live: "#",
     repo: "#",
+    // Screenshot: taruh file di public/assets/projects/1.jpg
+    image: "/assets/projects/1.jpg",
   },
   {
     id: 2,
@@ -49,6 +51,7 @@ export const projects = [
     year: "2025",
     live: "#",
     repo: "#",
+    image: "/assets/projects/2.jpg",
   },
   {
     id: 3,
@@ -58,13 +61,14 @@ export const projects = [
     year: "2025",
     live: "#",
     repo: "#",
+    image: "/assets/projects/3.jpg",
   },
 ];
 
 export const certificates = [
-  { id: 1, title: "Certificate Name 1", issuer: "Issuer / Platform", year: "2025" },
-  { id: 2, title: "Certificate Name 2", issuer: "Issuer / Platform", year: "2024" },
-  { id: 3, title: "Certificate Name 3", issuer: "Issuer / Platform", year: "2024" },
+  { id: 1, title: "Certificate Name 1", issuer: "Issuer / Platform", year: "2025", image: "/assets/certificates/1.jpg" },
+  { id: 2, title: "Certificate Name 2", issuer: "Issuer / Platform", year: "2024", image: "/assets/certificates/2.jpg" },
+  { id: 3, title: "Certificate Name 3", issuer: "Issuer / Platform", year: "2024", image: "/assets/certificates/3.jpg" },
 ];
 
 // logo: CDN simple-icons (gambar otomatis, tanpa file). Ganti dengan path lokal
