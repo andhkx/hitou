@@ -105,7 +105,10 @@ export default function Lanyard({
           camera={{ position: position, fov: fov }}
           dpr={[1, isMobile ? 1.5 : 2]}
           gl={{ alpha: transparent }}
-          onCreated={({ gl }) => gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)}
+          onCreated={({ gl }) => {
+            gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1);
+            gl.domElement.addEventListener("webglcontextlost", (e) => e.preventDefault());
+          }}
         >
           <ambientLight intensity={Math.PI} />
           <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60}>
@@ -229,7 +232,7 @@ function Band({
     const composite = new THREE.CanvasTexture(canvas);
     composite.colorSpace = THREE.SRGBColorSpace;
     composite.flipY = baseMap.flipY;
-    composite.anisotropy = 16;
+    composite.anisotropy = 4;
     composite.needsUpdate = true;
     return composite;
   }, [frontImage, backImage, imageFit, frontTex, backTex, baseMaterial]);
@@ -344,7 +347,7 @@ function Band({
               <mesh geometry={cardGeometry}>
                 <meshPhysicalMaterial
                   map={cardMap}
-                  map-anisotropy={16}
+                  map-anisotropy={4}
                   clearcoat={isMobile ? 0 : 1}
                   clearcoatRoughness={0.15}
                   roughness={0.9}

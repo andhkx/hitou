@@ -70,7 +70,7 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.65, ease: EASE }}
           className="mb-3"
         >
-          <span className="font-mono text-[15px] text-secondary tracking-[0.1em]">
+          <div className="font-mono text-[15px] text-secondary tracking-[0.1em]">
             <Typewriter
               text={profile.typedRoles}
               speed={65}
@@ -79,10 +79,10 @@ export default function Hero() {
               showCursor={true}
               cursorChar="_"
             />
-          </span>
+          </div>
         </motion.div>
 
-        <motion.p
+        <motion.div
           initial={reduce ? false : { opacity: 0, y: 60, scale: 0.96 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 1, delay: 0.8, ease: EASE }}
@@ -101,7 +101,7 @@ export default function Hero() {
               cursorChar="_"
             />
           )}
-        </motion.p>
+        </motion.div>
 
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 30, scale: 0.88 }}
