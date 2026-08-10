@@ -29,7 +29,7 @@ export default function Hero() {
     >
       {showLanyard && (
         <div className="absolute inset-y-0 right-0 w-full h-full lg:w-[42%] z-0 opacity-70 lg:opacity-100 pointer-events-none lg:pointer-events-auto">
-          <Lanyard position={[0, 0, 30]} gravity={[0, -40, 0]} lanyardWidth={1.2} />
+          <Lanyard position={[0, 0, 20]} gravity={[0, -40, 0]} lanyardWidth={1.2} />
         </div>
       )}
 

@@ -1,6 +1,5 @@
-// React Compiler is incompatible with @react-three/fiber rendering; the
+// @ts-ignore - React Compiler is incompatible with @react-three/fiber; the
 // memoized commits drop the WebGL scene (flash then blank canvas).
-// @ts-ignore
 "use no memo";
 "use client";
 import { Component, useEffect, useMemo, useRef, useState } from "react";
@@ -12,6 +11,10 @@ import * as THREE from "three";
 
 // React Bits - Backgrounds/Lanyard (JS port)
 // https://www.reactbits.dev/backgrounds/lanyard
+//
+// Next.js note: unlike Vite (assetsInclude: ['**/*.glb']), Next serves the
+// model/texture from public/ by URL. Keep card.glb + lanyard.png in
+// public/assets/lanyard/.
 
 const CARD_GLB = "/assets/lanyard/card.glb";
 const LANYARD_PNG = "/assets/lanyard/lanyard.png";
@@ -38,7 +41,7 @@ class LanyardBoundary extends Component {
   }
 
   componentDidCatch(error) {
-    console.error("[Lanyard]", error);
+    console.error("[Lanyard] render error:", error);
   }
 
   render() {
@@ -104,47 +107,47 @@ export default function Lanyard({
           gl={{ alpha: transparent }}
           onCreated={({ gl }) => gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)}
         >
-        <ambientLight intensity={Math.PI} />
-        <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60}>
-          <Band
-            isMobile={isMobile}
-            frontImage={frontImage}
-            backImage={backImage}
-            imageFit={imageFit}
-            lanyardImage={lanyardImage}
-            lanyardWidth={lanyardWidth}
-          />
-        </Physics>
-        <Environment>
-          <Lightformer
-            intensity={2}
-            color="white"
-            position={[0, -1, 5]}
-            rotation={[0, 0, Math.PI / 3]}
-            scale={[100, 0.1, 1]}
-          />
-          <Lightformer
-            intensity={3}
-            color="white"
-            position={[-1, -1, 1]}
-            rotation={[0, 0, Math.PI / 3]}
-            scale={[100, 0.1, 1]}
-          />
-          <Lightformer
-            intensity={3}
-            color="white"
-            position={[1, 1, 1]}
-            rotation={[0, 0, Math.PI / 3]}
-            scale={[100, 0.1, 1]}
-          />
-          <Lightformer
-            intensity={10}
-            color="white"
-            position={[-10, 0, 14]}
-            rotation={[0, Math.PI / 2, Math.PI / 3]}
-            scale={[100, 10, 1]}
-          />
-        </Environment>
+          <ambientLight intensity={Math.PI} />
+          <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60}>
+            <Band
+              isMobile={isMobile}
+              frontImage={frontImage}
+              backImage={backImage}
+              imageFit={imageFit}
+              lanyardImage={lanyardImage}
+              lanyardWidth={lanyardWidth}
+            />
+          </Physics>
+          <Environment blur={0.75}>
+            <Lightformer
+              intensity={2}
+              color="white"
+              position={[0, -1, 5]}
+              rotation={[0, 0, Math.PI / 3]}
+              scale={[100, 0.1, 1]}
+            />
+            <Lightformer
+              intensity={3}
+              color="white"
+              position={[-1, -1, 1]}
+              rotation={[0, 0, Math.PI / 3]}
+              scale={[100, 0.1, 1]}
+            />
+            <Lightformer
+              intensity={3}
+              color="white"
+              position={[1, 1, 1]}
+              rotation={[0, 0, Math.PI / 3]}
+              scale={[100, 0.1, 1]}
+            />
+            <Lightformer
+              intensity={10}
+              color="white"
+              position={[-10, 0, 14]}
+              rotation={[0, Math.PI / 2, Math.PI / 3]}
+              scale={[100, 10, 1]}
+            />
+          </Environment>
         </Canvas>
       </LanyardBoundary>
     </div>
@@ -243,11 +246,14 @@ function Band({
   });
 
   const wrapTexture = useMemo(() => {
+    // clone() copies wrap settings; reset here because the react-hooks
+    // immutability rule forbids mutating the useTexture() result directly.
     const t = texture.clone();
     t.wrapS = t.wrapT = THREE.RepeatWrapping;
     t.needsUpdate = true;
     return t;
   }, [texture]);
+
   const [dragged, drag] = useState(false);
   const [hovered, hover] = useState(false);
 
@@ -348,14 +354,7 @@ function Band({
             ) : (
               <mesh>
                 <boxGeometry args={[0.8, 1.125, 0.01]} />
-                <meshPhysicalMaterial
-                  color="#1a1a1a"
-                  map={cardMap}
-                  clearcoat={isMobile ? 0 : 1}
-                  clearcoatRoughness={0.15}
-                  roughness={0.9}
-                  metalness={0.8}
-                />
+                <meshPhysicalMaterial color="#232323" clearcoat={isMobile ? 0 : 1} clearcoatRoughness={0.15} roughness={0.9} metalness={0.8} />
               </mesh>
             )}
             {nodes.clip?.geometry && (
