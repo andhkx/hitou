@@ -15,11 +15,23 @@ const EASE = [0.16, 1, 0.3, 1];
 
 export default function Hero() {
   const reduce = useReducedMotion();
-  const [showLanyard, setShowLanyard] = useState(false);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const t = setTimeout(() => setShowLanyard(true), 400);
-    return () => clearTimeout(t);
+    let cancelled = false;
+    Promise.all([
+      fetch("/assets/lanyard/card.glb").then((r) => r.blob()),
+      fetch("/assets/lanyard/lanyard.png").then((r) => r.blob()),
+    ])
+      .then(() => {
+        if (!cancelled) setReady(true);
+      })
+      .catch(() => {
+        if (!cancelled) setReady(true);
+      });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   return (
@@ -27,9 +39,9 @@ export default function Hero() {
       id="home"
       className="px-6 md:pl-[120px] md:pr-[60px] min-h-[100dvh] flex items-center justify-start relative overflow-hidden"
     >
-      {showLanyard && (
+      {ready && (
         <div className="absolute inset-y-0 right-0 w-full h-full lg:w-[42%] z-0 opacity-70 lg:opacity-100 pointer-events-none lg:pointer-events-auto">
-          <Lanyard position={[0, 0, 20]} gravity={[0, -40, 0]} lanyardWidth={1.2} />
+          <Lanyard position={[0, 0, 20]} fov={14} gravity={[0, -40, 0]} lanyardWidth={1.2} />
         </div>
       )}
 
