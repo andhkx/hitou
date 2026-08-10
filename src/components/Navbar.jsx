@@ -30,9 +30,11 @@ export default function Navbar() {
         <nav className="max-w-[1400px] mx-auto flex items-center justify-between px-6 md:px-12 h-16">
           <a
             href="#home"
-            className="font-mono text-[13px] font-medium tracking-[0.15em] uppercase text-foreground hover:text-white transition-colors"
+            className="flex items-baseline text-[15px] font-bold tracking-tight text-foreground hover:text-white transition-colors"
           >
-            A<span className="text-secondary">.</span>P
+            <span className="text-foreground">Andhika</span>
+            <span className="text-secondary">&nbsp;Andriana</span>
+            <span className="text-muted">&nbsp;Putra</span>
           </a>
 
           <div className="flex items-center gap-8">
@@ -63,7 +65,7 @@ export default function Navbar() {
 
         <motion.div
           style={{ scaleX: scrollYProgress }}
-          className="h-[2px] bg-white/25 origin-left"
+          className="h-[2px] bg-white origin-left"
         />
       </motion.header>
 

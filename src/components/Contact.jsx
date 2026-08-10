@@ -223,8 +223,6 @@ export default function Contact() {
           </div>
         </Reveal>
       </div>
-
-      <div className="mt-20 text-center text-xs text-white/35">{contactInfo.footer}</div>
     </section>
   );
 }

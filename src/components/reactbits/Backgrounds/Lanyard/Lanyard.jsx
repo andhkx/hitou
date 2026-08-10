@@ -295,21 +295,21 @@ function Band({
   useRopeJoint(fixed, j1, [
     [0, 0, 0],
     [0, 0, 0],
-    0.8,
+    1.2,
   ]);
   useRopeJoint(j1, j2, [
     [0, 0, 0],
     [0, 0, 0],
-    0.8,
+    1.2,
   ]);
   useRopeJoint(j2, j3, [
     [0, 0, 0],
     [0, 0, 0],
-    0.8,
+    1.2,
   ]);
   useSphericalJoint(j3, card, [
     [0, 0, 0],
-    [0, 1.0, 0],
+    [0, 1.4, 0],
   ]);
 
   useEffect(() => {
