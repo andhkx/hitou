@@ -23,7 +23,10 @@ export default function IntroLoader() {
       if (t < 1) raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
-    const done = setTimeout(() => setVisible(false), DURATION + 250);
+    const done = setTimeout(() => {
+      setVisible(false);
+      document.body.style.overflow = "";
+    }, DURATION + 250);
     return () => {
       cancelAnimationFrame(raf);
       clearTimeout(done);

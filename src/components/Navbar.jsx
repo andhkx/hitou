@@ -35,21 +35,20 @@ export default function Navbar() {
             A<span className="text-secondary">.</span>P
           </a>
 
-          <ul className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <li key={link.id}>
-                <a
-                  href={`#${link.id}`}
-                  className="font-mono text-[13px] text-secondary hover:text-foreground transition-colors duration-300"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-
-          <div className="flex items-center gap-4">
-            <span className="hidden lg:inline-block font-mono text-[11px] tracking-[0.2em] uppercase text-muted">
+          <div className="flex items-center gap-8">
+            <ul className="hidden md:flex items-center gap-8">
+              {navLinks.map((link) => (
+                <li key={link.id}>
+                  <a
+                    href={`#${link.id}`}
+                    className="font-mono text-[13px] text-secondary hover:text-foreground transition-colors duration-300"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <span className="hidden lg:inline-block font-mono text-[11px] tracking-[0.2em] uppercase text-secondary">
               ✦ {profile.eyebrow.replace("✦ ", "")}
             </span>
             <button
