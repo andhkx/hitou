@@ -108,7 +108,7 @@ export const socials = [
 ];
 
 export const contactInfo = {
-  email: "email@kamu.com",
+  email: "andhikaputrach273@gmail.com",
   location: "Indonesia",
   footer: "© 2026 Andhika Andriana Putra — All rights reserved.",
 };

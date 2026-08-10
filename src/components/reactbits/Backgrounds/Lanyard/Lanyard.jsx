@@ -19,6 +19,13 @@ import * as THREE from "three";
 const CARD_GLB = "/assets/lanyard/card.glb";
 const LANYARD_PNG = "/assets/lanyard/lanyard.png";
 
+// Warm the loader caches before the Canvas mounts so cold reloads don't race
+// (3.8MB GLB + WASM compiling while the render loop starts -> context loss).
+if (typeof window !== "undefined") {
+  useGLTF.preload(CARD_GLB);
+  useTexture.preload(LANYARD_PNG);
+}
+
 extend({ MeshLineGeometry, MeshLineMaterial });
 
 // 1x1 transparent pixel - lets useTexture be called unconditionally when a
@@ -42,6 +49,7 @@ class LanyardBoundary extends Component {
 
   componentDidCatch(error) {
     console.error("[Lanyard] render error:", error);
+    this.props.onReset?.();
   }
 
   render() {
@@ -91,6 +99,8 @@ export default function Lanyard({
   lanyardWidth = 1,
 }) {
   const [isMobile, setIsMobile] = useState(() => typeof window !== "undefined" && window.innerWidth < 768);
+  const [key, setKey] = useState(0);
+  const [failed, setFailed] = useState(false);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
@@ -98,16 +108,31 @@ export default function Lanyard({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  if (failed) return <StaticCard />;
+
   return (
     <div className="relative z-0 w-full h-full flex justify-center items-center transform scale-100 origin-center">
-      <LanyardBoundary>
+      <LanyardBoundary onReset={() => setKey((k) => k + 1)}>
         <Canvas
+          key={key}
           camera={{ position: position, fov: fov }}
-          dpr={[1, isMobile ? 1.5 : 2]}
-          gl={{ alpha: transparent }}
+          dpr={[1, isMobile ? 1.25 : 1.5]}
+          gl={{ alpha: transparent, powerPreference: "high-performance", antialias: true }}
           onCreated={({ gl }) => {
             gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1);
-            gl.domElement.addEventListener("webglcontextlost", (e) => e.preventDefault());
+            const dom = gl.domElement;
+            const handleLost = (e) => {
+              e.preventDefault();
+              console.warn("[Lanyard] WebGL context lost - auto recovering");
+              setKey((k) => {
+                if (k >= 3) {
+                  setFailed(true);
+                  return k;
+                }
+                return k + 1;
+              });
+            };
+            dom.addEventListener("webglcontextlost", handleLost, false);
           }}
         >
           <ambientLight intensity={Math.PI} />
@@ -193,41 +218,48 @@ function Band({
   const cardMap = useMemo(() => {
     if (!baseMaterial) return null;
     const baseMap = baseMaterial.map;
-    if (!frontImage && !backImage) return baseMap;
+    if (!baseMap || !baseMap.image) return baseMap;
 
     const baseImg = baseMap.image;
-    if (!baseImg) return baseMap;
-    const W = baseImg.width;
-    const H = baseImg.height;
+    // Downscale heavy texture (e.g. 2560x2560 -> 1024x1024) to save VRAM and prevent GPU drops on cold reloads
+    const MAX_DIM = 1024;
+    const origW = baseImg.width || 1024;
+    const origH = baseImg.height || 1024;
+    const scaleFactor = Math.min(1, MAX_DIM / Math.max(origW, origH));
+    const W = Math.round(origW * scaleFactor);
+    const H = Math.round(origH * scaleFactor);
+
     const canvas = document.createElement("canvas");
     canvas.width = W;
     canvas.height = H;
     const ctx = canvas.getContext("2d");
     if (!ctx) return baseMap;
-    // Keep the original baked atlas for the card edges and any untouched face.
+
     ctx.drawImage(baseImg, 0, 0, W, H);
 
-    const drawFitted = (img, rect) => {
-      const rx = rect.x * W;
-      const ry = rect.y * H;
-      const rw = rect.w * W;
-      const rh = rect.h * H;
-      const pick = imageFit === "contain" ? Math.min : Math.max;
-      const scale = pick(rw / img.width, rh / img.height);
-      const dw = img.width * scale;
-      const dh = img.height * scale;
-      const dx = rx + (rw - dw) / 2;
-      const dy = ry + (rh - dh) / 2;
-      ctx.save();
-      ctx.beginPath();
-      ctx.rect(rx, ry, rw, rh);
-      ctx.clip();
-      ctx.drawImage(img, dx, dy, dw, dh);
-      ctx.restore();
-    };
+    if (frontImage || backImage) {
+      const drawFitted = (img, rect) => {
+        const rx = rect.x * W;
+        const ry = rect.y * H;
+        const rw = rect.w * W;
+        const rh = rect.h * H;
+        const pick = imageFit === "contain" ? Math.min : Math.max;
+        const scale = pick(rw / img.width, rh / img.height);
+        const dw = img.width * scale;
+        const dh = img.height * scale;
+        const dx = rx + (rw - dw) / 2;
+        const dy = ry + (rh - dh) / 2;
+        ctx.save();
+        ctx.beginPath();
+        ctx.rect(rx, ry, rw, rh);
+        ctx.clip();
+        ctx.drawImage(img, dx, dy, dw, dh);
+        ctx.restore();
+      };
 
-    if (frontImage && frontTex.image) drawFitted(frontTex.image, FRONT_UV_RECT);
-    if (backImage && backTex.image) drawFitted(backTex.image, BACK_UV_RECT);
+      if (frontImage && frontTex.image) drawFitted(frontTex.image, FRONT_UV_RECT);
+      if (backImage && backTex.image) drawFitted(backTex.image, BACK_UV_RECT);
+    }
 
     const composite = new THREE.CanvasTexture(canvas);
     composite.colorSpace = THREE.SRGBColorSpace;
