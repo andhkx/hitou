@@ -162,33 +162,35 @@ export default function Portfolio() {
               animate="show"
               exit={reduce ? undefined : "exit"}
               transition={{ duration: 0.5, ease: EASE }}
-              className="max-w-3xl mx-auto space-y-4 px-1"
+              className="grid md:grid-cols-2 xl:grid-cols-3 gap-6 px-1"
             >
               {certificates.map((c, i) => (
                 <motion.div
                   key={c.id}
-                  initial={reduce ? false : { opacity: 0, x: -28 }}
-                  animate={{ opacity: 1, x: 0 }}
+                  initial={reduce ? false : { opacity: 0, y: 28 }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.07 * i, ease: EASE }}
-                  className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-5 transition-all duration-300 hover:bg-white/[0.06] hover:border-white/20"
+                  className="group rounded-[24px] border border-white/10 bg-white/[0.04] backdrop-blur-xl p-5 transition-all duration-300 hover:bg-white/[0.06] hover:border-white/20 hover:scale-[1.01]"
                 >
-                  <div className="w-12 h-12 rounded-lg overflow-hidden border border-white/10 bg-black/20 shrink-0">
+                  <div className="relative rounded-xl overflow-hidden border border-white/10 bg-black/20 aspect-[4/3] mb-4">
                     <SafeImg
                       src={c.image}
                       alt={c.title}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       fallback={
                         <div className="w-full h-full flex items-center justify-center">
-                          <Award size={18} className="text-white/50" />
+                          <Award size={26} className="text-white/20" />
                         </div>
                       }
                     />
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-[15px] font-semibold truncate">{c.title}</h3>
-                    <p className="text-[13px] text-white/50">{c.issuer}</p>
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <h3 className="text-[15px] font-semibold truncate">{c.title}</h3>
+                      <p className="text-[13px] text-white/50">{c.issuer}</p>
+                    </div>
+                    <span className="font-mono text-[11px] text-white/35 shrink-0">{c.year}</span>
                   </div>
-                  <span className="font-mono text-[11px] text-white/35">{c.year}</span>
                 </motion.div>
               ))}
             </motion.div>
