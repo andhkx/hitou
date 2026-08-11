@@ -1,4 +1,5 @@
 import Background from "@/components/Background";
+import CursorGlow from "@/components/CursorGlow";
 import IntroLoader from "@/components/IntroLoader";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
@@ -17,6 +18,7 @@ export default function Home() {
     <main className="relative overflow-hidden">
       <IntroLoader />
       <Background />
+      <CursorGlow />
       <Navbar />
       <div className="relative z-[2]">
         <Hero />

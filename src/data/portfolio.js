@@ -11,17 +11,23 @@ export const navLinks = [
 ];
 
 export const profile = {
-  name: "Andhika Andriana Putra",
-  firstName: "Andhika",
-  lastName: "Putra",
-  nameParts: ["Andhika", "Andriana", "Putra"],
+  name: "Hitou",
+  brand: "Hitou Studio",
+  firstName: "Hitou",
+  lastName: "",
+  nameParts: ["Hitou"],
   eyebrow: "✦ Jasa Pembuatan Website",
   tagline: "JASA PEMBUATAN WEBSITE",
-  headLinePrimary: "Butuh Website?",
-  headLineSecondary: "Mulai",
-  heroPrice: "Rp 250rb",
-  typedRoles: ["Cepat, murah, terpercaya.", "Landing page dalam 3-5 hari.", "Website UMKM & personal."],
-  bio: "Bikin website cepat, murah, terpercaya untuk UMKM & personal.",
+  greeting: "Halo! Saya",
+  heroName: "Hitou",
+  heroRole: "Web Developer",
+  heroPriceBadge: "Mulai dari Rp 250rb",
+  typedDescriptions: [
+    "Saya bantu UMKM & personal punya website — cepat, murah, dan terpercaya. Dari landing page sampai aplikasi web dengan backend.",
+    "Mulai dari Rp 250rb, delivery 3–5 hari, support after deploy. Ceritakan kebutuhanmu, saya yang kerjakan.",
+    "Pernah bikin platform booking travel yang live production & aplikasi sekolah multi-role. Hasil nyata, bukan cuma janji.",
+  ],
+  bio: "Jasa pembuatan website untuk UMKM & personal — cepat, murah, terpercaya.",
   hints: ["↓ lihat paket & portofolio", "↗ respon cepat via WhatsApp"],
   heroTags: ["Laravel", "Next.js", "React", "Tailwind"],
   ctaPrimary: "Pesan Sekarang",
@@ -245,11 +251,11 @@ export const contactInfo = {
   email: "andhikaputrach273@gmail.com",
   phone: "+62 895-6271-74900",
   location: "Cimahi, Indonesia",
-  footer: "© 2026 Andhika Andriana Putra — Jasa Pembuatan Website",
+  footer: "© 2026 Hitou Studio — Jasa Pembuatan Website",
 };
 
 export const about = {
   photo: "/assets/profile.jpg",
   paragraph:
-    "Halo! Saya Andhika, membantu UMKM & personal punya website — cepat, murah, dan terpercaya.",
+    "Halo! Saya Hitou, membantu UMKM & personal punya website — cepat, murah, dan terpercaya.",
 };

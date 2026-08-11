@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import { Mail, MessageCircle, Phone } from "lucide-react";
-import { about, contactInfo, socials, wa } from "@/data/portfolio";
+import { about, contactInfo, profile, socials, wa } from "@/data/portfolio";
 
 const EASE = [0.16, 1, 0.3, 1];
 
@@ -60,7 +60,7 @@ export default function CTA() {
                 href={wa("Halo Andhika! Saya siap order website.")}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 rounded-xl bg-lime-400 text-black text-[16px] font-extrabold px-8 py-4 transition-all duration-300 hover:bg-lime-300 hover:-translate-y-0.5 active:scale-[0.99]"
+                className="inline-flex items-center gap-2.5 rounded-xl bg-white text-black text-[16px] font-extrabold px-8 py-4 transition-all duration-300 hover:bg-white/90 hover:-translate-y-0.5 active:scale-[0.99]"
               >
                 <MessageCircle size={18} aria-hidden="true" />
                 Chat WhatsApp
@@ -107,7 +107,7 @@ export default function CTA() {
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={about.photo}
-                  alt="Andhika Andriana Putra"
+                  alt={profile.name}
                   width={160}
                   height={160}
                   className="w-40 h-40 rounded-full object-cover block"
@@ -119,10 +119,10 @@ export default function CTA() {
               )}
             </div>
             <div className="text-center">
-              <p className="font-bold text-[15px]">Andhika Andriana Putra</p>
-              <p className="font-mono text-[11px] text-white/40">Fullstack Developer — Cimahi</p>
+              <p className="font-bold text-[15px]">{profile.name}</p>
+              <p className="font-mono text-[11px] text-white/40">Web Developer — Cimahi</p>
             </div>
-            <div className="flex items-center gap-2 text-[12px] text-lime-300">
+            <div className="flex items-center gap-2 text-[12px] text-white/70">
               <Phone size={13} aria-hidden="true" />
               {contactInfo.phone}
             </div>

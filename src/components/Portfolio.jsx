@@ -71,8 +71,8 @@ export default function Portfolio() {
                   </div>
                 }
               />
-              <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-lime-400/15 border border-lime-400/30 text-lime-300 text-[10px] font-bold px-2.5 py-1 backdrop-blur-md">
-                <span className="w-1.5 h-1.5 rounded-full bg-lime-400 animate-pulse" />
+              <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-white/10 border border-white/25 text-white/70 text-[10px] font-bold px-2.5 py-1 backdrop-blur-md">
+                <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
                 {p.status}
               </span>
             </div>
@@ -97,7 +97,7 @@ export default function Portfolio() {
             <ul className="space-y-1.5">
               {p.points.map((pt) => (
                 <li key={pt} className="flex items-center gap-2 text-[13px] text-white/65">
-                  <Check size={13} className="text-lime-400 shrink-0" aria-hidden="true" />
+                  <Check size={13} className="text-white/80 shrink-0" aria-hidden="true" />
                   {pt}
                 </li>
               ))}
@@ -107,7 +107,7 @@ export default function Portfolio() {
               href={p.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-auto inline-flex items-center gap-1.5 text-[13px] font-semibold text-lime-300 hover:text-lime-200 transition-colors"
+              className="mt-auto inline-flex items-center gap-1.5 text-[13px] font-semibold text-white/70 hover:text-white transition-colors"
             >
               {p.linkLabel}
               <ExternalLink size={14} aria-hidden="true" />
@@ -120,7 +120,7 @@ export default function Portfolio() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.7, delay: 0.16, ease: EASE }}
-          className="rounded-[24px] border border-lime-400/25 bg-lime-400/[0.05] backdrop-blur-xl p-6 flex flex-col justify-center gap-5 text-center"
+          className="rounded-[24px] border border-white/25 bg-white/[0.05] backdrop-blur-xl p-6 flex flex-col justify-center gap-5 text-center"
         >
           <span className="text-3xl">✨</span>
           <div>
@@ -133,7 +133,7 @@ export default function Portfolio() {
             href={wa("Halo Andhika! Saya mau buat website, boleh konsultasi?")}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-lime-400 text-black text-sm font-bold px-5 py-3.5 transition-all duration-300 hover:bg-lime-300 active:scale-[0.99]"
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-white text-black text-sm font-bold px-5 py-3.5 transition-all duration-300 hover:bg-white/90 active:scale-[0.99]"
           >
             <MessageCircle size={16} aria-hidden="true" />
             Chat WhatsApp

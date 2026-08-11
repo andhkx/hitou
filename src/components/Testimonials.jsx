@@ -42,7 +42,7 @@ export default function Testimonials() {
           href={wa("Halo Andhika! Saya mau jadi klien pertamamu.")}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-6 inline-flex items-center gap-2 rounded-xl bg-lime-400 text-black text-sm font-bold px-5 py-3 transition-all duration-300 hover:bg-lime-300 active:scale-[0.99]"
+          className="mt-6 inline-flex items-center gap-2 rounded-xl bg-white text-black text-sm font-bold px-5 py-3 transition-all duration-300 hover:bg-white/90 active:scale-[0.99]"
         >
           <MessageCircle size={15} aria-hidden="true" />
           Mau Jadi yang Pertama?

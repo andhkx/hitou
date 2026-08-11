@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr] gap-10">
         <div>
           <p className="text-lg font-bold mb-3">
-            Andhika<span className="text-secondary">.</span>
+            Hitou<span className="text-secondary"> Studio</span>
           </p>
           <p className="text-sm text-white/55 leading-relaxed max-w-xs">{profile.bio}</p>
         </div>

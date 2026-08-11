@@ -39,7 +39,7 @@ export default function Process() {
             <span className="absolute -top-3 -right-2 text-[64px] font-extrabold text-white/[0.06] leading-none select-none">
               {p.step}
             </span>
-            <span className="font-mono text-[11px] text-lime-400 tracking-[0.2em]">
+            <span className="font-mono text-[11px] text-white/80 tracking-[0.2em]">
               STEP {p.step}
             </span>
             <h3 className="text-[16px] font-bold mt-2 mb-1">{p.title}</h3>

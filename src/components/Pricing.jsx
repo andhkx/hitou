@@ -37,42 +37,46 @@ export default function Pricing() {
             transition={{ duration: 0.7, delay: 0.08 * i, ease: EASE }}
             className={`relative rounded-[24px] border backdrop-blur-xl p-6 flex flex-col transition-all duration-300 hover:-translate-y-1 ${
               p.popular
-                ? "border-lime-400/40 bg-white/[0.06] shadow-[0_0_40px_rgba(163,230,53,0.08)]"
-                : "border-white/10 bg-white/[0.04] hover:border-white/20"
+                ? "border-white/50 bg-white/[0.07] shadow-[0_0_50px_rgba(255,255,255,0.08)]"
+                : "border-white/20 bg-white/[0.04] hover:border-white/35"
             }`}
           >
             {p.popular && (
-              <span className="absolute -top-3 left-1/2 -translate-x-1/2 inline-flex items-center gap-1.5 rounded-full bg-lime-400 text-black text-[11px] font-bold px-4 py-1.5">
+              <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 inline-flex items-center gap-1.5 rounded-full bg-white text-black text-[11px] font-extrabold tracking-wide px-4 py-1.5 shadow-[0_0_20px_rgba(255,255,255,0.35)]">
                 <Sparkles size={12} aria-hidden="true" />
-                POPULAR
+                PALING LARIS
               </span>
             )}
 
             <p className="font-mono text-[11px] tracking-[0.25em] text-white/45 uppercase mb-2">
               {p.name}
             </p>
-            <h3 className="text-[26px] font-extrabold tracking-tight leading-tight mb-2">
+
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40 mb-1">
+              {p.id === "custom" ? "Hubungi" : "Mulai dari"}
+            </p>
+            <h3 className="text-3xl md:text-4xl font-extrabold tracking-tight leading-tight mb-2">
               {p.price}
             </h3>
             <p className="text-[13px] text-white/50 leading-relaxed mb-5">{p.desc}</p>
 
             <ul className="space-y-2.5 mb-6 flex-1">
               {p.features.map((f) => (
-                <li key={f} className="flex items-start gap-2.5 text-[13px] text-white/70">
-                  <Check size={15} className="text-lime-400 shrink-0 mt-0.5" aria-hidden="true" />
+                <li key={f} className="flex items-start gap-2.5 text-[13px] text-white/75">
+                  <Check size={15} className="text-white shrink-0 mt-0.5" aria-hidden="true" />
                   {f}
                 </li>
               ))}
             </ul>
 
             <a
-              href={wa(`Halo Andhika! Saya mau pesan paket ${p.name} — harga ${p.price}.`)}
+              href={wa(`Halo Hitou! Saya mau pesan paket ${p.name} — harga ${p.price}.`)}
               target="_blank"
               rel="noopener noreferrer"
-              className={`w-full rounded-xl py-3.5 text-sm font-bold text-center transition-all duration-300 active:scale-[0.99] ${
+              className={`w-full rounded-xl py-4 text-sm font-bold text-center transition-all duration-300 active:scale-[0.99] ${
                 p.popular
-                  ? "bg-lime-400 text-black hover:bg-lime-300"
-                  : "bg-white/10 border border-white/10 text-white hover:bg-white/20"
+                  ? "bg-white text-black hover:bg-white/90 shadow-[0_0_25px_rgba(255,255,255,0.2)]"
+                  : "bg-white text-black hover:bg-white/90"
               }`}
             >
               {p.cta}

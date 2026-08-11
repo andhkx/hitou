@@ -14,9 +14,9 @@ const dmMono = DM_Mono({
 });
 
 export const metadata = {
-  title: "Andhika Andriana Putra",
+  title: "Hitou Studio",
   description:
-    "Fullstack Developer - Portfolio. Menciptakan website modern dengan tampilan clean, responsif, dan elegan.",
+    "Jasa pembuatan website untuk UMKM & personal — cepat, murah, terpercaya. Mulai dari Rp 250rb.",
 };
 
 export default function RootLayout({ children }) {

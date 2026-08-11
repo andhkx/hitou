@@ -79,7 +79,7 @@ export default function IntroLoader() {
               className="flex flex-col items-center gap-1.5"
             >
               <span className="text-2xl font-extrabold tracking-tight text-foreground">
-                {profile.firstName}
+                {profile.heroName}
                 <span className="text-secondary">.</span>
               </span>
               <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-muted">

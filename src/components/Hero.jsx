@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { motion, useReducedMotion } from "motion/react";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, MessageCircle } from "lucide-react";
 import Typewriter from "./reactbits/TextAnimations/Typewriter/Typewriter.jsx";
 import { profile, wa } from "@/data/portfolio";
 
@@ -20,10 +20,10 @@ export default function Hero() {
 
   useEffect(() => {
     if (typeof window.requestIdleCallback === "function") {
-      const id = requestIdleCallback(() => setReady(true), { timeout: 2500 });
+      const id = requestIdleCallback(() => setReady(true), { timeout: 5000 });
       return () => cancelIdleCallback(id);
     }
-    const t = setTimeout(() => setReady(true), 1200);
+    const t = setTimeout(() => setReady(true), 2000);
     return () => clearTimeout(t);
   }, []);
 
@@ -50,70 +50,71 @@ export default function Hero() {
           </span>
         </motion.div>
 
-        <div>
-          <motion.h1
-            initial={reduce ? false : { opacity: 0, y: 60, scale: 0.88 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 1, delay: 0.35, ease: EASE }}
-            className="text-[clamp(34px,6vw,64px)] font-extrabold leading-[1.05] tracking-[-0.03em] text-foreground"
-          >
-            {profile.headLinePrimary}
-          </motion.h1>
-          <motion.h1
-            initial={reduce ? false : { opacity: 0, x: -90, rotate: -5 }}
-            animate={{ opacity: 1, x: 0, rotate: 0 }}
-            transition={{ duration: 1, delay: 0.5, ease: EASE }}
-            className="text-[clamp(34px,6vw,64px)] font-extrabold leading-[1.05] tracking-[-0.03em] text-secondary mb-6"
-          >
-            {profile.headLineSecondary}{" "}
-            <span className="text-lime-400">{profile.heroPrice}</span>
-          </motion.h1>
-        </div>
-
-        <motion.div
-          initial={reduce ? false : { opacity: 0, x: 50, filter: "blur(8px)" }}
-          animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-          transition={{ duration: 1, delay: 0.65, ease: EASE }}
-          className="mb-4"
+        <motion.p
+          initial={reduce ? false : { opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.35, ease: EASE }}
+          className="text-2xl md:text-3xl text-secondary mb-2"
         >
-          <div className="font-mono text-[15px] text-secondary tracking-[0.1em]">
-            <Typewriter
-              text={profile.typedRoles}
-              speed={55}
-              waitTime={1800}
-              deleteSpeed={28}
-              showCursor={true}
-              cursorChar="_"
-            />
-          </div>
-        </motion.div>
+          {profile.greeting}{" "}
+          <span className="font-bold text-foreground">{profile.heroName}</span>
+        </motion.p>
 
-        <motion.div
-          initial={reduce ? false : { opacity: 0, y: 60, scale: 0.96 }}
+        <motion.h1
+          initial={reduce ? false : { opacity: 0, y: 60, scale: 0.92 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 1, delay: 0.8, ease: EASE }}
-          className="mb-8 w-full max-w-[480px] text-[15px] text-secondary leading-[1.9]"
+          transition={{ duration: 1, delay: 0.5, ease: EASE }}
+          className="text-[clamp(38px,7vw,72px)] font-extrabold leading-[1.02] tracking-[-0.03em] text-foreground mb-6"
         >
-          {profile.bio}
+          {profile.heroRole}
+          <span className="text-secondary">.</span>
+        </motion.h1>
+
+        <motion.div
+          initial={reduce ? false : { opacity: 0, y: 40, filter: "blur(6px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={{ duration: 1, delay: 0.65, ease: EASE }}
+          className="mb-8 w-full max-w-[520px]"
+        >
+          {reduce ? (
+            <p className="text-[15px] text-secondary leading-[1.9]">
+              {profile.typedDescriptions[0]}
+            </p>
+          ) : (
+            <div className="min-h-[96px] md:min-h-[66px]">
+              <p className="text-[15px] text-secondary leading-[1.9]">
+                <Typewriter
+                  text={profile.typedDescriptions}
+                  speed={24}
+                  waitTime={3200}
+                  deleteSpeed={14}
+                  loop={true}
+                  showCursor={true}
+                  cursorChar="_"
+                />
+              </p>
+            </div>
+          )}
         </motion.div>
 
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.95, ease: EASE }}
-          className="flex items-center gap-3 flex-wrap mb-8"
+          transition={{ duration: 1, delay: 0.85, ease: EASE }}
+          className="flex items-center gap-3 flex-wrap mb-5"
         >
           <a
-            href={wa("Halo Andhika! Saya mau pesan website.")}
+            href={wa("Halo Hitou! Saya mau pesan website.")}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-lg bg-lime-400 text-black text-[15px] font-bold px-6 py-3.5 cursor-pointer transition-all duration-300 hover:bg-lime-300 hover:-translate-y-0.5 active:scale-[0.99]"
+            className="inline-flex items-center gap-2 rounded-lg bg-white text-black text-[15px] font-bold px-6 py-3.5 transition-all duration-300 hover:bg-white/90 hover:-translate-y-0.5 active:scale-[0.99]"
           >
+            <MessageCircle size={16} aria-hidden="true" />
             {profile.ctaPrimary}
           </a>
           <a
             href="#pricing"
-            className="inline-flex items-center gap-2 rounded-lg border border-white/20 text-white text-[15px] font-semibold px-6 py-3.5 transition-all duration-300 hover:bg-white/10 hover:border-white/40"
+            className="inline-flex items-center gap-2 rounded-lg border border-white/25 text-white text-[15px] font-semibold px-6 py-3.5 transition-all duration-300 hover:bg-white/10 hover:border-white/50"
           >
             {profile.ctaSecondary}
             <ArrowDown size={16} aria-hidden="true" />
@@ -121,9 +122,21 @@ export default function Hero() {
         </motion.div>
 
         <motion.div
+          initial={reduce ? false : { opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 1, ease: EASE }}
+          className="mb-7"
+        >
+          <span className="inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.15em] uppercase text-white/60 border border-white/25 rounded-full px-4 py-2">
+            {profile.heroPriceBadge}
+            <ArrowDown size={12} aria-hidden="true" className="text-white/50" />
+          </span>
+        </motion.div>
+
+        <motion.div
           initial={reduce ? false : { opacity: 0, y: 30, scale: 0.88 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 1, delay: 1.1, ease: EASE }}
+          transition={{ duration: 1, delay: 1.15, ease: EASE }}
           className="flex gap-2 flex-wrap mb-7"
         >
           {profile.heroTags.map((tag) => (

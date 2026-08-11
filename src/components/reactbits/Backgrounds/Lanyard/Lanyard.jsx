@@ -326,6 +326,15 @@ function Band({
       vec.add(dir.multiplyScalar(state.camera.position.length()));
       [card, j1, j2, j3, fixed].forEach((ref) => ref.current?.wakeUp());
       card.current?.setNextKinematicTranslation({ x: vec.x - dragged.x, y: vec.y - dragged.y, z: vec.z - dragged.z });
+    } else if (card.current) {
+      // Idle sway: keep the card gently rocking so the scene feels alive.
+      const t = state.clock.elapsedTime;
+      card.current.setAngvel({
+        x: Math.sin(t * 0.7) * 0.5,
+        y: 0.9 + Math.cos(t * 0.5) * 0.35,
+        z: Math.cos(t * 0.9) * 0.4,
+      });
+      [card, j1, j2, j3].forEach((ref) => ref.current?.wakeUp());
     }
     if (fixed.current) {
       [j1, j2].forEach((ref) => {
