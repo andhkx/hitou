@@ -295,21 +295,21 @@ function Band({
   useRopeJoint(fixed, j1, [
     [0, 0, 0],
     [0, 0, 0],
-    1.2,
+    1.1,
   ]);
   useRopeJoint(j1, j2, [
     [0, 0, 0],
     [0, 0, 0],
-    1.2,
+    1.1,
   ]);
   useRopeJoint(j2, j3, [
     [0, 0, 0],
     [0, 0, 0],
-    1.2,
+    1.1,
   ]);
   useSphericalJoint(j3, card, [
     [0, 0, 0],
-    [0, 1.4, 0],
+    [0, 1.5, 0],
   ]);
 
   useEffect(() => {
@@ -327,14 +327,12 @@ function Band({
       [card, j1, j2, j3, fixed].forEach((ref) => ref.current?.wakeUp());
       card.current?.setNextKinematicTranslation({ x: vec.x - dragged.x, y: vec.y - dragged.y, z: vec.z - dragged.z });
     } else if (card.current) {
-      // Idle sway: keep the card gently rocking so the scene feels alive.
+      // Gendesign-style sway: slow, symmetric, left-right pendulum.
+      // No free rotation - keep the card facing the camera.
       const t = state.clock.elapsedTime;
-      card.current.setAngvel({
-        x: Math.sin(t * 0.7) * 0.5,
-        y: 0.9 + Math.cos(t * 0.5) * 0.35,
-        z: Math.cos(t * 0.9) * 0.4,
-      });
-      [card, j1, j2, j3].forEach((ref) => ref.current?.wakeUp());
+      card.current.setLinvel({ x: Math.sin(t * 1.2) * 1.2, y: 0, z: 0 });
+      card.current.setAngvel({ x: 0, y: 0, z: 0 });
+      [j1, j2, j3].forEach((ref) => ref.current?.wakeUp());
     }
     if (fixed.current) {
       [j1, j2].forEach((ref) => {

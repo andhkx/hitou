@@ -34,7 +34,7 @@ export default function Hero() {
     >
       {ready && (
         <div className="hidden md:block absolute inset-0 z-0 opacity-70 lg:opacity-100 pointer-events-auto">
-          <Lanyard position={[0, 0, 20]} fov={13} gravity={[0, -40, 0]} lanyardWidth={2} />
+          <Lanyard position={[0, 0, 20]} fov={13} gravity={[0, -40, 0]} lanyardWidth={1} />
         </div>
       )}
 
@@ -82,7 +82,7 @@ export default function Hero() {
             </p>
           ) : (
             <div className="min-h-[96px] md:min-h-[66px]">
-              <p className="text-[15px] text-secondary leading-[1.9]">
+              <div className="text-[15px] text-secondary leading-[1.9]">
                 <Typewriter
                   text={profile.typedDescriptions}
                   speed={24}
@@ -92,7 +92,7 @@ export default function Hero() {
                   showCursor={true}
                   cursorChar="_"
                 />
-              </p>
+              </div>
             </div>
           )}
         </motion.div>
