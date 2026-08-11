@@ -274,23 +274,23 @@ function Band({
   useRopeJoint(fixed, j1, [
     [0, 0, 0],
     [0, 0, 0],
-    1, // <- segmen 1: panjang tali
+    0.8, // <- segmen 1: panjang tali
   ]);
   useRopeJoint(j1, j2, [
     [0, 0, 0],
     [0, 0, 0],
-    1, // <- segmen 2: panjang tali
+    0.8, // <- segmen 2: panjang tali
   ]);
   useRopeJoint(j2, j3, [
     [0, 0, 0],
     [0, 0, 0],
-    1, // <- segmen 3: panjang tali
+    0.8, // <- segmen 3: panjang tali
   ]);
   // Jarak kartu ke dudukan tali: [0, 1.5, 0] -> 1.5 = kartu agak jauh dari
   // dudukan, 1.0 = kartu menempel lebih dekat ke tali.
   useSphericalJoint(j3, card, [
     [0, 0, 0],
-    [0, 1.5, 0], // <- anchor kartu (angka tengah = jarak)
+    [0, 1.7, 0], // <- anchor kartu (angka tengah = jarak)
   ]);
 
   useEffect(() => {
@@ -307,6 +307,13 @@ function Band({
       vec.add(dir.multiplyScalar(state.camera.position.length()));
       [card, j1, j2, j3, fixed].forEach((ref) => ref.current?.wakeUp());
       card.current?.setNextKinematicTranslation({ x: vec.x - dragged.x, y: vec.y - dragged.y, z: vec.z - dragged.z });
+    } else if (card.current) {
+      // Goyangan pendulum sangat halus ke kiri-kanan (ala gendesignid).
+      // 0.45 = jarak ayun (makin kecil makin sedikit), 1.0 = kecepatan ayun (makin kecil makin pelan)
+      const t = state.clock.elapsedTime;
+      card.current.setLinvel({ x: Math.sin(t * 1.0) * 0.45, y: 0, z: 0 });
+      card.current.setAngvel({ x: 0, y: 0, z: 0 });
+      [j1, j2, j3].forEach((ref) => ref.current?.wakeUp());
     }
     if (fixed.current) {
       [j1, j2].forEach((ref) => {
@@ -327,11 +334,9 @@ function Band({
 
   return (
     <>
-      {/* POSISI GANTUNG SELURUH LANYARD:
-          x = geser kiri/kanan (positif = kanan, negatif = kiri)
-          y = naik/turun (5 = lebih tinggi, 4 = lebih rendah)
-          z = maju/mundur */}
-      <group position={[0, 4, 0]}>
+      {/* POSISI GANTUNG LANYARD: x = kiri/kanan (1.6 = kanan dari teks, 0 = tengah),
+          y = naik/turun (4 = normal, 5 = lebih tinggi), z = maju/mundur */}
+      <group position={[1.6, 4, 0]}>
         <RigidBody ref={fixed} {...segmentProps} type="fixed" />
         <RigidBody position={[0.5, 0, 0]} ref={j1} {...segmentProps}>
           <BallCollider args={[0.1]} />
@@ -350,8 +355,8 @@ function Band({
         >
           <CuboidCollider args={[0.8, 1.125, 0.01]} />
           <group
-            scale={2.25} // <- UKURAN KARTU: 2.25 = sedang, 2.6 = lebih besar, 2 = lebih kecil
-            position={[0, -1.2, -0.05]} // posisi kartu relatif dudukan (jarang diubah)
+            scale={2.25}
+            position={[0, -1, -0.05]}
             onPointerOver={() => hover(true)}
             onPointerOut={() => hover(false)}
             onPointerUp={(e) => (e.target.releasePointerCapture(e.pointerId), drag(false))}

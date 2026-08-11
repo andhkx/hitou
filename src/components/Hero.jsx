@@ -39,7 +39,7 @@ export default function Hero() {
               fov      = zoom lensa: 13 = kartu besar, 18 = kartu kecil
               gravity  = gravitasi: -40 = normal, -20 = kartu lebih melayang
               lanyardWidth = lebar tali: 2 = sedang, 3 = tebal, 1 = tipis */}
-          <Lanyard position={[0, 0, 20]} fov={13} gravity={[0, -40, 0]} lanyardWidth={2} />
+          <Lanyard position={[0, 0, 22]} fov={13} gravity={[0, -40, 0]} lanyardWidth={1} />
         </div>
       )}
 

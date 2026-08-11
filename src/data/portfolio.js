@@ -95,7 +95,7 @@ export const pricing = [
   {
     id: "custom",
     name: "CUSTOM",
-    price: "Konsultasi",
+    price: "Konsul",
     popular: false,
     desc: "Kebutuhan khusus? Kita diskusikan dulu, gratis",
     features: [
