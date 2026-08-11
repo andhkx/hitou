@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { motion, useReducedMotion } from "motion/react";
+import { ArrowDown } from "lucide-react";
 import Typewriter from "./reactbits/TextAnimations/Typewriter/Typewriter.jsx";
-import { profile } from "@/data/portfolio";
+import { profile, wa } from "@/data/portfolio";
 
 const Lanyard = dynamic(
   () => import("./reactbits/Backgrounds/Lanyard/Lanyard.jsx"),
@@ -18,8 +19,6 @@ export default function Hero() {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    // Defer the 3D scene until the browser is idle, so three/rapier init
-    // never blocks first paint (LCP/TBT).
     if (typeof window.requestIdleCallback === "function") {
       const id = requestIdleCallback(() => setReady(true), { timeout: 2500 });
       return () => cancelIdleCallback(id);
@@ -33,13 +32,13 @@ export default function Hero() {
       id="home"
       className="px-6 md:pl-[120px] md:pr-[60px] min-h-[100dvh] flex items-center justify-start relative overflow-hidden"
     >
-{ready && (
+      {ready && (
         <div className="hidden md:block absolute inset-y-0 right-0 w-full h-full lg:w-[38%] lg:translate-x-[4%] z-0 opacity-70 lg:opacity-100 pointer-events-none lg:pointer-events-auto">
           <Lanyard position={[0, 0, 20]} fov={13} gravity={[0, -40, 0]} lanyardWidth={1.2} />
         </div>
       )}
 
-      <div className="md:max-w-[600px] w-full relative z-10">
+      <div className="md:max-w-[640px] w-full relative z-10">
         <motion.div
           initial={reduce ? false : { opacity: 0, filter: "blur(12px)", y: 30 }}
           animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
@@ -56,7 +55,7 @@ export default function Hero() {
             initial={reduce ? false : { opacity: 0, y: 60, scale: 0.88 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 1, delay: 0.35, ease: EASE }}
-            className="text-[clamp(32px,6vw,62px)] font-extrabold leading-[1.05] tracking-[-0.03em] text-foreground"
+            className="text-[clamp(34px,6vw,64px)] font-extrabold leading-[1.05] tracking-[-0.03em] text-foreground"
           >
             {profile.headLinePrimary}
           </motion.h1>
@@ -64,9 +63,10 @@ export default function Hero() {
             initial={reduce ? false : { opacity: 0, x: -90, rotate: -5 }}
             animate={{ opacity: 1, x: 0, rotate: 0 }}
             transition={{ duration: 1, delay: 0.5, ease: EASE }}
-            className="text-[clamp(32px,6vw,62px)] font-extrabold leading-[1.05] tracking-[-0.03em] text-secondary mb-6"
+            className="text-[clamp(34px,6vw,64px)] font-extrabold leading-[1.05] tracking-[-0.03em] text-secondary mb-6"
           >
-            {profile.headLineSecondary}
+            {profile.headLineSecondary}{" "}
+            <span className="text-lime-400">{profile.heroPrice}</span>
           </motion.h1>
         </div>
 
@@ -74,14 +74,14 @@ export default function Hero() {
           initial={reduce ? false : { opacity: 0, x: 50, filter: "blur(8px)" }}
           animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
           transition={{ duration: 1, delay: 0.65, ease: EASE }}
-          className="mb-3"
+          className="mb-4"
         >
           <div className="font-mono text-[15px] text-secondary tracking-[0.1em]">
             <Typewriter
               text={profile.typedRoles}
-              speed={65}
-              waitTime={2200}
-              deleteSpeed={30}
+              speed={55}
+              waitTime={1800}
+              deleteSpeed={28}
               showCursor={true}
               cursorChar="_"
             />
@@ -92,21 +92,32 @@ export default function Hero() {
           initial={reduce ? false : { opacity: 0, y: 60, scale: 0.96 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 1, delay: 0.8, ease: EASE }}
-          className="mb-7 w-full max-w-[460px] text-[14px] text-secondary leading-[1.9] tracking-[0.01em] text-pretty"
+          className="mb-8 w-full max-w-[480px] text-[15px] text-secondary leading-[1.9]"
         >
-          {reduce ? (
-            profile.bio
-          ) : (
-            <Typewriter
-              text={[profile.bio]}
-              speed={16}
-              waitTime={60000}
-              deleteSpeed={20}
-              loop={false}
-              showCursor={true}
-              cursorChar="_"
-            />
-          )}
+          {profile.bio}
+        </motion.div>
+
+        <motion.div
+          initial={reduce ? false : { opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.95, ease: EASE }}
+          className="flex items-center gap-3 flex-wrap mb-8"
+        >
+          <a
+            href={wa("Halo Andhika! Saya mau pesan website.")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-lg bg-lime-400 text-black text-[15px] font-bold px-6 py-3.5 cursor-pointer transition-all duration-300 hover:bg-lime-300 hover:-translate-y-0.5 active:scale-[0.99]"
+          >
+            {profile.ctaPrimary}
+          </a>
+          <a
+            href="#pricing"
+            className="inline-flex items-center gap-2 rounded-lg border border-white/20 text-white text-[15px] font-semibold px-6 py-3.5 transition-all duration-300 hover:bg-white/10 hover:border-white/40"
+          >
+            {profile.ctaSecondary}
+            <ArrowDown size={16} aria-hidden="true" />
+          </a>
         </motion.div>
 
         <motion.div

@@ -1,0 +1,85 @@
+"use client";
+
+import { motion, useReducedMotion } from "motion/react";
+import { Check, Sparkles } from "lucide-react";
+import { pricing, wa } from "@/data/portfolio";
+
+const EASE = [0.16, 1, 0.3, 1];
+
+export default function Pricing() {
+  const reduce = useReducedMotion();
+
+  return (
+    <section
+      id="pricing"
+      className="w-full max-w-[1450px] mx-auto px-8 md:px-12 lg:px-20 pt-20 pb-24 relative z-10 text-white"
+    >
+      <motion.div
+        initial={reduce ? false : { opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.4 }}
+        transition={{ duration: 0.8, ease: EASE }}
+        className="text-center mb-12"
+      >
+        <h1 className="text-3xl md:text-5xl font-bold mb-3">Paket Harga</h1>
+        <p className="text-white/55 max-w-xl mx-auto text-sm md:text-base">
+          Mulai dari Rp 250rb — harga jujur, tanpa biaya tersembunyi.
+        </p>
+      </motion.div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
+        {pricing.map((p, i) => (
+          <motion.div
+            key={p.id}
+            initial={reduce ? false : { opacity: 0, y: 40, scale: 0.97 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.7, delay: 0.08 * i, ease: EASE }}
+            className={`relative rounded-[24px] border backdrop-blur-xl p-6 flex flex-col transition-all duration-300 hover:-translate-y-1 ${
+              p.popular
+                ? "border-lime-400/40 bg-white/[0.06] shadow-[0_0_40px_rgba(163,230,53,0.08)]"
+                : "border-white/10 bg-white/[0.04] hover:border-white/20"
+            }`}
+          >
+            {p.popular && (
+              <span className="absolute -top-3 left-1/2 -translate-x-1/2 inline-flex items-center gap-1.5 rounded-full bg-lime-400 text-black text-[11px] font-bold px-4 py-1.5">
+                <Sparkles size={12} aria-hidden="true" />
+                POPULAR
+              </span>
+            )}
+
+            <p className="font-mono text-[11px] tracking-[0.25em] text-white/45 uppercase mb-2">
+              {p.name}
+            </p>
+            <h3 className="text-[26px] font-extrabold tracking-tight leading-tight mb-2">
+              {p.price}
+            </h3>
+            <p className="text-[13px] text-white/50 leading-relaxed mb-5">{p.desc}</p>
+
+            <ul className="space-y-2.5 mb-6 flex-1">
+              {p.features.map((f) => (
+                <li key={f} className="flex items-start gap-2.5 text-[13px] text-white/70">
+                  <Check size={15} className="text-lime-400 shrink-0 mt-0.5" aria-hidden="true" />
+                  {f}
+                </li>
+              ))}
+            </ul>
+
+            <a
+              href={wa(`Halo Andhika! Saya mau pesan paket ${p.name} — harga ${p.price}.`)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`w-full rounded-xl py-3.5 text-sm font-bold text-center transition-all duration-300 active:scale-[0.99] ${
+                p.popular
+                  ? "bg-lime-400 text-black hover:bg-lime-300"
+                  : "bg-white/10 border border-white/10 text-white hover:bg-white/20"
+              }`}
+            >
+              {p.cta}
+            </a>
+          </motion.div>
+        ))}
+      </div>
+    </section>
+  );
+}

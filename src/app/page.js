@@ -2,9 +2,14 @@ import Background from "@/components/Background";
 import IntroLoader from "@/components/IntroLoader";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import About from "@/components/About";
+import Value from "@/components/Value";
+import Pricing from "@/components/Pricing";
 import Portfolio from "@/components/Portfolio";
-import Contact from "@/components/Contact";
+import Features from "@/components/Features";
+import Process from "@/components/Process";
+import FAQ from "@/components/FAQ";
+import Testimonials from "@/components/Testimonials";
+import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -15,9 +20,14 @@ export default function Home() {
       <Navbar />
       <div className="relative z-[2]">
         <Hero />
-        <About />
+        <Value />
+        <Pricing />
         <Portfolio />
-        <Contact />
+        <Features />
+        <Process />
+        <FAQ />
+        <Testimonials />
+        <CTA />
       </div>
       <Footer />
     </main>

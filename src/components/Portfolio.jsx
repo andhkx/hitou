@@ -1,37 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
-import { Award, ArrowUpRight, Code2, Folder } from "lucide-react";
-import { projects, certificates, techStack } from "@/data/portfolio";
+import { ArrowUpRight, Check, ExternalLink, MessageCircle } from "lucide-react";
+import { projects, techStack, wa } from "@/data/portfolio";
 
 const EASE = [0.16, 1, 0.3, 1];
-
-const TABS = [
-  { id: "projects", label: "Projects" },
-  { id: "certificates", label: "Certificates" },
-  { id: "tech", label: "Tech Stack" },
-];
-
-function Reveal({ children, delay = 0, reduce }) {
-  return (
-    <motion.div
-      initial={reduce ? false : { opacity: 0, y: 45 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 1, delay, ease: EASE }}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
-const tabVariants = {
-  hidden: { opacity: 0, y: 28, scale: 0.98 },
-  show: { opacity: 1, y: 0, scale: 1 },
-  exit: { opacity: 0, y: -14, scale: 0.985 },
-};
 
 function SafeImg({ src, alt, className, fallback }) {
   const [err, setErr] = useState(false);
@@ -42,204 +17,160 @@ function SafeImg({ src, alt, className, fallback }) {
   );
 }
 
+function SectionHead({ title, sub }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.4 }}
+      transition={{ duration: 0.8, ease: EASE }}
+      className="text-center mb-12"
+    >
+      <h1 className="text-3xl md:text-5xl font-bold mb-3">{title}</h1>
+      {sub && (
+        <p className="text-white/55 max-w-xl mx-auto text-sm md:text-base">{sub}</p>
+      )}
+    </motion.div>
+  );
+}
+
 export default function Portfolio() {
   const reduce = useReducedMotion();
-  const [tab, setTab] = useState("projects");
+  const allTech = techStack.flatMap((g) => g.items);
 
   return (
     <section
       id="portfolio"
       className="w-full max-w-[1450px] mx-auto px-8 md:px-12 lg:px-20 pt-24 pb-24 text-white relative z-10"
     >
-      <Reveal reduce={reduce}>
-        <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-5xl font-bold mb-3">Portfolio Showcase</h1>
-          <p className="text-white/55 max-w-xl mx-auto text-sm md:text-base">
-            Explore my journey through projects, certifications, and technical expertise.
-          </p>
-        </div>
-      </Reveal>
+      <SectionHead
+        title="Portofolio"
+        sub="Hasil kerja terbaru — live production dan project sekolah."
+      />
 
-      <Reveal reduce={reduce} delay={0.12}>
-        <div className="flex justify-center mb-10">
-          <div className="w-full max-w-3xl rounded-full border border-white/10 bg-white/5 p-2 flex gap-2 backdrop-blur-xl">
-            {TABS.map((t) => (
-              <button
-                key={t.id}
-                onClick={() => setTab(t.id)}
-                className={`flex-1 rounded-full py-3 text-sm transition-all duration-300 ${
-                  tab === t.id ? "bg-white/10 text-white" : "text-white/50 hover:text-white"
-                }`}
-              >
-                {t.label}
-              </button>
-            ))}
+      <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+        {projects.map((p, i) => (
+          <motion.div
+            key={p.id}
+            initial={reduce ? false : { opacity: 0, y: 32 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.7, delay: 0.08 * i, ease: EASE }}
+            className="group rounded-[24px] border border-white/10 bg-white/[0.04] backdrop-blur-xl p-6 flex flex-col gap-4 transition-all duration-300 hover:bg-white/[0.06] hover:border-white/20 hover:scale-[1.01]"
+          >
+            <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-black/20 aspect-video">
+              <SafeImg
+                src={p.image}
+                alt={p.title}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                fallback={
+                  <div className="w-full h-full flex items-center justify-center">
+                    <span className="text-4xl font-extrabold text-white/15 tracking-tight">
+                      {p.title.slice(0, 2).toUpperCase()}
+                    </span>
+                  </div>
+                }
+              />
+              <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-lime-400/15 border border-lime-400/30 text-lime-300 text-[10px] font-bold px-2.5 py-1 backdrop-blur-md">
+                <span className="w-1.5 h-1.5 rounded-full bg-lime-400 animate-pulse" />
+                {p.status}
+              </span>
+            </div>
+
+            <div className="flex items-start justify-between gap-3">
+              <h3 className="text-lg font-bold">{p.title}</h3>
+              <span className="font-mono text-[11px] text-white/35 shrink-0">{p.year}</span>
+            </div>
+            <p className="text-sm text-white/55 leading-relaxed">{p.desc}</p>
+
+            <div className="flex gap-2 flex-wrap">
+              {p.tech.map((t) => (
+                <span
+                  key={t}
+                  className="font-mono text-[10px] text-white/50 border border-white/10 rounded-full px-2.5 py-1"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+
+            <ul className="space-y-1.5">
+              {p.points.map((pt) => (
+                <li key={pt} className="flex items-center gap-2 text-[13px] text-white/65">
+                  <Check size={13} className="text-lime-400 shrink-0" aria-hidden="true" />
+                  {pt}
+                </li>
+              ))}
+            </ul>
+
+            <a
+              href={p.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-auto inline-flex items-center gap-1.5 text-[13px] font-semibold text-lime-300 hover:text-lime-200 transition-colors"
+            >
+              {p.linkLabel}
+              <ExternalLink size={14} aria-hidden="true" />
+            </a>
+          </motion.div>
+        ))}
+
+        <motion.div
+          initial={reduce ? false : { opacity: 0, y: 32 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7, delay: 0.16, ease: EASE }}
+          className="rounded-[24px] border border-lime-400/25 bg-lime-400/[0.05] backdrop-blur-xl p-6 flex flex-col justify-center gap-5 text-center"
+        >
+          <span className="text-3xl">✨</span>
+          <div>
+            <h3 className="text-xl font-extrabold mb-2">Punya Project Seperti Ini?</h3>
+            <p className="text-sm text-white/55 leading-relaxed">
+              Website kamu bisa jadi di sini — mulai dari Rp 250rb, warna dan fitur sesuai keinginan.
+            </p>
           </div>
-        </div>
-      </Reveal>
+          <a
+            href={wa("Halo Andhika! Saya mau buat website, boleh konsultasi?")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-lime-400 text-black text-sm font-bold px-5 py-3.5 transition-all duration-300 hover:bg-lime-300 active:scale-[0.99]"
+          >
+            <MessageCircle size={16} aria-hidden="true" />
+            Chat WhatsApp
+          </a>
+          <div>
+            <a
+              href="#pricing"
+              className="inline-flex items-center gap-1 text-[13px] font-semibold text-white/70 hover:text-white transition-colors"
+            >
+              atau lihat paket dulu
+              <ArrowUpRight size={13} aria-hidden="true" />
+            </a>
+          </div>
+        </motion.div>
+      </div>
 
       <motion.div
-        initial={reduce ? false : { opacity: 0, y: 30 }}
+        initial={reduce ? false : { opacity: 0, y: 32 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 1, delay: 0.15, ease: EASE }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.8, delay: 0.1, ease: EASE }}
+        className="mt-20"
       >
-        <AnimatePresence mode="wait">
-          {tab === "projects" && (
-            <motion.div
-              key="projects"
-              variants={tabVariants}
-              initial={reduce ? false : "hidden"}
-              animate="show"
-              exit={reduce ? undefined : "exit"}
-              transition={{ duration: 0.5, ease: EASE, staggerChildren: 0.08 }}
-              className="grid md:grid-cols-2 xl:grid-cols-3 gap-6 px-1"
+        <p className="text-center font-mono text-[11px] tracking-[0.25em] uppercase text-white/40 mb-6">
+          Teknologi yang Saya Pakai
+        </p>
+        <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-5">
+          {allTech.map((t) => (
+            <span
+              key={t.name}
+              className="flex items-center gap-2.5 font-mono text-[11px] text-white/50"
             >
-              {projects.map((p, i) => (
-                <motion.div
-                  key={p.id}
-                  initial={reduce ? false : { opacity: 0, y: 32 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.08 * i, ease: EASE }}
-                  className="group rounded-[24px] border border-white/10 bg-white/[0.04] backdrop-blur-xl p-6 flex flex-col gap-4 transition-all duration-300 hover:bg-white/[0.06] hover:border-white/20 hover:scale-[1.01]"
-                >
-                  <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-black/20 aspect-video mb-4">
-                    <SafeImg
-                      src={p.image}
-                      alt={p.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      fallback={
-                        <div className="w-full h-full flex items-center justify-center">
-                          <Folder size={22} className="text-white/20" />
-                        </div>
-                      }
-                    />
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
-                      <Folder size={18} className="text-white/70" />
-                    </div>
-                    <span className="font-mono text-[11px] text-white/35">{p.year}</span>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold mb-1.5">{p.title}</h3>
-                    <p className="text-sm text-white/55 leading-relaxed">{p.description}</p>
-                  </div>
-                  <div className="flex gap-2 flex-wrap">
-                    {p.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="font-mono text-[10px] text-white/50 border border-white/10 rounded-full px-2.5 py-1"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="flex gap-3 pt-1 mt-auto">
-                    <a
-                      href={p.live}
-                      className="inline-flex items-center gap-1.5 text-[13px] font-medium text-white/80 hover:text-white transition-colors"
-                    >
-                      Live <ArrowUpRight size={14} />
-                    </a>
-                    <a
-                      href={p.repo}
-                      className="inline-flex items-center gap-1.5 text-[13px] font-medium text-white/80 hover:text-white transition-colors"
-                    >
-                      Repo <ArrowUpRight size={14} />
-                    </a>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          )}
-
-          {tab === "certificates" && (
-            <motion.div
-              key="certificates"
-              variants={tabVariants}
-              initial={reduce ? false : "hidden"}
-              animate="show"
-              exit={reduce ? undefined : "exit"}
-              transition={{ duration: 0.5, ease: EASE }}
-              className="grid md:grid-cols-2 xl:grid-cols-3 gap-6 px-1"
-            >
-              {certificates.map((c, i) => (
-                <motion.div
-                  key={c.id}
-                  initial={reduce ? false : { opacity: 0, y: 28 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.07 * i, ease: EASE }}
-                  className="group rounded-[24px] border border-white/10 bg-white/[0.04] backdrop-blur-xl p-5 transition-all duration-300 hover:bg-white/[0.06] hover:border-white/20 hover:scale-[1.01]"
-                >
-                  <div className="relative rounded-xl overflow-hidden border border-white/10 bg-black/20 aspect-[4/3] mb-4">
-                    <SafeImg
-                      src={c.image}
-                      alt={c.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      fallback={
-                        <div className="w-full h-full flex items-center justify-center">
-                          <Award size={26} className="text-white/20" />
-                        </div>
-                      }
-                    />
-                  </div>
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="min-w-0">
-                      <h3 className="text-[15px] font-semibold truncate">{c.title}</h3>
-                      <p className="text-[13px] text-white/50">{c.issuer}</p>
-                    </div>
-                    <span className="font-mono text-[11px] text-white/35 shrink-0">{c.year}</span>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          )}
-
-          {tab === "tech" && (
-            <motion.div
-              key="tech"
-              variants={tabVariants}
-              initial={reduce ? false : "hidden"}
-              animate="show"
-              exit={reduce ? undefined : "exit"}
-              transition={{ duration: 0.5, ease: EASE }}
-              className="grid md:grid-cols-3 gap-6 px-1"
-            >
-              {techStack.map((group, gi) => (
-                <motion.div
-                  key={group.category}
-                  initial={reduce ? false : { opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.08 * gi, ease: EASE }}
-                  className="rounded-[24px] border border-white/10 bg-white/[0.04] backdrop-blur-xl p-6"
-                >
-                  <div className="flex items-center gap-2.5 mb-5">
-                    <Code2 size={16} className="text-white/60" />
-                    <h3 className="text-[15px] font-semibold">{group.category}</h3>
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {group.items.map((item) => (
-                      <span
-                        key={item.name}
-                        className="flex items-center gap-2.5 font-mono text-[11px] text-white/60 border border-white/10 rounded-xl px-3 py-2 bg-black/20 transition-all duration-300 hover:border-white/25 hover:text-white/90"
-                      >
-                        <Image
-                          src={item.logo}
-                          alt={item.name}
-                          width={14}
-                          height={14}
-                          className="shrink-0"
-                        />
-                        {item.name}
-                      </span>
-                    ))}
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
+              <Image src={t.logo} alt={t.name} width={16} height={16} className="shrink-0" />
+              {t.name}
+            </span>
+          ))}
+        </div>
       </motion.div>
     </section>
   );

@@ -83,7 +83,7 @@ export default function IntroLoader() {
                 <span className="text-secondary">.</span>
               </span>
               <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-muted">
-                {profile.headLineSecondary}
+                {profile.tagline}
               </span>
             </motion.div>
           </div>
