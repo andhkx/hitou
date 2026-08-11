@@ -3,7 +3,6 @@ import CursorGlow from "@/components/CursorGlow";
 import IntroLoader from "@/components/IntroLoader";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import Value from "@/components/Value";
 import Pricing from "@/components/Pricing";
 import Portfolio from "@/components/Portfolio";
 import Features from "@/components/Features";
@@ -22,7 +21,6 @@ export default function Home() {
       <Navbar />
       <div className="relative z-[2]">
         <Hero />
-        <Value />
         <Pricing />
         <Portfolio />
         <Features />

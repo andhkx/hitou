@@ -130,12 +130,11 @@ export default function Hero() {
           initial={reduce ? false : { opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1, ease: EASE }}
-          className="mb-7"
+          className="mb-8"
         >
-          <span className="inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.15em] uppercase text-white/60 border border-white/25 rounded-full px-4 py-2">
-            {profile.heroPriceBadge}
-            <ArrowDown size={12} aria-hidden="true" className="text-white/50" />
-          </span>
+          <p className="font-mono text-[11px] tracking-[0.12em] uppercase text-muted">
+            {profile.heroMicrocopy}
+          </p>
         </motion.div>
 
         <motion.div
@@ -150,19 +149,6 @@ export default function Hero() {
               className="font-mono text-[11px] text-secondary border border-border rounded-full px-3 py-[5px] bg-card"
             >
               {tag}
-            </span>
-          ))}
-        </motion.div>
-
-        <motion.div
-          initial={reduce ? false : { opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1.3, ease: EASE }}
-          className="flex flex-col gap-1.5"
-        >
-          {profile.hints.map((hint) => (
-            <span key={hint} className="font-mono text-[13px] text-muted">
-              {hint}
             </span>
           ))}
         </motion.div>

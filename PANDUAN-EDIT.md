@@ -11,21 +11,21 @@ Cara pakai: buka file di VS Code, tekan `Ctrl+Click` pada referensi `nama-file:n
 
 | Yang mau diubah | File:Baris | Isi |
 |---|---|---|
-| Nomor WhatsApp (semua tombol) | `src/data/portfolio.js:3` | `wa = (message)` → nomor `62895627174900` |
+| Nomor WhatsApp (semua tombol) | `src/data/portfolio.js:3` | `wa = (message)` → nomor `628179172900` |
 | Nama & teks hero | `src/data/portfolio.js:13` | blok `profile` (mulai baris 13) |
-| Kalimat ketik di hero | `src/data/portfolio.js:24` | `typedDescriptions` (3 kalimat berputar) |
-| Bio (dipakai footer) | `src/data/portfolio.js:31` | `bio` |
-| 4 value (Cepat/Harga/Responsif/Support) | `src/data/portfolio.js:37` | `valueProps` |
-| 4 paket harga + fitur | `src/data/portfolio.js:44` | `pricing` (mulai baris 44) |
-| 2 project (Mahessa, BK) | `src/data/portfolio.js:113` | `projects` |
-| Proses 4 langkah | `src/data/portfolio.js:140` | `process` |
-| Checklist "Selalu Included" | `src/data/portfolio.js:167` | `features` |
-| 7 pertanyaan FAQ | `src/data/portfolio.js:177` | `faqs` |
-| Testimonial placeholder | `src/data/portfolio.js:208` | `testimonialsPlaceholder` |
-| Tech stack / logo | `src/data/portfolio.js:211` | `techStack` |
-| 6 sosmed | `src/data/portfolio.js:241` | `socials` |
-| Email, nomor, lokasi, footer text | `src/data/portfolio.js:250` | `contactInfo` |
-| Foto profil About/CTA | `src/data/portfolio.js:257` | `about.photo` → `/assets/profile.jpg` |
+| Baris info di bawah CTA hero | `src/data/portfolio.js:24` | `heroMicrocopy` (harga/delivery) |
+| Kalimat ketik di hero | `src/data/portfolio.js:26` | `typedDescriptions` (3 kalimat berputar) |
+| Bio (dipakai footer) | `src/data/portfolio.js:33` | `bio` |
+| 4 paket harga + fitur | `src/data/portfolio.js:36` | `pricing` (mulai baris 36) |
+| 2 project (Mahessa, BK) | `src/data/portfolio.js:105` | `projects` |
+| Proses 4 langkah | `src/data/portfolio.js:132` | `process` |
+| Checklist "Selalu Included" | `src/data/portfolio.js:159` | `features` |
+| 7 pertanyaan FAQ | `src/data/portfolio.js:169` | `faqs` |
+| Testimonial placeholder | `src/data/portfolio.js:200` | `testimonialsPlaceholder` |
+| Tech stack / logo | `src/data/portfolio.js:203` | `techStack` |
+| 4 sosmed | `src/data/portfolio.js:233` | `socials` |
+| Email, nomor, lokasi, footer text | `src/data/portfolio.js:240` | `contactInfo` |
+| Foto profil About/CTA | `src/data/portfolio.js:247` | `about.photo` → `/assets/profile.jpg` |
 
 Foto project: taruh di `public/assets/projects/1.jpg`, `2.jpg`; foto profil di `public/assets/profile.jpg`.
 
@@ -43,7 +43,7 @@ Foto project: taruh di `public/assets/projects/1.jpg`, `2.jpg`; foto profil di `
 | Paragraf typewriting | `src/components/Hero.jsx:87` | kalimat = `typedDescriptions`; kecepatan = `speed={24}` (baris 86), delay antar kalimat `waitTime={3200}` |
 | Tombol WA putih | `src/components/Hero.jsx:109` | label = `ctaPrimary` |
 | Tombol Lihat Paket | `src/components/Hero.jsx:117` | label = `ctaSecondary` |
-| Badge harga | `src/components/Hero.jsx:130` | teks = `heroPriceBadge` |
+| Baris info harga/delivery | `src/components/Hero.jsx:130` | teks = `heroMicrocopy` (di data) |
 | **Posisi & ukuran kartu 3D** | `src/components/Hero.jsx:38` | `position={[0,0,20]}` (z kecil = dekat/besar), `fov={13}` (kecil = besar), `lanyardWidth={2}` (lebar tali) |
 | Area tarik kartu | `src/components/Hero.jsx:37` | wrapper `inset-0` = seluruh hero bisa di-drag; kartu di **bawah** teks (z-0) |
 
@@ -55,22 +55,15 @@ Foto project: taruh di `public/assets/projects/1.jpg`, `2.jpg`; foto profil di `
 
 | Elemen | File:Baris | Cara atur |
 |---|---|---|
-| Posisi gantung (kartu geser kanan) | `Lanyard.jsx:358` | `position={[1.6, 5.0, 0]}` → x geser kiri/kanan, y naik/turun |
-| Panjang tali (3 segmen) | `Lanyard.jsx:307-317` | angka terakhir tiap `useRopeJoint` = panjang segmen (0.8 = pendek, 1.2 = panjang) |
-| Jarak kartu ke dudukan | `Lanyard.jsx:321` | `useSphericalJoint` → `[0, 1.0, 0]` |
-| Lebar tali | `src/components/Hero.jsx:38` | `lanyardWidth={2}` (2 = sedang, 3 = tebal) |
-| Goyangan idle (bergerak sendiri) | `Lanyard.jsx:327-339` | `else if (card.current)` — `0.5` = amplitudo goyangan, `0.7` = kecepatan |
-| Ukuran fisik kartu | `Lanyard.jsx:380` | `scale={2.25}` → 2.6 lebih besar |
+| Posisi gantung (kartu geser kanan) | `Lanyard.jsx:332` | `position={[2.2, 4, 0]}` → x geser kiri/kanan, y naik/turun |
+| Panjang tali (3 segmen) | `Lanyard.jsx:274-289` | angka terakhir tiap `useRopeJoint` = panjang segmen (0.8 = pendek, 1.2 = panjang) |
+| Jarak kartu ke dudukan | `Lanyard.jsx:291` | `useSphericalJoint` → `[0, 1.5, 0]` |
+| Lebar tali | `src/components/Hero.jsx:38` | `lanyardWidth={1}` (2 = sedang, 3 = tebal) |
+| Ukuran fisik kartu | `Lanyard.jsx:351` | `scale={2.25}` → 2.6 lebih besar |
 
 ---
 
-## 4. Value (4 pill di bawah hero)
-
-[`src/components/Value.jsx`](src/components/Value.jsx) — teks di `portfolio.js:43` (`valueProps`).
-
----
-
-## 5. Paket Harga
+## 4. Paket Harga
 
 [`src/components/Pricing.jsx`](src/components/Pricing.jsx)
 
@@ -101,10 +94,10 @@ Foto project: taruh di `public/assets/projects/1.jpg`, `2.jpg`; foto profil di `
 
 | Komponen | File | Konten di |
 |---|---|---|
-| Checklist | [`src/components/Features.jsx`](src/components/Features.jsx) | `portfolio.js:167` |
-| Proses 4 langkah | [`src/components/Process.jsx`](src/components/Process.jsx) | `portfolio.js:140` |
-| FAQ accordion | [`src/components/FAQ.jsx`](src/components/FAQ.jsx) | `portfolio.js:177` |
-| Testimonial | [`src/components/Testimonials.jsx`](src/components/Testimonials.jsx) | `portfolio.js:208` (`testimonialsPlaceholder`) |
+| Checklist | [`src/components/Features.jsx`](src/components/Features.jsx) | `portfolio.js:159` |
+| Proses 4 langkah | [`src/components/Process.jsx`](src/components/Process.jsx) | `portfolio.js:132` |
+| FAQ accordion | [`src/components/FAQ.jsx`](src/components/FAQ.jsx) | `portfolio.js:169` |
+| Testimonial | [`src/components/Testimonials.jsx`](src/components/Testimonials.jsx) | `portfolio.js:200` (`testimonialsPlaceholder`) |
 
 ---
 

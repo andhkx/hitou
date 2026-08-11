@@ -1,7 +1,7 @@
 // ------- KONFIGURASI PRIBADI — ganti semua data di file ini -------
 
 export const wa = (message = "") =>
-  `https://wa.me/62895627174900${message ? `?text=${encodeURIComponent(message)}` : ""}`;
+  `https://wa.me/628179172900${message ? `?text=${encodeURIComponent(message)}` : ""}`;
 
 export const navLinks = [
   { id: "home", label: "Beranda" },
@@ -21,25 +21,17 @@ export const profile = {
   greeting: "Halo! Saya",
   heroName: "Hitou",
   heroRole: "Web Developer",
-  heroPriceBadge: "Mulai dari Rp 250rb",
+  heroMicrocopy: "Mulai dari Rp 250rb · Delivery 3–5 hari · Support included",
   typedDescriptions: [
     "Saya bantu UMKM & personal punya website — cepat, murah, dan terpercaya. Dari landing page sampai aplikasi web dengan backend.",
     "Mulai dari Rp 250rb, delivery 3–5 hari, support after deploy. Ceritakan kebutuhanmu, saya yang kerjakan.",
     "Pernah bikin platform booking travel yang live production & aplikasi sekolah multi-role. Hasil nyata, bukan cuma janji.",
   ],
   bio: "Jasa pembuatan website untuk UMKM & personal — cepat, murah, terpercaya.",
-  hints: ["↓ lihat paket & portofolio", "↗ respon cepat via WhatsApp"],
   heroTags: ["Laravel", "Next.js", "React", "Tailwind"],
   ctaPrimary: "Pesan Sekarang",
   ctaSecondary: "Lihat Paket",
 };
-
-export const valueProps = [
-  { title: "Cepat Delivery", desc: "Website jadi dalam 3–5 hari kerja", icon: "zap" },
-  { title: "Harga Terjangkau", desc: "Mulai dari Rp 250rb, tanpa biaya tersembunyi", icon: "banknote" },
-  { title: "Responsif", desc: "Mobile-first, rapi di HP, tablet, dan desktop", icon: "smartphone" },
-  { title: "Support Included", desc: "Bantuan setelah website live, sesuai paket", icon: "lifebuoy" },
-];
 
 export const pricing = [
   {
@@ -239,7 +231,7 @@ export const techStack = [
 ];
 
 export const socials = [
-  { label: "WhatsApp", handle: "+62 895-6271-74900", icon: "whatsapp", url: wa() },
+  { label: "WhatsApp", handle: "+62 817-9172-900", icon: "whatsapp", url: wa() },
   { label: "Instagram", handle: "@andhkx_", icon: "instagram", url: "https://www.instagram.com/andhkx_" },
   { label: "LinkedIn", handle: "@andhika-andriana-putra", icon: "linkedin", url: "https://www.linkedin.com/in/andhika-andriana-putra-1aa031388" },
   { label: "GitHub", handle: "@andhkx", icon: "github", url: "https://github.com/andhkx" },
@@ -247,7 +239,7 @@ export const socials = [
 
 export const contactInfo = {
   email: "andhikaputrach273@gmail.com",
-  phone: "+62 895-6271-74900",
+  phone: "+62 817-9172-900",
   location: "Cimahi, Indonesia",
   footer: "© 2026 Hitou Studio — Jasa Pembuatan Website",
 };
