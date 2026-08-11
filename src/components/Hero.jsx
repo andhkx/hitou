@@ -30,7 +30,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="px-6 md:pl-[120px] md:pr-[60px] min-h-[100dvh] flex items-center justify-start relative overflow-hidden"
+      className="px-6 md:pl-[260px] md:pr-[60px] min-h-[100dvh] flex items-center justify-start relative overflow-hidden"
     >
       {ready && (
         <div className="hidden md:block absolute inset-0 z-0 opacity-70 lg:opacity-100 pointer-events-auto">

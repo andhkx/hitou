@@ -329,7 +329,7 @@ function Band({
     <>
       {/* POSISI GANTUNG LANYARD: x = kiri/kanan (1.6 = kanan dari teks, 0 = tengah),
           y = naik/turun (4 = normal, 5 = lebih tinggi), z = maju/mundur */}
-      <group position={[1.6, 4, 0]}>
+      <group position={[2.2, 4, 0]}>
         <RigidBody ref={fixed} {...segmentProps} type="fixed" />
         <RigidBody position={[0.5, 0, 0]} ref={j1} {...segmentProps}>
           <BallCollider args={[0.1]} />

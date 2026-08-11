@@ -240,11 +240,9 @@ export const techStack = [
 
 export const socials = [
   { label: "WhatsApp", handle: "+62 895-6271-74900", icon: "whatsapp", url: wa() },
-  { label: "LinkedIn", handle: "@linkedin", icon: "linkedin", url: "#" },
-  { label: "Instagram", handle: "@instagram", icon: "instagram", url: "#" },
-  { label: "Youtube", handle: "@youtube", icon: "youtube", url: "#" },
-  { label: "Github", handle: "@github", icon: "github", url: "#" },
-  { label: "TikTok", handle: "@tiktok", icon: "tiktok", url: "#" },
+  { label: "Instagram", handle: "@andhkx_", icon: "instagram", url: "https://www.instagram.com/andhkx_" },
+  { label: "LinkedIn", handle: "@andhika-andriana-putra", icon: "linkedin", url: "https://www.linkedin.com/in/andhika-andriana-putra-1aa031388" },
+  { label: "GitHub", handle: "@andhkx", icon: "github", url: "https://github.com/andhkx" },
 ];
 
 export const contactInfo = {
