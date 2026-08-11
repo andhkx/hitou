@@ -16,7 +16,7 @@ Cara pakai: buka file di VS Code, tekan `Ctrl+Click` pada referensi `nama-file:n
 | Baris info di bawah CTA hero | `src/data/portfolio.js:24` | `heroMicrocopy` (harga/delivery) |
 | Kalimat ketik di hero | `src/data/portfolio.js:26` | `typedDescriptions` (3 kalimat berputar) |
 | Bio (dipakai footer) | `src/data/portfolio.js:33` | `bio` |
-| 4 paket harga + fitur | `src/data/portfolio.js:36` | `pricing` — tiap paket: `price` (harga), `desc`, `for` (cocok buat), `example` (link contoh, dipakai Premium), `features`, `cta` |
+| 4 paket harga + fitur | `src/data/portfolio.js:36` | `pricing` — tiap paket: `price` (harga), `desc`, `for` (cocok buat, dipisah koma → jadi badge), `example` (link contoh, dipakai Premium), `features`, `cta` |
 | 2 project (Mahessa, BK) | `src/data/portfolio.js:105` | `projects` |
 | Proses 4 langkah | `src/data/portfolio.js:132` | `process` |
 | Checklist "Selalu Included" | `src/data/portfolio.js:159` | `features` |
@@ -86,7 +86,9 @@ Foto project: taruh di `public/assets/projects/1.jpg`, `2.jpg`; foto profil di `
 | Gambar project | `Portfolio.jsx:63` | `p.image` → file di `public/assets/projects/` |
 | Badge LIVE | `Portfolio.jsx:75` | dari `p.status` (data) |
 | Link project | `Portfolio.jsx:122` | `p.link` di data |
-| Logo tech di bawah | `Portfolio.jsx:40` | dari `techStack` (data) |
+| Logo tech di bawah | `Portfolio.jsx:40` | dari `techStack` (data) — kini marquee LogoLoop |
+| Logo marquee (kecepatan) | `src/components/Portfolio.jsx` (cari `LogoLoop`) | `speed={60}` = kecepatan geser, `direction="left"`, `logoHeight={22}`, `scaleOnHover` |
+| Glow border kartu | `src/components/reactbits/BorderGlow/BorderGlow.jsx` | dipakai di Pricing (`Pricing.jsx`), Portfolio card, CTA; atur `glowColor`/`glowIntensity` per pemakaian |
 
 ---
 
@@ -112,7 +114,9 @@ Foto project: taruh di `public/assets/projects/1.jpg`, `2.jpg`; foto profil di `
 
 | Elemen | File:Baris | Cara atur |
 |---|---|---|
-| Navbar (menu, logo, aktif-hover) | [`src/components/Navbar.jsx`](src/components/Navbar.jsx:54) | logo `:54`, link `:59` |
+| Navbar (menu, logo, aktif-hover) | [`src/components/Navbar.jsx`](src/components/Navbar.jsx:54) | logo gambar `:45`, link `:59` |
+| Logo navbar & footer | `src/data/portfolio.js` → file `/assets/logo_hitou.png` | ganti file di `public/assets/logo_hitou.png` (ucapkan nama sama) |
+| Favicon | `src/app/layout.js:21` | `icons.icon` → `/assets/logo_h.png` (ganti file di `public/assets/logo_h.png`) |
 | Intro loader durasi | [`src/components/IntroLoader.jsx`](src/components/IntroLoader.jsx:8) | `DURATION = 1100` (ms) |
 | Cursor glow (besar/transparan) | [`src/components/CursorGlow.jsx`](src/components/CursorGlow.jsx:24) | `w-80 h-80` ukuran, `bg-white/[0.045]` transparansi |
 | Warna tema (background, teks abu) | [`src/app/globals.css`](src/app/globals.css:4) | `--bg-primary`, `--text-primary`, `--text-secondary`, `--text-muted` |

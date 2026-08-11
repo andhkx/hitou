@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import Image from "next/image";
 import { ArrowUpRight, Check, ExternalLink, MessageCircle } from "lucide-react";
+import BorderGlow from "./reactbits/BorderGlow/BorderGlow.jsx";
+import LogoLoop from "./reactbits/LogoLoop/LogoLoop.jsx";
 import { projects, techStack, wa } from "@/data/portfolio";
 
 const EASE = [0.16, 1, 0.3, 1];
@@ -36,7 +37,7 @@ function SectionHead({ title, sub }) {
 
 export default function Portfolio() {
   const reduce = useReducedMotion();
-  const allTech = techStack.flatMap((g) => g.items);
+  const allTech = techStack.flatMap((g) => g.items).map((t) => ({ src: t.logo, alt: t.name, title: t.name }));
 
   return (
     <section
@@ -56,62 +57,74 @@ export default function Portfolio() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.7, delay: 0.08 * i, ease: EASE }}
-            className="group rounded-[24px] border border-white/10 bg-white/[0.04] backdrop-blur-xl p-6 flex flex-col gap-4 transition-all duration-300 hover:bg-white/[0.06] hover:border-white/20 hover:scale-[1.01]"
+            className="h-full"
           >
-            <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-black/20 aspect-video">
-              <SafeImg
-                src={p.image}
-                alt={p.title}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                fallback={
-                  <div className="w-full h-full flex items-center justify-center">
-                    <span className="text-4xl font-extrabold text-white/15 tracking-tight">
-                      {p.title.slice(0, 2).toUpperCase()}
-                    </span>
-                  </div>
-                }
-              />
-              <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-white/10 border border-white/25 text-white/70 text-[10px] font-bold px-2.5 py-1 backdrop-blur-md">
-                <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-                {p.status}
-              </span>
-            </div>
-
-            <div className="flex items-start justify-between gap-3">
-              <h3 className="text-lg font-bold">{p.title}</h3>
-              <span className="font-mono text-[11px] text-white/35 shrink-0">{p.year}</span>
-            </div>
-            <p className="text-sm text-white/55 leading-relaxed">{p.desc}</p>
-
-            <div className="flex gap-2 flex-wrap">
-              {p.tech.map((t) => (
-                <span
-                  key={t}
-                  className="font-mono text-[10px] text-white/50 border border-white/10 rounded-full px-2.5 py-1"
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
-
-            <ul className="space-y-1.5">
-              {p.points.map((pt) => (
-                <li key={pt} className="flex items-center gap-2 text-[13px] text-white/65">
-                  <Check size={13} className="text-white/80 shrink-0" aria-hidden="true" />
-                  {pt}
-                </li>
-              ))}
-            </ul>
-
-            <a
-              href={p.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-auto inline-flex items-center gap-1.5 text-[13px] font-semibold text-white/70 hover:text-white transition-colors"
+            <BorderGlow
+              className="h-full"
+              backgroundColor="#181818"
+              borderRadius={24}
+              edgeSensitivity={41}
+              glowColor="0 0 100"
+              glowIntensity={1}
+              fillOpacity={0.4}
             >
-              {p.linkLabel}
-              <ExternalLink size={14} aria-hidden="true" />
-            </a>
+              <div className="group p-6 flex flex-col gap-4 h-full">
+                <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-black/20 aspect-video">
+                  <SafeImg
+                    src={p.image}
+                    alt={p.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    fallback={
+                      <div className="w-full h-full flex items-center justify-center">
+                        <span className="text-4xl font-extrabold text-white/15 tracking-tight">
+                          {p.title.slice(0, 2).toUpperCase()}
+                        </span>
+                      </div>
+                    }
+                  />
+                  <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-white/10 border border-white/25 text-white/70 text-[10px] font-bold px-2.5 py-1 backdrop-blur-md">
+                    <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                    {p.status}
+                  </span>
+                </div>
+
+                <div className="flex items-start justify-between gap-3">
+                  <h3 className="text-lg font-bold">{p.title}</h3>
+                  <span className="font-mono text-[11px] text-white/35 shrink-0">{p.year}</span>
+                </div>
+                <p className="text-sm text-white/55 leading-relaxed">{p.desc}</p>
+
+                <div className="flex gap-2 flex-wrap">
+                  {p.tech.map((t) => (
+                    <span
+                      key={t}
+                      className="font-mono text-[10px] text-white/50 border border-white/10 rounded-full px-2.5 py-1"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+
+                <ul className="space-y-1.5">
+                  {p.points.map((pt) => (
+                    <li key={pt} className="flex items-center gap-2 text-[13px] text-white/65">
+                      <Check size={13} className="text-white/80 shrink-0" aria-hidden="true" />
+                      {pt}
+                    </li>
+                  ))}
+                </ul>
+
+                <a
+                  href={p.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-auto inline-flex items-center gap-1.5 text-[13px] font-semibold text-white/70 hover:text-white transition-colors"
+                >
+                  {p.linkLabel}
+                  <ExternalLink size={14} aria-hidden="true" />
+                </a>
+              </div>
+            </BorderGlow>
           </motion.div>
         ))}
 
@@ -120,33 +133,45 @@ export default function Portfolio() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.7, delay: 0.16, ease: EASE }}
-          className="rounded-[24px] border border-white/25 bg-white/[0.05] backdrop-blur-xl p-6 flex flex-col justify-center gap-5 text-center"
+          className="h-full"
         >
-          <span className="text-3xl">✨</span>
-          <div>
-            <h3 className="text-xl font-extrabold mb-2">Punya Project Seperti Ini?</h3>
-            <p className="text-sm text-white/55 leading-relaxed">
-              Website kamu bisa jadi di sini — mulai dari Rp 250rb, warna dan fitur sesuai keinginan.
-            </p>
-          </div>
-          <a
-            href={wa("Halo Andhika! Saya mau buat website, boleh konsultasi?")}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-white text-black text-sm font-bold px-5 py-3.5 transition-all duration-300 hover:bg-white/90 active:scale-[0.99]"
+          <BorderGlow
+            className="h-full"
+            backgroundColor="#181818"
+            borderRadius={24}
+            edgeSensitivity={41}
+            glowColor="0 0 100"
+            glowIntensity={1.3}
+            fillOpacity={0.5}
           >
-            <MessageCircle size={16} aria-hidden="true" />
-            Chat WhatsApp
-          </a>
-          <div>
-            <a
-              href="#pricing"
-              className="inline-flex items-center gap-1 text-[13px] font-semibold text-white/70 hover:text-white transition-colors"
-            >
-              atau lihat paket dulu
-              <ArrowUpRight size={13} aria-hidden="true" />
-            </a>
-          </div>
+            <div className="p-6 flex flex-col justify-center gap-5 text-center h-full">
+              <span className="text-3xl">✨</span>
+              <div>
+                <h3 className="text-xl font-extrabold mb-2">Punya Project Seperti Ini?</h3>
+                <p className="text-sm text-white/55 leading-relaxed">
+                  Website kamu bisa jadi di sini — mulai dari Rp 250rb, warna dan fitur sesuai keinginan.
+                </p>
+              </div>
+              <a
+                href={wa("Halo Hitou! Saya mau buat website, boleh konsultasi?")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-white text-black text-sm font-bold px-5 py-3.5 transition-all duration-300 hover:bg-white/90 active:scale-[0.99]"
+              >
+                <MessageCircle size={16} aria-hidden="true" />
+                Chat WhatsApp
+              </a>
+              <div>
+                <a
+                  href="#pricing"
+                  className="inline-flex items-center gap-1 text-[13px] font-semibold text-white/70 hover:text-white transition-colors"
+                >
+                  atau lihat paket dulu
+                  <ArrowUpRight size={13} aria-hidden="true" />
+                </a>
+              </div>
+            </div>
+          </BorderGlow>
         </motion.div>
       </div>
 
@@ -157,19 +182,21 @@ export default function Portfolio() {
         transition={{ duration: 0.8, delay: 0.1, ease: EASE }}
         className="mt-20"
       >
-        <p className="text-center font-mono text-[11px] tracking-[0.25em] uppercase text-white/40 mb-6">
+        <p className="text-center font-mono text-[11px] tracking-[0.25em] uppercase text-white/40 mb-8">
           Teknologi yang Saya Pakai
         </p>
-        <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-5">
-          {allTech.map((t) => (
-            <span
-              key={t.name}
-              className="flex items-center gap-2.5 font-mono text-[11px] text-white/50"
-            >
-              <Image src={t.logo} alt={t.name} width={16} height={16} className="shrink-0" />
-              {t.name}
-            </span>
-          ))}
+        <div className="w-full overflow-hidden">
+          <LogoLoop
+            logos={allTech}
+            speed={60}
+            direction="left"
+            logoHeight={22}
+            gap={64}
+            fadeOut
+            fadeOutColor="#151515"
+            scaleOnHover
+            ariaLabel="Teknologi yang saya pakai"
+          />
         </div>
       </motion.div>
     </section>

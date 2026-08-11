@@ -7,9 +7,19 @@ export default function Footer() {
     <footer className="w-full border-t border-white/10 bg-[#101010] relative z-10">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr] gap-10">
         <div>
-          <p className="text-lg font-bold mb-3">
-            Hitou<span className="text-secondary"> Studio</span>
-          </p>
+          <div className="flex items-center gap-2.5 mb-3">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/assets/logo_hitou.png"
+              alt="Hitou Studio"
+              width={28}
+              height={22}
+              className="h-5 w-auto object-contain"
+            />
+            <p className="text-lg font-bold">
+              Hitou<span className="text-secondary"> Studio</span>
+            </p>
+          </div>
           <p className="text-sm text-white/55 leading-relaxed max-w-xs">{profile.bio}</p>
         </div>
         <div>

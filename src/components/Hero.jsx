@@ -90,9 +90,9 @@ export default function Hero() {
               <div className="text-[15px] text-secondary leading-[1.9]">
                 <Typewriter
                   text={profile.typedDescriptions}
-                  speed={24}
-                  waitTime={3200}
-                  deleteSpeed={14}
+                  speed={30}
+                  waitTime={1500}
+                  deleteSpeed={12}
                   loop={true}
                   showCursor={true}
                   cursorChar="_"

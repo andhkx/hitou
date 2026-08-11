@@ -17,6 +17,9 @@ export const metadata = {
   title: "Hitou Studio",
   description:
     "Jasa pembuatan website untuk UMKM & personal — cepat, murah, terpercaya. Mulai dari Rp 250rb.",
+  icons: {
+    icon: "/assets/logo_h.png",
+  },
 };
 
 export default function RootLayout({ children }) {

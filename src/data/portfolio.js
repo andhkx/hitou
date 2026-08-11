@@ -82,7 +82,7 @@ export const pricing = [
       "Advanced admin panel",
       "Database + backend logic",
       "Payment integration (opsional)",
-      "5–7x revisi",
+      "Bebas revisi",
       "Support 1 bulan",
       "Delivery 10–14 hari",
     ],
@@ -112,7 +112,7 @@ export const projects = [
     id: 1,
     title: "Mahessa Holiday",
     status: "Live Production",
-    desc: "Platform booking travel & tour untuk tour operator — berjalan di produksi.",
+    desc: "Platform booking travel & sewa mobil.",
     tech: ["Laravel", "MySQL", "SEO Optimized"],
     points: ["Admin panel", "Package management", "Integrasi WhatsApp", "Responsive"],
     year: "2026",
@@ -126,11 +126,11 @@ export const projects = [
     status: "Tugas Akhir — Deployed",
     desc: "Aplikasi bimbingan konseling sekolah dengan autentikasi multi-role.",
     tech: ["Flask", "SQL", "Multi-role (5 roles)"],
-    points: ["Student guidance tracking", "Admin dashboard", "Data management"],
+    points: ["Dashboard Interaktif", "Master Data", "Generate Surat", "35+ Fitur"],
     year: "2025",
     image: "/assets/projects/2.jpg",
-    link: "#",
-    linkLabel: "Lihat Detail",
+    link: "https://youtu.be/VncL3zn87rU?si=ynTrhIagEgPv9hy0",
+    linkLabel: "Lihat Video YT",
   },
 ];
 
@@ -144,13 +144,13 @@ export const process = [
   {
     step: "02",
     title: "Design & Development",
-    time: "3–5 hari",
+    time: "2–4 hari",
     desc: "Website dibangun sesuai brief, dikerjakan bertahap.",
   },
   {
     step: "03",
     title: "Review & Revisi",
-    time: "2–3 hari",
+    time: "1-3 hari",
     desc: "Kamu lihat hasilnya, kasih feedback, kami revisi.",
   },
   {
@@ -173,12 +173,12 @@ export const features = [
 
 export const faqs = [
   {
-    q: "Berapa lama delivery?",
+    q: "Berapa lama website dibuat?",
     a: "Tergantung paket: Starter 3–5 hari, Standar 5–7 hari, Premium 10–14 hari. Request cepat bisa dibahas.",
   },
   {
     q: "Bisa revisi berapa kali?",
-    a: "Starter 2–3x, Standar 3–5x, Premium 5–7x revisi. Revisi kecil dilayani juga setelah itu.",
+    a: "Starter 3x, Standar 5x, Premium bebas revisi. Revisi kecil dilayani juga setelah itu.",
   },
   {
     q: "Setelah website live, ada support?",
@@ -186,11 +186,11 @@ export const faqs = [
   },
   {
     q: "Bisa pakai template atau custom?",
-    a: "Bisa dua-duanya. Template lebih cepat & murah, custom mengikuti visi kamu.",
+    a: "Bisa dua-duanya. Template lebih cepat & murah, custom mengikuti brief kamu.",
   },
   {
     q: "Bagaimana soal domain & hosting?",
-    a: "Saya bantu rekomendasi & setup. Biaya domain & hosting dibayar terpisah — justru lebih murah.",
+    a: "Sudah termasuk didalam paket, domain menyesuaikan harga paket.",
   },
   {
     q: "Bisa integrasi payment gateway?",

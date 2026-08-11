@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
-// React Bits - TextAnimations/Typewriter (JS port)
+// React Bits - TextAnimations/Typewriter (JS port) - fixed loop bug
 // https://www.reactbits.dev/text-animations/typewriter
 
 export default function Typewriter({
@@ -22,71 +22,55 @@ export default function Typewriter({
 }) {
   const [numDisplayedChars, setNumDisplayedChars] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [showFullText, setShowFullText] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
   const [textIndex, setTextIndex] = useState(0);
   const [isDone, setIsDone] = useState(false);
-  const timeoutRef = useRef(null);
 
   const currentText = text[textIndex];
-  const displayText = currentText.slice(0, numDisplayedChars);
+  const isFull = numDisplayedChars >= currentText.length;
+  const showFullText = !isDeleting && isFull;
+  const cursorOpacity =
+    showCursor && (hideCursorOnType ? showFullText : true) ? "opacity-100" : "opacity-0";
 
   useEffect(() => {
-    if (isDone || isPaused) return;
+    if (isDone) return;
+    const full = numDisplayedChars >= text[textIndex].length;
 
-    const handleTyping = () => {
-      const shouldStartDeleting =
-        !isDeleting && numDisplayedChars === currentText.length;
-
-      if (shouldStartDeleting) {
-        if (!loop) {
-          setIsDone(true);
-          return;
-        }
-        setIsPaused(true);
-        timeoutRef.current = setTimeout(() => {
-          setIsDeleting(true);
-          setShowFullText(true);
-          setIsPaused(false);
-        }, waitTime);
-      } else if (isDeleting) {
-        if (numDisplayedChars === 0) {
-          setIsPaused(true);
-          timeoutRef.current = setTimeout(() => {
-            setIsDeleting(false);
+    const timeout = setTimeout(
+      () => {
+        if (isDeleting) {
+          if (numDisplayedChars === 0) {
+            // selesai menghapus -> pindah ke teks berikutnya
             setTextIndex((prev) => (prev + 1) % text.length);
-            setShowFullText(false);
-            setIsPaused(false);
-          }, 300);
+            setIsDeleting(false);
+          } else {
+            setNumDisplayedChars((n) => n - 1);
+          }
+        } else if (full) {
+          if (!loop) {
+            setIsDone(true);
+            return;
+          }
+          // jeda (waitTime) lalu mulai hapus
+          setIsDeleting(true);
         } else {
-          timeoutRef.current = setTimeout(() => {
-            setNumDisplayedChars((prev) => prev - 1);
-          }, deleteSpeed);
+          setNumDisplayedChars((n) => n + 1);
         }
-      } else {
-        timeoutRef.current = setTimeout(() => {
-          setNumDisplayedChars((prev) => prev + 1);
-        }, speed);
-      }
-    };
+      },
+      isDeleting
+        ? numDisplayedChars === 0
+          ? 300
+          : deleteSpeed
+        : full
+          ? waitTime
+          : speed
+    );
 
-    if (initialDelay > 0 && numDisplayedChars === 0 && !isDeleting) {
-      timeoutRef.current = setTimeout(() => {
-        setNumDisplayedChars(1);
-      }, initialDelay);
-    } else {
-      handleTyping();
-    }
-
-    return () => clearTimeout(timeoutRef.current);
+    return () => clearTimeout(timeout);
   }, [
     numDisplayedChars,
     isDeleting,
-    isPaused,
-    textIndex,
     text,
-    currentText,
-    initialDelay,
+    textIndex,
     waitTime,
     speed,
     deleteSpeed,
@@ -94,18 +78,13 @@ export default function Typewriter({
     isDone,
   ]);
 
-  const cursorOpacity =
-    showCursor && (hideCursorOnType ? showFullText : true) ? "opacity-100" : "opacity-0";
-
   return (
-    <div
-      className={`inline-block whitespace-pre-wrap tracking-tight ${className}`}
-    >
+    <div className={`inline-block whitespace-pre-wrap tracking-tight ${className}`}>
       <span
         className="inline"
         style={{ color: textColor === "auto" ? undefined : textColor }}
       >
-        {displayText}
+        {currentText.slice(0, numDisplayedChars)}
       </span>
       <span
         className={`ml-1 inline-block ${cursorOpacity} ${cursorClassName}`}

@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import { Mail, MessageCircle, Phone } from "lucide-react";
+import BorderGlow from "./reactbits/BorderGlow/BorderGlow.jsx";
 import { about, contactInfo, profile, socials, wa } from "@/data/portfolio";
 
 const EASE = [0.16, 1, 0.3, 1];
@@ -44,8 +45,17 @@ export default function CTA() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.8, ease: EASE }}
-        className="rounded-[28px] md:rounded-[34px] border border-white/10 bg-white/[0.04] backdrop-blur-xl p-8 md:p-12"
       >
+        <BorderGlow
+          className="w-full"
+          backgroundColor="#181818"
+          borderRadius={28}
+          edgeSensitivity={35}
+          glowColor="0 0 100"
+          glowIntensity={1.2}
+          fillOpacity={0.45}
+        >
+        <div className="p-8 md:p-12">
         <div className="flex flex-col lg:flex-row items-center gap-10">
           <div className="flex-1 text-center lg:text-left">
             <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-3">
@@ -128,6 +138,8 @@ export default function CTA() {
             </div>
           </motion.div>
         </div>
+        </div>
+        </BorderGlow>
       </motion.div>
     </section>
   );
