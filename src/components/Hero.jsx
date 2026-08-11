@@ -18,20 +18,14 @@ export default function Hero() {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    let cancelled = false;
-    Promise.all([
-      fetch("/assets/lanyard/card.glb").then((r) => r.blob()),
-      fetch("/assets/lanyard/lanyard.png").then((r) => r.blob()),
-    ])
-      .then(() => {
-        if (!cancelled) setReady(true);
-      })
-      .catch(() => {
-        if (!cancelled) setReady(true);
-      });
-    return () => {
-      cancelled = true;
-    };
+    // Defer the 3D scene until the browser is idle, so three/rapier init
+    // never blocks first paint (LCP/TBT).
+    if (typeof window.requestIdleCallback === "function") {
+      const id = requestIdleCallback(() => setReady(true), { timeout: 2500 });
+      return () => cancelIdleCallback(id);
+    }
+    const t = setTimeout(() => setReady(true), 1200);
+    return () => clearTimeout(t);
   }, []);
 
   return (
@@ -40,7 +34,7 @@ export default function Hero() {
       className="px-6 md:pl-[120px] md:pr-[60px] min-h-[100dvh] flex items-center justify-start relative overflow-hidden"
     >
 {ready && (
-        <div className="absolute inset-y-0 right-0 w-full h-full lg:w-[38%] lg:translate-x-[4%] z-0 opacity-70 lg:opacity-100 pointer-events-none lg:pointer-events-auto">
+        <div className="hidden md:block absolute inset-y-0 right-0 w-full h-full lg:w-[38%] lg:translate-x-[4%] z-0 opacity-70 lg:opacity-100 pointer-events-none lg:pointer-events-auto">
           <Lanyard position={[0, 0, 20]} fov={13} gravity={[0, -40, 0]} lanyardWidth={1.2} />
         </div>
       )}
