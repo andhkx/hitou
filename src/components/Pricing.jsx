@@ -58,7 +58,28 @@ export default function Pricing() {
             <h3 className="text-3xl md:text-4xl font-extrabold tracking-tight leading-tight mb-2">
               {p.price}
             </h3>
-            <p className="text-[13px] text-white/50 leading-relaxed mb-5">{p.desc}</p>
+            <p className="text-[13px] text-white/50 leading-relaxed mb-4">{p.desc}</p>
+
+            <p className="text-[12px] text-white/60 leading-relaxed mb-6">
+              <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/40">
+                Cocok buat:{" "}
+              </span>
+              {p.for}
+              {p.example && (
+                <>
+                  {" "}
+                  — contoh:{" "}
+                  <a
+                    href={p.example}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline underline-offset-2 text-white/80 hover:text-white transition-colors"
+                  >
+                    {p.example.replace("https://", "")}
+                  </a>
+                </>
+              )}
+            </p>
 
             <ul className="space-y-2.5 mb-6 flex-1">
               {p.features.map((f) => (

@@ -16,7 +16,7 @@ Cara pakai: buka file di VS Code, tekan `Ctrl+Click` pada referensi `nama-file:n
 | Baris info di bawah CTA hero | `src/data/portfolio.js:24` | `heroMicrocopy` (harga/delivery) |
 | Kalimat ketik di hero | `src/data/portfolio.js:26` | `typedDescriptions` (3 kalimat berputar) |
 | Bio (dipakai footer) | `src/data/portfolio.js:33` | `bio` |
-| 4 paket harga + fitur | `src/data/portfolio.js:36` | `pricing` (mulai baris 36) |
+| 4 paket harga + fitur | `src/data/portfolio.js:36` | `pricing` — tiap paket: `price` (harga), `desc`, `for` (cocok buat), `example` (link contoh, dipakai Premium), `features`, `cta` |
 | 2 project (Mahessa, BK) | `src/data/portfolio.js:105` | `projects` |
 | Proses 4 langkah | `src/data/portfolio.js:132` | `process` |
 | Checklist "Selalu Included" | `src/data/portfolio.js:159` | `features` |

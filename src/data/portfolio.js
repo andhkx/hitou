@@ -21,14 +21,14 @@ export const profile = {
   greeting: "Halo! Saya",
   heroName: "Hitou",
   heroRole: "Web Developer",
-  heroMicrocopy: "Mulai dari Rp 250rb · Delivery 3–5 hari · Support included",
+  heroMicrocopy: "Mulai dari Rp 250k · Beres 3–5 hari · Dijamin suka",
   typedDescriptions: [
-    "Saya bantu UMKM & personal punya website — cepat, murah, dan terpercaya. Dari landing page sampai aplikasi web dengan backend.",
-    "Mulai dari Rp 250rb, delivery 3–5 hari, support after deploy. Ceritakan kebutuhanmu, saya yang kerjakan.",
-    "Pernah bikin platform booking travel yang live production & aplikasi sekolah multi-role. Hasil nyata, bukan cuma janji.",
+    "Bikin website buat usaha dan personal — hasil rapi, harga bersahabat.",
+    "Mulai Rp 250rb, jadi 3–5 hari. Kamu cerita kebutuhan, sisanya aku yang urus.",
+    "Udah pernah bikin platform booking travel yang live & aplikasi bimbingan sekolah yang dipakai beneran.",
   ],
   bio: "Jasa pembuatan website untuk UMKM & personal — cepat, murah, terpercaya.",
-  heroTags: ["Laravel", "Next.js", "React", "Tailwind"],
+  heroTags: ["Laravel", "Next.js", "React", "Flask"],
   ctaPrimary: "Pesan Sekarang",
   ctaSecondary: "Lihat Paket",
 };
@@ -40,6 +40,7 @@ export const pricing = [
     price: "Rp 250k",
     popular: false,
     desc: "Landing page & profil usaha yang langsung online",
+    for: "UMKM, katering, jasa foto, profil usaha",
     features: [
       "Landing page 1–2 halaman",
       "Responsive design",
@@ -55,7 +56,8 @@ export const pricing = [
     name: "STANDAR",
     price: "Rp 500k",
     popular: true,
-    desc: "Website lengkap untuk bisnis yang serius",
+    desc: "5–7 halaman, bisa edit konten sendiri",
+    for: "katalog produk, jasa profesional, sekolah",
     features: [
       "Website 5–7 halaman",
       "Admin panel sederhana",
@@ -72,7 +74,9 @@ export const pricing = [
     name: "PREMIUM",
     price: "Rp 1.2jt",
     popular: false,
-    desc: "Aplikasi web custom dengan backend & database",
+    desc: "Website dengan database & backend — contohnya booking travel",
+    for: "booking travel, toko online, aplikasi sekolah",
+    example: "https://mahessaholiday.my.id",
     features: [
       "Website full custom",
       "Advanced admin panel",
@@ -90,6 +94,7 @@ export const pricing = [
     price: "Konsul",
     popular: false,
     desc: "Kebutuhan khusus? Kita diskusikan dulu, gratis",
+    for: "kebutuhan khusus atau sistem internal",
     features: [
       "Website sesuai kebutuhan",
       "Fitur & integrasi custom",
@@ -204,7 +209,6 @@ export const techStack = [
   {
     category: "Frontend",
     items: [
-      { name: "Typescript", logo: "https://cdn.simpleicons.org/typescript/cccccc" },
       { name: "React.js", logo: "https://cdn.simpleicons.org/react/cccccc" },
       { name: "Next.js", logo: "https://cdn.simpleicons.org/nextdotjs/cccccc" },
       { name: "Tailwind CSS", logo: "https://cdn.simpleicons.org/tailwindcss/cccccc" },
@@ -223,7 +227,6 @@ export const techStack = [
     category: "Tools",
     items: [
       { name: "Git", logo: "https://cdn.simpleicons.org/git/cccccc" },
-      { name: "Docker", logo: "https://cdn.simpleicons.org/docker/cccccc" },
       { name: "Vercel", logo: "https://cdn.simpleicons.org/vercel/cccccc" },
       { name: "Figma", logo: "https://cdn.simpleicons.org/figma/cccccc" },
     ],
@@ -238,7 +241,7 @@ export const socials = [
 ];
 
 export const contactInfo = {
-  email: "andhikaputrach273@gmail.com",
+  email: "hitoodiningrat@gmail.com",
   phone: "+62 817-9172-900",
   location: "Cimahi, Indonesia",
   footer: "© 2026 Hitou Studio — Jasa Pembuatan Website",
