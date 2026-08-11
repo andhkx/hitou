@@ -45,7 +45,7 @@ export const pricing = [
   {
     id: "starter",
     name: "STARTER",
-    price: "Rp 250rb",
+    price: "Rp 250k",
     popular: false,
     desc: "Landing page & profil usaha yang langsung online",
     features: [
@@ -61,7 +61,7 @@ export const pricing = [
   {
     id: "standar",
     name: "STANDAR",
-    price: "Rp 500rb",
+    price: "Rp 500k",
     popular: true,
     desc: "Website lengkap untuk bisnis yang serius",
     features: [

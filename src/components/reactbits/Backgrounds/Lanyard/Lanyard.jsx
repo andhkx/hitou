@@ -307,16 +307,6 @@ function Band({
       vec.add(dir.multiplyScalar(state.camera.position.length()));
       [card, j1, j2, j3, fixed].forEach((ref) => ref.current?.wakeUp());
       card.current?.setNextKinematicTranslation({ x: vec.x - dragged.x, y: vec.y - dragged.y, z: vec.z - dragged.z });
-    } else if (card.current) {
-      // Goyangan pendulum sangat halus ke kiri-kanan (ala gendesignid).
-      // Velocity-y dibiarkan natural supaya gravitasi tetap menarik kartu turun.
-      // 0.45 = jarak ayun (makin kecil makin sedikit), 1.0 = kecepatan ayun (makin kecil makin pelan)
-      const t = state.clock.elapsedTime;
-      const lv = card.current.linvel();
-      card.current.setLinvel({ x: Math.sin(t * 1.0) * 0.45, y: lv.y, z: lv.z });
-      card.current.setAngvel({ x: 0, y: 0, z: 0 });
-      card.current.wakeUp();
-      [j1, j2, j3].forEach((ref) => ref.current?.wakeUp());
     }
     if (fixed.current) {
       [j1, j2].forEach((ref) => {
