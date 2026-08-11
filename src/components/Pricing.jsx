@@ -23,7 +23,7 @@ export default function Pricing() {
       >
         <h1 className="text-3xl md:text-5xl font-bold mb-3">Paket Harga</h1>
         <p className="text-white/55 max-w-xl mx-auto text-sm md:text-base">
-          Mulai dari Rp 250rb — harga jujur, tanpa biaya tersembunyi.
+          Mulai dari Rp 250rb — tanpa biaya tersembunyi.
         </p>
       </motion.div>
 

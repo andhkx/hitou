@@ -1,0 +1,126 @@
+# PANDUAN EDIT — Hitou Studio
+
+Cara pakai: buka file di VS Code, tekan `Ctrl+Click` pada referensi `nama-file:nomor-baris` di bawah untuk lompat langsung ke lokasinya.
+
+---
+
+## 1. Data utama (nama, harga, paket, FAQ, project, sosmed)
+
+**Semua isi konten (teks, harga, link WA, FAQ, project) ada di satu file:**
+[`src/data/portfolio.js`](src/data/portfolio.js)
+
+| Yang mau diubah | File:Baris | Isi |
+|---|---|---|
+| Nomor WhatsApp (semua tombol) | `src/data/portfolio.js:3` | `wa = (message)` → nomor `62895627174900` |
+| Nama & teks hero | `src/data/portfolio.js:13` | blok `profile` (mulai baris 13) |
+| Kalimat ketik di hero | `src/data/portfolio.js:24` | `typedDescriptions` (3 kalimat berputar) |
+| Bio (dipakai footer) | `src/data/portfolio.js:31` | `bio` |
+| 4 value (Cepat/Harga/Responsif/Support) | `src/data/portfolio.js:37` | `valueProps` |
+| 4 paket harga + fitur | `src/data/portfolio.js:44` | `pricing` (mulai baris 44) |
+| 2 project (Mahessa, BK) | `src/data/portfolio.js:113` | `projects` |
+| Proses 4 langkah | `src/data/portfolio.js:140` | `process` |
+| Checklist "Selalu Included" | `src/data/portfolio.js:167` | `features` |
+| 7 pertanyaan FAQ | `src/data/portfolio.js:177` | `faqs` |
+| Testimonial placeholder | `src/data/portfolio.js:208` | `testimonialsPlaceholder` |
+| Tech stack / logo | `src/data/portfolio.js:211` | `techStack` |
+| 6 sosmed | `src/data/portfolio.js:241` | `socials` |
+| Email, nomor, lokasi, footer text | `src/data/portfolio.js:250` | `contactInfo` |
+| Foto profil About/CTA | `src/data/portfolio.js:257` | `about.photo` → `/assets/profile.jpg` |
+
+Foto project: taruh di `public/assets/projects/1.jpg`, `2.jpg`; foto profil di `public/assets/profile.jpg`.
+
+---
+
+## 2. Hero (tampilan awal)
+
+[`src/components/Hero.jsx`](src/components/Hero.jsx)
+
+| Elemen | File:Baris | Cara atur |
+|---|---|---|
+| "Halo! Saya" | `src/components/Hero.jsx:59` | teks greeting (ada di data) |
+| Nama "Hitou" | `src/components/Hero.jsx:60` | warna putih, bold |
+| Role "Web Developer." | `src/components/Hero.jsx:69` | ganti teks di `portfolio.js:22` (`heroRole`) |
+| Paragraf typewriting | `src/components/Hero.jsx:87` | kalimat = `typedDescriptions`; kecepatan = `speed={24}` (baris 86), delay antar kalimat `waitTime={3200}` |
+| Tombol WA putih | `src/components/Hero.jsx:109` | label = `ctaPrimary` |
+| Tombol Lihat Paket | `src/components/Hero.jsx:117` | label = `ctaSecondary` |
+| Badge harga | `src/components/Hero.jsx:130` | teks = `heroPriceBadge` |
+| **Posisi & ukuran kartu 3D** | `src/components/Hero.jsx:38` | `position={[0,0,20]}` (z kecil = dekat/besar), `fov={13}` (kecil = besar), `lanyardWidth={2}` (lebar tali) |
+| Area tarik kartu | `src/components/Hero.jsx:37` | wrapper `inset-0` = seluruh hero bisa di-drag; kartu di **bawah** teks (z-0) |
+
+---
+
+## 3. Lanyard / kartu 3D (physics & animasi)
+
+[`src/components/reactbits/Backgrounds/Lanyard/Lanyard.jsx`](src/components/reactbits/Backgrounds/Lanyard/Lanyard.jsx)
+
+| Elemen | File:Baris | Cara atur |
+|---|---|---|
+| Posisi gantung (kartu geser kanan) | `Lanyard.jsx:358` | `position={[1.6, 5.0, 0]}` → x geser kiri/kanan, y naik/turun |
+| Panjang tali (3 segmen) | `Lanyard.jsx:307-317` | angka terakhir tiap `useRopeJoint` = panjang segmen (0.8 = pendek, 1.2 = panjang) |
+| Jarak kartu ke dudukan | `Lanyard.jsx:321` | `useSphericalJoint` → `[0, 1.0, 0]` |
+| Lebar tali | `src/components/Hero.jsx:38` | `lanyardWidth={2}` (2 = sedang, 3 = tebal) |
+| Goyangan idle (bergerak sendiri) | `Lanyard.jsx:327-339` | `else if (card.current)` — `0.5` = amplitudo goyangan, `0.7` = kecepatan |
+| Ukuran fisik kartu | `Lanyard.jsx:380` | `scale={2.25}` → 2.6 lebih besar |
+
+---
+
+## 4. Value (4 pill di bawah hero)
+
+[`src/components/Value.jsx`](src/components/Value.jsx) — teks di `portfolio.js:43` (`valueProps`).
+
+---
+
+## 5. Paket Harga
+
+[`src/components/Pricing.jsx`](src/components/Pricing.jsx)
+
+| Elemen | File:Baris | Cara atur |
+|---|---|---|
+| Daftar paket | `Pricing.jsx:31` | render dari `pricing` (data) |
+| Badge "PALING LARIS" | `Pricing.jsx:47` | muncul di paket dengan `popular: true` (data) |
+| Ukuran harga | `Pricing.jsx:57-59` | `text-3xl md:text-4xl` |
+| Tombol per paket → WA | `Pricing.jsx:72` | pesan WA otomatis berisi nama paket |
+
+---
+
+## 6. Portofolio (project + tech strip)
+
+[`src/components/Portfolio.jsx`](src/components/Portfolio.jsx)
+
+| Elemen | File:Baris | Cara atur |
+|---|---|---|
+| Kartu project | `Portfolio.jsx:52` | dari `projects` (data) |
+| Gambar project | `Portfolio.jsx:63` | `p.image` → file di `public/assets/projects/` |
+| Badge LIVE | `Portfolio.jsx:75` | dari `p.status` (data) |
+| Link project | `Portfolio.jsx:122` | `p.link` di data |
+| Logo tech di bawah | `Portfolio.jsx:40` | dari `techStack` (data) |
+
+---
+
+## 7. Features / Process / FAQ / Testimonial
+
+| Komponen | File | Konten di |
+|---|---|---|
+| Checklist | [`src/components/Features.jsx`](src/components/Features.jsx) | `portfolio.js:167` |
+| Proses 4 langkah | [`src/components/Process.jsx`](src/components/Process.jsx) | `portfolio.js:140` |
+| FAQ accordion | [`src/components/FAQ.jsx`](src/components/FAQ.jsx) | `portfolio.js:177` |
+| Testimonial | [`src/components/Testimonials.jsx`](src/components/Testimonials.jsx) | `portfolio.js:208` (`testimonialsPlaceholder`) |
+
+---
+
+## 8. CTA & Footer
+
+[`src/components/CTA.jsx`](src/components/CTA.jsx) — tombol WA besar `CTA.jsx:66`, email `:69`, foto `:109`, nomor HP `:127`.
+[`src/components/Footer.jsx`](src/components/Footer.jsx) — brand `:11`, menu `:20`, sosmed `:49`, copyright `:66`.
+
+---
+
+## 9. Elemen global
+
+| Elemen | File:Baris | Cara atur |
+|---|---|---|
+| Navbar (menu, logo, aktif-hover) | [`src/components/Navbar.jsx`](src/components/Navbar.jsx:54) | logo `:54`, link `:59` |
+| Intro loader durasi | [`src/components/IntroLoader.jsx`](src/components/IntroLoader.jsx:8) | `DURATION = 1100` (ms) |
+| Cursor glow (besar/transparan) | [`src/components/CursorGlow.jsx`](src/components/CursorGlow.jsx:24) | `w-80 h-80` ukuran, `bg-white/[0.045]` transparansi |
+| Warna tema (background, teks abu) | [`src/app/globals.css`](src/app/globals.css:4) | `--bg-primary`, `--text-primary`, `--text-secondary`, `--text-muted` |
+| Judul tab browser | [`src/app/layout.js`](src/app/layout.js:16) | `metadata.title` |
