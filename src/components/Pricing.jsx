@@ -30,14 +30,20 @@ export default function Pricing() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
         {pricing.map((p, i) => (
-          <motion.div
-            key={p.id}
-            initial={reduce ? false : { opacity: 0, y: 40, scale: 0.97 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.7, delay: 0.08 * i, ease: EASE }}
-            className="h-full"
-          >
+            <motion.div
+              key={p.id}
+              initial={reduce ? false : { opacity: 0, y: 40, scale: 0.97 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.7, delay: 0.08 * i, ease: EASE }}
+              className="relative h-full"
+            >
+              {p.popular && (
+                <span className="absolute -top-4 left-1/2 -translate-x-1/2 z-30 inline-flex items-center gap-1.5 rounded-full bg-white text-black text-[11px] font-extrabold tracking-wide px-4 py-1.5 shadow-[0_0_20px_rgba(255,255,255,0.4)] whitespace-nowrap">
+                  <Sparkles size={12} aria-hidden="true" />
+                  PALING LARIS
+                </span>
+              )}
             <BorderGlow
               className={`h-full ${p.popular ? "border-white/50" : ""}`}
               backgroundColor="#181818"
@@ -49,13 +55,6 @@ export default function Pricing() {
               animated={p.popular}
             >
               <div className="p-5 sm:p-6 flex flex-col h-full relative">
-                {p.popular && (
-                  <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 inline-flex items-center gap-1.5 rounded-full bg-white text-black text-[11px] font-extrabold tracking-wide px-4 py-1.5 shadow-[0_0_20px_rgba(255,255,255,0.35)] whitespace-nowrap z-10">
-                    <Sparkles size={12} aria-hidden="true" />
-                    PALING LARIS
-                  </span>
-                )}
-
                 <p className="font-mono text-[13px] sm:text-[14px] font-bold tracking-[0.25em] text-white uppercase mb-2">
                   {p.name}
                 </p>

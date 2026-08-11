@@ -47,18 +47,15 @@ export default function Navbar() {
         }`}
       >
         <nav className="max-w-[1400px] mx-auto flex items-center justify-between px-6 md:px-12 h-16">
-          <a href="#home" className="flex items-center gap-2.5 hover:opacity-90 transition-opacity">
+          <a href="#home" className="flex items-center hover:opacity-90 transition-opacity">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/assets/logo_hitou.png"
               alt="Hitou Studio"
-              width={30}
-              height={24}
-              className="h-6 w-auto object-contain"
+              width={110}
+              height={28}
+              className="h-7 w-auto object-contain brightness-0 invert"
             />
-            <span className="text-[15px] font-extrabold tracking-tight text-foreground">
-              Hitou<span className="text-secondary font-bold">&nbsp;Studio</span>
-            </span>
           </a>
 
           <div className="flex items-center gap-8">
