@@ -39,26 +39,58 @@ class LanyardBoundary extends Component {
 
   componentDidCatch(error) {
     console.error("[Lanyard] render error:", error);
+    this.props.onReset?.();
   }
 
   render() {
-    if (this.state.failed) return null;
+    if (this.state.failed) return <StaticCard />;
     return this.props.children;
   }
 }
 
+function StaticCard() {
+  return (
+    <div className="lanyard-wrapper">
+      <Canvas dpr={[1, 1.5]} gl={{ alpha: true }} camera={{ position: [0, 0, 6], fov: 20 }}>
+        <ambientLight intensity={Math.PI} />
+        <directionalLight position={[0, 0, 5]} intensity={2} />
+        <SpinCard />
+      </Canvas>
+    </div>
+  );
+}
+
+function SpinCard() {
+  const ref = useRef();
+  useFrame((_, delta) => {
+    if (!ref.current) return;
+    ref.current.rotation.x += delta * 0.35;
+    ref.current.rotation.y += delta * 0.5;
+  });
+  return (
+    <group ref={ref}>
+      <mesh>
+        <boxGeometry args={[2.2, 3.1, 0.05]} />
+        <meshPhysicalMaterial color="#232323" clearcoat={1} clearcoatRoughness={0.15} roughness={0.6} metalness={0.6} />
+      </mesh>
+    </group>
+  );
+}
+
 export default function Lanyard({
-  position = [0, 0, 30],
-  gravity = [0, -40, 0],
-  fov = 20,
+  position = [0, 0, 30], // [x, y, z] posisi kamera. z kecil = kartu lebih dekat/besar
+  gravity = [0, -40, 0], // gravitasi physics. -40 = normal, -20 = kartu melayang lebih ringan
+  fov = 20, // sudut lensa. kecil = zoom-in (kartu besar), besar = zoom-out
   transparent = true,
   frontImage = null,
   backImage = null,
   imageFit = "cover",
   lanyardImage = null,
-  lanyardWidth = 1,
+  lanyardWidth = 1, // lebar tali (biasanya diatur dari Hero.jsx)
 }) {
   const [isMobile, setIsMobile] = useState(() => typeof window !== "undefined" && window.innerWidth < 768);
+  const [key, setKey] = useState(0);
+  const [failed, setFailed] = useState(false);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
@@ -66,16 +98,31 @@ export default function Lanyard({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  if (failed) return <StaticCard />;
+
   return (
     <div className="lanyard-wrapper">
-      <LanyardBoundary>
+      <LanyardBoundary onReset={() => setKey((k) => k + 1)}>
         <Canvas
+          key={key}
           camera={{ position: position, fov: fov }}
-          dpr={[1, isMobile ? 1.5 : 2]}
+          dpr={[1, isMobile ? 1.5 : 2]} // resolusi render (1 = hemat, 2 = tajam)
           gl={{ alpha: transparent }}
           onCreated={({ gl }) => {
             gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1);
-            gl.domElement.addEventListener("webglcontextlost", (e) => e.preventDefault());
+            const dom = gl.domElement;
+            const handleLost = (e) => {
+              e.preventDefault();
+              console.warn("[Lanyard] WebGL context lost - auto recovering");
+              setKey((k) => {
+                if (k >= 3) {
+                  setFailed(true);
+                  return k;
+                }
+                return k + 1;
+              });
+            };
+            dom.addEventListener("webglcontextlost", handleLost, false);
           }}
         >
           <ambientLight intensity={Math.PI} />
@@ -221,24 +268,29 @@ function Band({
   const [dragged, drag] = useState(false);
   const [hovered, hover] = useState(false);
 
+    // === PENGATURAN TALI & POSISI ===
+  // Panjang tiap segmen tali (3 segmen): angka terakhir di bawah.
+  // 1 = panjang normal, 0.8 = tali lebih pendek, 1.2 = tali lebih panjang.
   useRopeJoint(fixed, j1, [
     [0, 0, 0],
     [0, 0, 0],
-    1,
+    1, // <- segmen 1: panjang tali
   ]);
   useRopeJoint(j1, j2, [
     [0, 0, 0],
     [0, 0, 0],
-    1,
+    1, // <- segmen 2: panjang tali
   ]);
   useRopeJoint(j2, j3, [
     [0, 0, 0],
     [0, 0, 0],
-    1,
+    1, // <- segmen 3: panjang tali
   ]);
+  // Jarak kartu ke dudukan tali: [0, 1.5, 0] -> 1.5 = kartu agak jauh dari
+  // dudukan, 1.0 = kartu menempel lebih dekat ke tali.
   useSphericalJoint(j3, card, [
     [0, 0, 0],
-    [0, 1.5, 0],
+    [0, 1.5, 0], // <- anchor kartu (angka tengah = jarak)
   ]);
 
   useEffect(() => {
@@ -275,6 +327,10 @@ function Band({
 
   return (
     <>
+      {/* POSISI GANTUNG SELURUH LANYARD:
+          x = geser kiri/kanan (positif = kanan, negatif = kiri)
+          y = naik/turun (5 = lebih tinggi, 4 = lebih rendah)
+          z = maju/mundur */}
       <group position={[0, 4, 0]}>
         <RigidBody ref={fixed} {...segmentProps} type="fixed" />
         <RigidBody position={[0.5, 0, 0]} ref={j1} {...segmentProps}>
@@ -294,8 +350,8 @@ function Band({
         >
           <CuboidCollider args={[0.8, 1.125, 0.01]} />
           <group
-            scale={2.25}
-            position={[0, -1.2, -0.05]}
+            scale={2.25} // <- UKURAN KARTU: 2.25 = sedang, 2.6 = lebih besar, 2 = lebih kecil
+            position={[0, -1.2, -0.05]} // posisi kartu relatif dudukan (jarang diubah)
             onPointerOver={() => hover(true)}
             onPointerOut={() => hover(false)}
             onPointerUp={(e) => (e.target.releasePointerCapture(e.pointerId), drag(false))}

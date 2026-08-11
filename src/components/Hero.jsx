@@ -34,7 +34,12 @@ export default function Hero() {
     >
       {ready && (
         <div className="hidden md:block absolute inset-0 z-0 opacity-70 lg:opacity-100 pointer-events-auto">
-          <Lanyard position={[0, 0, 20]} fov={13} gravity={[0, -40, 0]} lanyardWidth={1} />
+          {/* PENGATURAN KARTU 3D:
+              position = posisi kamera: [x, y, z] -> z 20 = dekat/besar, 25 = jauh/kecil
+              fov      = zoom lensa: 13 = kartu besar, 18 = kartu kecil
+              gravity  = gravitasi: -40 = normal, -20 = kartu lebih melayang
+              lanyardWidth = lebar tali: 2 = sedang, 3 = tebal, 1 = tipis */}
+          <Lanyard position={[0, 0, 20]} fov={13} gravity={[0, -40, 0]} lanyardWidth={2} />
         </div>
       )}
 

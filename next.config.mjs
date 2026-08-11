@@ -2,6 +2,9 @@
 const nextConfig = {
   output: 'export',
   reactCompiler: true,
+  // Matikan StrictMode agar WebGL (three.js) tidak di-mount dua kali di dev
+  // (double-mount membuat browser membunuh WebGL context -> kartu hilang).
+  reactStrictMode: false,
   images: {
     unoptimized: true,
     remotePatterns: [

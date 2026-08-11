@@ -45,7 +45,7 @@ export const pricing = [
   {
     id: "starter",
     name: "STARTER",
-    price: "Rp 250rb — 500rb",
+    price: "Rp 250rb",
     popular: false,
     desc: "Landing page & profil usaha yang langsung online",
     features: [
@@ -61,7 +61,7 @@ export const pricing = [
   {
     id: "standar",
     name: "STANDAR",
-    price: "Rp 500rb — 1.2jt",
+    price: "Rp 500rb",
     popular: true,
     desc: "Website lengkap untuk bisnis yang serius",
     features: [
@@ -78,7 +78,7 @@ export const pricing = [
   {
     id: "premium",
     name: "PREMIUM",
-    price: "Rp 1.2jt — 2.5jt",
+    price: "Rp 1.2jt",
     popular: false,
     desc: "Aplikasi web custom dengan backend & database",
     features: [
