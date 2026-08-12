@@ -47,12 +47,17 @@ export default function Testimonials() {
           >
             <div className="flex gap-0.5 mb-4">
               {[...Array(t.rating)].map((_, s) => (
-                <Star
+                <span
                   key={s}
-                  size={16}
-                  className="text-white/70 fill-white/60"
-                  aria-hidden="true"
-                />
+                  className="star-shine inline-flex"
+                  style={{ animationDelay: `${s * 0.18}s` }}
+                >
+                  <Star
+                    size={16}
+                    className="text-white/70 fill-white/60"
+                    aria-hidden="true"
+                  />
+                </span>
               ))}
             </div>
             <Quote size={22} className="text-white/15 mb-3" aria-hidden="true" />

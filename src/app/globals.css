@@ -118,3 +118,27 @@ textarea {
     animation: none;
   }
 }
+
+@keyframes star-shine {
+  0%,
+  100% {
+    opacity: 0.75;
+    transform: scale(1);
+    filter: drop-shadow(0 0 0 rgba(255, 255, 255, 0));
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.18);
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.85));
+  }
+}
+
+.star-shine {
+  animation: star-shine 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .star-shine {
+    animation: none;
+  }
+}

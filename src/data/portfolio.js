@@ -20,7 +20,7 @@ export const profile = {
   tagline: "JASA PEMBUATAN WEBSITE",
   greeting: "Halo! Saya",
   heroName: "Hitou",
-  heroRole: "Web Developer",
+  heroRole: "Web Developer",  
   heroMicrocopy: "Mulai dari Rp 300k · Beres 3–5 hari · Dijamin suka",
   typedDescriptions: [
     "Bikin website buat usaha dan personal — hasil rapi, harga bersahabat.",
@@ -100,7 +100,7 @@ export const pricing = [
   {
     id: "custom",
     name: "CUSTOM",
-    price: "Konsultasi",
+    price: "Sesuai Kantong",
     popular: false,
     desc: "Kebutuhan khusus? Kita diskusikan dulu, gratis konsultasi",
     for: "kebutuhan unik atau sistem internal kompleks",
@@ -194,7 +194,6 @@ export const testimonials = [
     name: "CEO Mahessa Trans Holiday",
     role: "Pemilik Mahessa Trans Holiday",
     rating: 5,
-    avatar: "🎯",
   },
   {
     id: 2,
@@ -203,7 +202,6 @@ export const testimonials = [
     name: "Pak Gugum Gumilar, S.T, M.T",
     role: "Penguji Tugas Akhir",
     rating: 5,
-    avatar: "⭐",
   },
   {
     id: 3,
@@ -212,7 +210,6 @@ export const testimonials = [
     name: "Ibu Tini Hermawati, S.Psi",
     role: "Guru BK",
     rating: 5,
-    avatar: "💡",
   },
 ];
 
@@ -297,7 +294,7 @@ export const socials = [
 ];
 
 export const contactInfo = {
-  email: "andhikaputrach273@gmail.com",
+  email: "hitoodiningrat@gmail.com",
   phone: "+62 817-9172-900",
   location: "Cimahi, Indonesia",
   footer: "© 2026 Hitou Studio — Jasa Pembuatan Website",

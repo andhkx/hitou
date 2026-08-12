@@ -42,11 +42,12 @@ export default function CursorGlow() {
       {/* lingkaran liquid glass mengikuti pointer */}
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none fixed z-[60] w-9 h-9 -ml-[18px] -mt-[18px] rounded-full"
+        className="pointer-events-none fixed z-[60] w-12 h-12 -ml-6 -mt-6 rounded-full"
         style={{ x: cx, y: cy, scale: pressScale }}
       >
-        <div className="w-full h-full rounded-full border border-white/25 bg-white/10 backdrop-blur-sm shadow-[inset_0_1px_1px_rgba(255,255,255,0.25),0_0_12px_rgba(255,255,255,0.15)]" />
-        <div className="absolute top-1.5 left-1.5 w-2 h-2 rounded-full bg-white/40 blur-[1px]" />
+        <div className="absolute inset-0 rounded-full bg-white/[0.08] backdrop-blur-md border border-white/30 shadow-[inset_0_1px_2px_rgba(255,255,255,0.35),inset_0_-2px_6px_rgba(255,255,255,0.08),0_0_16px_rgba(255,255,255,0.12),0_4px_16px_rgba(0,0,0,0.35)] ring-1 ring-white/10" />
+        <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/25 via-transparent to-transparent" />
+        <div className="absolute top-[7px] left-[9px] w-2.5 h-1.5 rounded-full bg-white/50 blur-[2px]" />
       </motion.div>
     </>
   );
