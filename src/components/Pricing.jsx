@@ -37,7 +37,7 @@ export default function Pricing() {
               </p>
 
               <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40 mb-1">
-                {p.id === "custom" ? "Hubungi" : "Mulai dari"}
+                {p.id === "kantong" ? "Harga" : "Mulai dari"}
               </p>
               <h3 className="text-[26px] sm:text-3xl md:text-4xl font-extrabold tracking-tight leading-tight mb-2">
                 {p.price}
@@ -83,12 +83,12 @@ export default function Pricing() {
               {p.note && (
                 <p
                   className={`inline-flex items-start gap-2 font-mono text-[10px] tracking-wide leading-relaxed rounded-lg border px-3 py-2 mb-5 ${
-                    p.id === "starter"
+                    p.id === "kantong"
                       ? "border-white/25 bg-white/[0.04] text-white/60"
                       : "border-white/35 bg-white/[0.06] text-white/80"
                   }`}
                 >
-                  {p.id === "starter" ? (
+                  {p.id === "kantong" ? (
                     <AlertTriangle size={13} className="shrink-0 mt-0.5 text-white/60" aria-hidden="true" />
                   ) : (
                     <CheckCircle2 size={13} className="shrink-0 mt-0.5 text-white" aria-hidden="true" />
@@ -98,7 +98,10 @@ export default function Pricing() {
               )}
 
               <a
-                href={wa(`Halo Hitou! Saya mau pesan paket ${p.name} — harga ${p.price}.`)}
+                href={wa(
+                  p.waText ??
+                    `Halo Hitou! Saya mau pesan paket ${p.name} — mulai dari ${p.price}.`
+                )}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`mt-auto w-full rounded-xl py-4 text-sm font-bold text-center transition-all duration-300 active:scale-[0.99] ${

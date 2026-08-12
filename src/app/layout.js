@@ -14,9 +14,21 @@ const dmMono = DM_Mono({
 });
 
 export const metadata = {
-  title: "Hitou Studio",
+  title: "Jasa Pembuatan Website Murah | Hitou Studio",
   description:
-    "Jasa pembuatan website untuk UMKM & personal — cepat, murah, terpercaya. Mulai dari Rp 250rb.",
+    "Jasa pembuatan website murah untuk UMKM & personal. Harga menyesuaikan kantong, mulai Rp 250rb, domain & hosting termasuk. Konsultasi gratis via WhatsApp.",
+  verification: {
+    google: "Nj-LODOTWbShquXrYB_bzPA3rhF12vEOPOCLtYok9Hw",
+  },
+  openGraph: {
+    title: "Jasa Pembuatan Website Murah | Hitou Studio",
+    description:
+      "Jasa pembuatan website murah untuk UMKM & personal. Mulai Rp 250rb, domain & hosting termasuk, konsultasi gratis.",
+    type: "website",
+    url: "https://hitoustudio.pages.dev",
+    siteName: "Hitou Studio",
+    locale: "id_ID",
+  },
   icons: {
     icon: [
       { url: "/assets/logo_h_white.png", media: "(prefers-color-scheme: dark)" },
