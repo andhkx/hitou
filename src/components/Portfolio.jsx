@@ -14,7 +14,15 @@ function SafeImg({ src, alt, className, fallback }) {
   if (err || !src) return fallback;
   return (
     // eslint-disable-next-line @next/next/no-img-element
-    <img src={src} alt={alt} className={className} loading="lazy" onError={() => setErr(true)} />
+    <img
+      src={src}
+      alt={alt}
+      width={1280}
+      height={720}
+      className={className}
+      loading="lazy"
+      onError={() => setErr(true)}
+    />
   );
 }
 
@@ -27,7 +35,7 @@ function SectionHead({ title, sub }) {
       transition={{ duration: 0.8, ease: EASE }}
       className="text-center mb-12"
     >
-      <h1 className="text-3xl md:text-5xl font-bold mb-3">{title}</h1>
+      <h2 className="text-3xl md:text-5xl font-bold mb-3">{title}</h2>
       {sub && (
         <p className="text-white/55 max-w-xl mx-auto text-sm md:text-base">{sub}</p>
       )}
@@ -196,30 +204,21 @@ export default function Portfolio() {
         transition={{ duration: 0.8, delay: 0.1, ease: EASE }}
         className="mt-20"
       >
-        <p className="text-center font-mono text-[11px] tracking-[0.25em] uppercase text-white/40 mb-10">
+        <p className="text-center font-mono text-[11px] tracking-[0.25em] uppercase text-white/40 mb-8">
           Teknologi yang Saya Pakai
         </p>
-        <div className="space-y-8">
-          {techStack.map((group, gi) => (
-            <div key={group.category}>
-              <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-white/30 mb-4 text-center">
-                {group.category}
-              </p>
-              <div className="w-full overflow-hidden">
-                <LogoLoop
-                  logos={group.items.map((t) => ({ src: t.logo, alt: t.name, title: t.name }))}
-                  speed={50}
-                  direction={gi % 2 === 0 ? "left" : "right"}
-                  logoHeight={18}
-                  gap={56}
-                  fadeOut
-                  fadeOutColor="#151515"
-                  scaleOnHover
-                  ariaLabel={`Teknologi ${group.category}`}
-                />
-              </div>
-            </div>
-          ))}
+        <div className="w-full overflow-hidden">
+          <LogoLoop
+            logos={techStack.flatMap((g) => g.items).map((t) => ({ src: t.logo, alt: t.name, title: t.name }))}
+            speed={55}
+            direction="left"
+            logoHeight={20}
+            gap={56}
+            fadeOut
+            fadeOutColor="#151515"
+            scaleOnHover
+            ariaLabel="Teknologi yang saya pakai"
+          />
         </div>
       </motion.div>
     </section>

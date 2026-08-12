@@ -18,7 +18,10 @@ export const metadata = {
   description:
     "Jasa pembuatan website untuk UMKM & personal — cepat, murah, terpercaya. Mulai dari Rp 250rb.",
   icons: {
-    icon: "/assets/logo_h.png",
+    icon: [
+      { url: "/assets/logo_h_white.png", media: "(prefers-color-scheme: dark)" },
+      { url: "/assets/logo_h.png", media: "(prefers-color-scheme: light)" },
+    ],
   },
 };
 

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, useScroll, useMotionValueEvent, useReducedMotion } from "motion/react";
 import { Menu, X } from "lucide-react";
-import { navLinks, profile } from "@/data/portfolio";
+import { navLinks } from "@/data/portfolio";
 
 export default function Navbar() {
   const reduce = useReducedMotion();
@@ -53,8 +53,8 @@ export default function Navbar() {
               src="/assets/logo_hitou.png"
               alt="Hitou Studio"
               width={110}
-              height={40}
-              className="h-10 w-auto object-contain brightness-0 invert"
+              height={20}
+              className="h-6 w-auto object-contain brightness-0 invert"
             />
           </a>
 
@@ -81,9 +81,6 @@ export default function Navbar() {
                 );
               })}
             </ul>
-            <span className="hidden lg:inline-block font-mono text-[11px] tracking-[0.2em] uppercase text-secondary">
-              ✦ {profile.eyebrow.replace("✦ ", "")}
-            </span>
             <button
               onClick={() => setOpen(!open)}
               aria-label="Toggle menu"

@@ -20,7 +20,7 @@ export default function Process() {
         transition={{ duration: 0.8, ease: EASE }}
         className="text-center mb-12"
       >
-        <h1 className="text-3xl md:text-5xl font-bold mb-3">Gimana Prosesnya?</h1>
+        <h2 className="text-3xl md:text-5xl font-bold mb-3">Gimana Prosesnya?</h2>
         <p className="text-white/55 max-w-xl mx-auto text-sm md:text-base">
           Simpel, jelas, dan kamu selalu tahu progress-nya.
         </p>

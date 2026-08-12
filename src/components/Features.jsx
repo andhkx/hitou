@@ -22,7 +22,7 @@ export default function Features() {
         transition={{ duration: 0.8, ease: EASE }}
         className="text-center mb-12"
       >
-        <h1 className="text-3xl md:text-5xl font-bold mb-3">Selalu Included</h1>
+        <h2 className="text-3xl md:text-5xl font-bold mb-3">Selalu Included</h2>
         <p className="text-white/55 max-w-xl mx-auto text-sm md:text-base">
           Semua paket sudah termasuk hal-hal ini.
         </p>

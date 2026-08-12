@@ -5,7 +5,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { profile } from "@/data/portfolio";
 
 const EASE = [0.22, 1, 0.36, 1];
-const DURATION = 1100;
+const DURATION = 800;
 
 export default function IntroLoader() {
   const reduce = useReducedMotion();
@@ -76,12 +76,16 @@ export default function IntroLoader() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.35, ease: EASE }}
-              className="flex flex-col items-center gap-1.5"
+              className="flex flex-col items-center gap-2.5"
             >
-              <span className="text-2xl font-extrabold tracking-tight text-foreground">
-                {profile.heroName}
-                <span className="text-secondary">.</span>
-              </span>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/assets/logo_hitou.png"
+                alt="Hitou Studio"
+                width={140}
+                height={46}
+                className="h-11 w-auto object-contain brightness-0 invert"
+              />
               <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-muted">
                 {profile.tagline}
               </span>

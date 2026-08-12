@@ -12,9 +12,9 @@ export default function Footer() {
             <img
               src="/assets/logo_hitou.png"
               alt="Hitou Studio"
-              width={120}
-              height={48}
-              className="h-12 w-auto object-contain brightness-0 invert"
+              width={100}
+              height={50}
+              className="h-7 w-auto object-contain brightness-0 invert"
             />
           </div>
           <p className="text-sm text-white/55 leading-relaxed max-w-xs">{profile.bio}</p>
@@ -70,8 +70,8 @@ export default function Footer() {
       </div>
       <div className="border-t border-white/10">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <p className="text-xs text-white/40">{contactInfo.footer}</p>
-          <p className="text-xs text-white/40">Built with Next.js &amp; React Bits</p>
+          <p className="text-xs text-white/55">{contactInfo.footer}</p>
+          <p className="text-xs text-white/55">Built with Next.js &amp; React Bits</p>
         </div>
       </div>
     </footer>
