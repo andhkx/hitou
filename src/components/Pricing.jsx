@@ -33,19 +33,19 @@ export default function Pricing() {
           const dark = p.popular; // kartu featured: putih solid, teks gelap
 
           const t = {
-            label: dark ? "text-black/50" : "text-white/40",
-            desc: dark ? "text-black/60" : "text-white/50",
-            feature: dark ? "text-black/75" : "text-white/75",
+            label: dark ? "text-black/60" : "text-white/40",
+            desc: dark ? "text-black/70" : "text-white/50",
+            feature: dark ? "text-black/80" : "text-white/75",
             icon: dark ? "text-black" : "text-white",
-            forLabel: dark ? "text-black/50" : "text-white/40",
+            forLabel: dark ? "text-black/60" : "text-white/40",
             badge: dark
-              ? "border-black/30 bg-black/[0.06] text-black/80 shadow-[0_0_10px_rgba(0,0,0,0.08)]"
+              ? "border-black/40 bg-black/[0.06] text-black/80"
               : "border-white/40 bg-white/[0.06] text-white/85 shadow-[0_0_10px_rgba(255,255,255,0.12)]",
             badgeExample: dark
-              ? "border-black/40 bg-black/[0.08] text-black shadow-[0_0_12px_rgba(0,0,0,0.12)] hover:bg-black/15"
+              ? "border-black/50 bg-black/[0.08] text-black hover:bg-black/15"
               : "border-white/50 bg-white/[0.08] text-white shadow-[0_0_12px_rgba(255,255,255,0.18)] hover:bg-white/15",
             note: dark
-              ? "border-black/20 bg-black/[0.04] text-black/60"
+              ? "border-black/30 bg-black/[0.05] text-black/70"
               : "border-white/25 bg-white/[0.04] text-white/60",
             cta: dark
               ? "bg-black text-white hover:bg-black/85 shadow-[0_0_25px_rgba(0,0,0,0.25)]"
@@ -54,9 +54,9 @@ export default function Pricing() {
 
           const cardInner = (
             <div
-              className={`p-5 sm:p-6 flex flex-col h-full relative ${
+              className={`p-5 sm:p-6 flex flex-col h-full relative rounded-[24px] ${
                 dark ? "bg-white text-black" : "text-white"
-              } ${dark ? "rounded-[24px] border border-white/30 shadow-[0_0_45px_rgba(255,255,255,0.22)]" : ""}`}
+              }`}
             >
               <p
                 className={`font-mono text-[13px] sm:text-[14px] font-bold tracking-[0.25em] uppercase mb-2 ${
@@ -150,7 +150,17 @@ export default function Pricing() {
                 </span>
               )}
               {dark ? (
-                cardInner
+                <BorderGlow
+                  className="h-full border-white/50"
+                  backgroundColor="#ffffff"
+                  borderRadius={24}
+                  edgeSensitivity={45}
+                  glowColor="0 0 100"
+                  glowIntensity={2}
+                  fillOpacity={0}
+                >
+                  {cardInner}
+                </BorderGlow>
               ) : (
                 <BorderGlow
                   className="h-full"
