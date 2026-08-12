@@ -3,7 +3,6 @@
 import { motion, useReducedMotion } from "motion/react";
 import { AlertTriangle, ArrowUpRight, Check, CheckCircle2, Sparkles } from "lucide-react";
 import BorderGlow from "./reactbits/BorderGlow/BorderGlow.jsx";
-import ElectricBorder from "./reactbits/ElectricBorder/ElectricBorder.jsx";
 import { pricing, wa } from "@/data/portfolio";
 
 const EASE = [0.16, 1, 0.3, 1];
@@ -121,7 +120,7 @@ export default function Pricing() {
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.7, delay: 0.08 * i, ease: EASE }}
               className={`relative h-full self-stretch ${
-                p.popular ? "z-10 xl:scale-[1.05] xl:-translate-y-1.5" : ""
+                p.popular ? "z-10 xl:scale-[1.02]" : ""
               }`}
             >
               {p.popular && (
@@ -130,30 +129,17 @@ export default function Pricing() {
                   PALING LARIS
                 </span>
               )}
-              {p.popular ? (
-                <ElectricBorder
-                  className="h-full"
-                  color="#ffffff"
-                  speed={0.9}
-                  chaos={0.1}
-                  borderRadius={24}
-                  style={{ background: "#181818" }}
-                >
-                  {cardInner}
-                </ElectricBorder>
-              ) : (
-                <BorderGlow
-                  className="h-full"
-                  backgroundColor="#181818"
-                  borderRadius={24}
-                  edgeSensitivity={41}
-                  glowColor="0 0 100"
-                  glowIntensity={1}
-                  fillOpacity={0.45}
-                >
-                  {cardInner}
-                </BorderGlow>
-              )}
+              <BorderGlow
+                className={`h-full ${p.popular ? "border-white/50 shadow-[0_0_50px_rgba(255,255,255,0.12)]" : ""}`}
+                backgroundColor="#181818"
+                borderRadius={24}
+                edgeSensitivity={41}
+                glowColor="0 0 100"
+                glowIntensity={p.popular ? 1.6 : 1}
+                fillOpacity={p.popular ? 0.5 : 0.45}
+              >
+                {cardInner}
+              </BorderGlow>
             </motion.div>
           );
         })}

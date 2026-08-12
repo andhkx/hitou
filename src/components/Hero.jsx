@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowDown, MessageCircle } from "lucide-react";
 import Typewriter from "./reactbits/TextAnimations/Typewriter/Typewriter.jsx";
+import SpecularButton from "./reactbits/SpecularButton/SpecularButton.jsx";
 import { profile, wa } from "@/data/portfolio";
 
 const Lanyard = dynamic(
@@ -112,15 +113,28 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.85, ease: EASE }}
           className="flex items-center gap-3 flex-wrap mb-5"
         >
-          <a
-            href={wa("Halo Hitou! Saya mau pesan website.")}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-lg bg-white text-black text-[15px] font-bold px-6 py-3.5 transition-all duration-300 hover:bg-white/90 hover:-translate-y-0.5 active:scale-[0.99]"
+          <SpecularButton
+            size="lg"
+            radius={14}
+            tint="#ffffff"
+            tintOpacity={0.05}
+            blur={6}
+            textColor="#ffffff"
+            lineColor="#ffffff"
+            baseColor="#9a9a9a"
+            intensity={1.1}
+            shineSize={8}
+            shineFade={35}
+            thickness={1.2}
+            speed={0.4}
+            followMouse
+            proximity={250}
+            autoAnimate
+            onClick={() => window.open(wa("Halo Hitou! Saya mau pesan website."), "_blank")}
           >
             <MessageCircle size={16} aria-hidden="true" />
             {profile.ctaPrimary}
-          </a>
+          </SpecularButton>
           <a
             href="#pricing"
             className="inline-flex items-center gap-2 rounded-lg border border-white/25 text-white text-[15px] font-semibold px-6 py-3.5 transition-all duration-300 hover:bg-white/10 hover:border-white/50"

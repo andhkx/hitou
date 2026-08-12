@@ -144,17 +144,10 @@ textarea {
 }
 
 /* Cursor custom: sembunyikan arrow default HANYA untuk perangkat mouse
-   (touch/hp tidak terpengaruh — tetap pakai pointer native) */
+   (touch/hp tidak terpengaruh — tetap pakai pointer native).
+   Pakai * + !important agar utility Tailwind cursor-pointer tidak menang. */
 @media (hover: hover) and (pointer: fine) {
-  body,
-  a,
-  button,
-  [role="button"],
-  input,
-  textarea,
-  select,
-  label,
-  [role="listitem"] a {
-    cursor: none;
+  * {
+    cursor: none !important;
   }
 }
