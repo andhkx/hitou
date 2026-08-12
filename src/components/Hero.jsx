@@ -142,7 +142,7 @@ export default function Hero() {
             speed={0.4}
             followMouse
             proximity={250}
-            autoAnimate
+            autoAnimate={false}
             onClick={() => window.open(wa("Halo Hitou! Saya mau pesan website."), "_blank")}
           >
             <MessageCircle size={16} aria-hidden="true" />
