@@ -19,8 +19,11 @@ export default function Hero() {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
+    // Kartu 3D hanya untuk layar >= 768px (mobile: bundle three/rapier tidak
+    // di-download sama sekali — hemat payload & main-thread).
+    if (typeof window !== "undefined" && window.innerWidth < 768) return;
     if (typeof window.requestIdleCallback === "function") {
-      const id = requestIdleCallback(() => setReady(true), { timeout: 5000 });
+      const id = requestIdleCallback(() => setReady(true), { timeout: 8000 });
       return () => cancelIdleCallback(id);
     }
     const t = setTimeout(() => setReady(true), 2000);

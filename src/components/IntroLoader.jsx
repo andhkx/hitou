@@ -5,7 +5,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { profile } from "@/data/portfolio";
 
 const EASE = [0.22, 1, 0.36, 1];
-const DURATION = 800;
+const DURATION = 600;
 
 export default function IntroLoader() {
   const reduce = useReducedMotion();
