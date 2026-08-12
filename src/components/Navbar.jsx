@@ -53,8 +53,8 @@ export default function Navbar() {
               src="/assets/logo_hitou.png"
               alt="Hitou Studio"
               width={110}
-              height={28}
-              className="h-7 w-auto object-contain brightness-0 invert"
+              height={40}
+              className="h-10 w-auto object-contain brightness-0 invert"
             />
           </a>
 

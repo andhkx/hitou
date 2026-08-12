@@ -51,7 +51,8 @@ export default function Hero() {
           className="mb-5"
         >
           <span className="font-mono text-[12px] text-secondary tracking-[0.2em] uppercase">
-            {profile.eyebrow}
+            <span className="hero-star text-white" aria-hidden="true">✦</span>{" "}
+            {profile.eyebrow.replace("✦ ", "")}
           </span>
         </motion.div>
 

@@ -93,3 +93,28 @@ textarea {
 .typewriter-cursor {
   animation: blink-cursor 1.1s step-end infinite;
 }
+
+@keyframes pulse-star {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.9));
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(0.82);
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.9));
+  }
+}
+
+.hero-star {
+  display: inline-block;
+  animation: pulse-star 1.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-star {
+    animation: none;
+  }
+}

@@ -6,6 +6,14 @@ import { testimonials } from "@/data/portfolio";
 
 const EASE = [0.16, 1, 0.3, 1];
 
+function initials(name) {
+  const words = name.replace(/[.,]/g, "").split(/\s+/).filter(Boolean);
+  if (words.length === 0) return "?";
+  const first = words[0][0] ?? "";
+  const second = words[1]?.[0] ?? "";
+  return (first + second).toUpperCase();
+}
+
 export default function Testimonials() {
   const reduce = useReducedMotion();
 
@@ -52,8 +60,8 @@ export default function Testimonials() {
               “{t.quote}”
             </p>
             <div className="flex items-center gap-3">
-              <span className="w-10 h-10 rounded-full bg-white/10 border border-white/15 flex items-center justify-center text-xl shrink-0">
-                {t.avatar}
+              <span className="w-10 h-10 rounded-full bg-white/10 border border-white/15 flex items-center justify-center text-[13px] font-bold text-white/80 shrink-0">
+                {initials(t.name)}
               </span>
               <div className="min-w-0">
                 <p className="font-bold text-white text-sm truncate">{t.name}</p>

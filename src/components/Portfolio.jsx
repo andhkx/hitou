@@ -37,7 +37,6 @@ function SectionHead({ title, sub }) {
 
 export default function Portfolio() {
   const reduce = useReducedMotion();
-  const allTech = techStack.flatMap((g) => g.items).map((t) => ({ src: t.logo, alt: t.name, title: t.name }));
 
   return (
     <section
@@ -197,21 +196,30 @@ export default function Portfolio() {
         transition={{ duration: 0.8, delay: 0.1, ease: EASE }}
         className="mt-20"
       >
-        <p className="text-center font-mono text-[11px] tracking-[0.25em] uppercase text-white/40 mb-8">
+        <p className="text-center font-mono text-[11px] tracking-[0.25em] uppercase text-white/40 mb-10">
           Teknologi yang Saya Pakai
         </p>
-        <div className="w-full overflow-hidden">
-          <LogoLoop
-            logos={allTech}
-            speed={60}
-            direction="left"
-            logoHeight={22}
-            gap={64}
-            fadeOut
-            fadeOutColor="#151515"
-            scaleOnHover
-            ariaLabel="Teknologi yang saya pakai"
-          />
+        <div className="space-y-8">
+          {techStack.map((group, gi) => (
+            <div key={group.category}>
+              <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-white/30 mb-4 text-center">
+                {group.category}
+              </p>
+              <div className="w-full overflow-hidden">
+                <LogoLoop
+                  logos={group.items.map((t) => ({ src: t.logo, alt: t.name, title: t.name }))}
+                  speed={50}
+                  direction={gi % 2 === 0 ? "left" : "right"}
+                  logoHeight={18}
+                  gap={56}
+                  fadeOut
+                  fadeOutColor="#151515"
+                  scaleOnHover
+                  ariaLabel={`Teknologi ${group.category}`}
+                />
+              </div>
+            </div>
+          ))}
         </div>
       </motion.div>
     </section>

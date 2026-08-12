@@ -13,8 +13,8 @@ export default function Footer() {
               src="/assets/logo_hitou.png"
               alt="Hitou Studio"
               width={120}
-              height={32}
-              className="h-8 w-auto object-contain brightness-0 invert"
+              height={48}
+              className="h-12 w-auto object-contain brightness-0 invert"
             />
           </div>
           <p className="text-sm text-white/55 leading-relaxed max-w-xs">{profile.bio}</p>
