@@ -216,6 +216,10 @@ const SpecularButton = ({
       const brightTarget = p.autoAnimate ? 1 : proximityT;
       bright += (brightTarget - bright) * (1 - Math.exp(-dt * 8));
 
+      // Hemat: skip draw saat cahaya mati & pointer jauh (audit/headless/scroll-off)
+      const shouldRender = p.autoAnimate || bright > 0.01;
+      if (!shouldRender) return;
+
       lineC.set(p.lineColor);
       baseC.set(p.baseColor);
       program.uniforms.uAngle.value = angle;
@@ -230,8 +234,26 @@ const SpecularButton = ({
     };
     raf = requestAnimationFrame(update);
 
+    // Pause total saat tombol di luar viewport
+    let visible = true;
+    const io = new IntersectionObserver(
+      (entries) => {
+        visible = entries[0]?.isIntersecting ?? true;
+        if (!visible && raf) {
+          cancelAnimationFrame(raf);
+          raf = 0;
+        } else if (visible && !raf) {
+          last = performance.now();
+          raf = requestAnimationFrame(update);
+        }
+      },
+      { rootMargin: "100px" }
+    );
+    io.observe(btn);
+
     return () => {
       cancelAnimationFrame(raf);
+      io.disconnect();
       ro.disconnect();
       window.removeEventListener("pointermove", onPointerMove);
       if (gl.canvas.parentNode === fx) fx.removeChild(gl.canvas);

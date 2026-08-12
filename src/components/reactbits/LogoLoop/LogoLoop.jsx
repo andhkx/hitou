@@ -70,6 +70,16 @@ const useAnimationLoop = (trackRef, targetVelocity, seqWidth, seqHeight, isHover
     const track = trackRef.current;
     if (!track) return;
 
+    // Pause saat di luar viewport (hemat main-thread)
+    let visible = true;
+    const io = new IntersectionObserver(
+      (entries) => {
+        visible = entries[0]?.isIntersecting ?? true;
+      },
+      { rootMargin: "100px" }
+    );
+    io.observe(track);
+
     const seqSize = isVertical ? seqHeight : seqWidth;
 
     if (seqSize > 0) {
@@ -81,6 +91,11 @@ const useAnimationLoop = (trackRef, targetVelocity, seqWidth, seqHeight, isHover
     }
 
     const animate = (timestamp) => {
+      if (!visible) {
+        rafRef.current = requestAnimationFrame(animate);
+        lastTimestampRef.current = null;
+        return;
+      }
       if (lastTimestampRef.current === null) {
         lastTimestampRef.current = timestamp;
       }
@@ -114,6 +129,7 @@ const useAnimationLoop = (trackRef, targetVelocity, seqWidth, seqHeight, isHover
         cancelAnimationFrame(rafRef.current);
         rafRef.current = null;
       }
+      io.disconnect();
       lastTimestampRef.current = null;
     };
   }, [targetVelocity, seqWidth, seqHeight, isHovered, hoverSpeed, isVertical, trackRef]);
@@ -248,8 +264,8 @@ export const LogoLoop = memo(
             src={item.src}
             srcSet={item.srcSet}
             sizes={item.sizes}
-            width={item.width}
-            height={item.height}
+            width={item.width ?? 40}
+            height={item.height ?? 40}
             alt={item.alt ?? ""}
             title={item.title}
             loading="lazy"

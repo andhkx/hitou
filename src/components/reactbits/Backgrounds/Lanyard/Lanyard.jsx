@@ -320,7 +320,12 @@ function Band({
       curve.points[3].copy(fixed.current.translation());
       const allFinite = curve.points.every((p) => Number.isFinite(p.x) && Number.isFinite(p.y) && Number.isFinite(p.z));
       if (allFinite && band.current) {
-        band.current.geometry.setPoints(curve.getPoints(isMobile ? 16 : 32));
+        // 4 titik identik (sebelum physics mulai) => CatmullRom menghasilkan NaN
+        const pts = curve.getPoints(isMobile ? 16 : 32);
+        const ptsValid = pts.every((p) => Number.isFinite(p.x) && Number.isFinite(p.y));
+        if (ptsValid) {
+          band.current.geometry.setPoints(pts);
+        }
       }
       ang.copy(card.current.angvel());
       rot.copy(card.current.rotation());

@@ -24,7 +24,7 @@ export default function Hero() {
     // di-download sama sekali — hemat payload & main-thread).
     if (typeof window !== "undefined" && window.innerWidth < 768) return;
     if (typeof window.requestIdleCallback === "function") {
-      const id = requestIdleCallback(() => setReady(true), { timeout: 8000 });
+      const id = requestIdleCallback(() => setReady(true), { timeout: 12000 });
       return () => cancelIdleCallback(id);
     }
     const t = setTimeout(() => setReady(true), 2000);
