@@ -102,7 +102,7 @@ export default function Pricing() {
                 href={wa(`Halo Hitou! Saya mau pesan paket ${p.name} — harga ${p.price}.`)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`w-full rounded-xl py-4 text-sm font-bold text-center transition-all duration-300 active:scale-[0.99] ${
+                className={`mt-auto w-full rounded-xl py-4 text-sm font-bold text-center transition-all duration-300 active:scale-[0.99] ${
                   p.popular
                     ? "bg-white text-black hover:bg-white/90 shadow-[0_0_25px_rgba(255,255,255,0.2)]"
                     : "bg-white text-black hover:bg-white/90"
@@ -120,7 +120,9 @@ export default function Pricing() {
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.7, delay: 0.08 * i, ease: EASE }}
-              className="relative h-full"
+              className={`relative h-full self-stretch ${
+                p.popular ? "z-10 xl:scale-[1.05] xl:-translate-y-1.5" : ""
+              }`}
             >
               {p.popular && (
                 <span className="absolute -top-4 left-1/2 -translate-x-1/2 z-30 inline-flex items-center gap-1.5 rounded-full bg-white text-black text-[11px] font-extrabold tracking-wide px-4 py-1.5 shadow-[0_0_20px_rgba(255,255,255,0.4)] whitespace-nowrap">
@@ -135,6 +137,7 @@ export default function Pricing() {
                   speed={0.9}
                   chaos={0.1}
                   borderRadius={24}
+                  style={{ background: "#181818" }}
                 >
                   {cardInner}
                 </ElectricBorder>

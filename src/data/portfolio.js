@@ -23,8 +23,8 @@ export const profile = {
   heroRole: "Web Developer",  
   heroMicrocopy: "Mulai dari Rp 300k · Beres 3–5 hari · Dijamin suka",
   typedDescriptions: [
-    "Bikin website buat usaha dan personal — hasil rapi, harga bersahabat.",
-    "Mulai Rp 300k, jadi 3–5 hari. Kamu cerita kebutuhan, sisanya aku yang urus.",
+    "Mau bikin website UMKM biar bisa dijangkau banyak orang? Hitou solusinya!.",
+    "Modal 300K udah punya website + bisa diakses orang,.",
     "Udah pernah bikin platform booking travel yang live & aplikasi bimbingan sekolah yang dipakai beneran.",
   ],
   bio: "Jasa pembuatan website untuk UMKM & personal — cepat, murah, terpercaya.",
