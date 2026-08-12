@@ -1,7 +1,21 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { motion, useMotionValue, useSpring } from "motion/react";
+
+const finePointerMedia =
+  typeof window !== "undefined"
+    ? window.matchMedia("(hover: hover) and (pointer: fine)")
+    : null;
+
+function subscribeFinePointer(callback) {
+  finePointerMedia?.addEventListener("change", callback);
+  return () => finePointerMedia?.removeEventListener("change", callback);
+}
+
+function getFinePointer() {
+  return finePointerMedia?.matches ?? false;
+}
 
 export default function CursorGlow() {
   const x = useMotionValue(-200);
@@ -14,8 +28,11 @@ export default function CursorGlow() {
   const cy = useSpring(y, { stiffness: 420, damping: 26, mass: 0.6 });
   const pressScale = useSpring(1, { stiffness: 300, damping: 20 });
   const [hovering, setHovering] = useState(false);
+  // Cursor custom hanya utk mouse — di touch/hp tidak dirender sama sekali
+  const enabled = useSyncExternalStore(subscribeFinePointer, getFinePointer, () => false);
 
   useEffect(() => {
+    if (!enabled) return;
     const move = (e) => {
       x.set(e.clientX);
       y.set(e.clientY);
@@ -32,7 +49,9 @@ export default function CursorGlow() {
       window.removeEventListener("mousedown", down);
       window.removeEventListener("mouseup", up);
     };
-  }, [x, y, pressScale]);
+  }, [x, y, pressScale, enabled]);
+
+  if (!enabled) return null;
 
   return (
     <>

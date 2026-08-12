@@ -21,6 +21,7 @@ function SafeImg({ src, alt, className, fallback }) {
       height={720}
       className={className}
       loading="lazy"
+      decoding="async"
       onError={() => setErr(true)}
     />
   );
