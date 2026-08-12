@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import { ArrowUpRight, Check, Sparkles } from "lucide-react";
+import { AlertTriangle, ArrowUpRight, Check, CheckCircle2, Sparkles } from "lucide-react";
 import BorderGlow from "./reactbits/BorderGlow/BorderGlow.jsx";
 import { pricing, wa } from "@/data/portfolio";
 
@@ -94,7 +94,7 @@ export default function Pricing() {
                   </div>
                 </div>
 
-                <ul className="space-y-2.5 mb-6 flex-1">
+                <ul className="space-y-2.5 mb-5 flex-1">
                   {p.features.map((f) => (
                     <li key={f} className="flex items-start gap-2.5 text-[13px] text-white/75">
                       <Check size={15} className="text-white shrink-0 mt-0.5" aria-hidden="true" />
@@ -102,6 +102,23 @@ export default function Pricing() {
                     </li>
                   ))}
                 </ul>
+
+                {p.note && (
+                  <p
+                    className={`inline-flex items-start gap-2 font-mono text-[10px] tracking-wide leading-relaxed rounded-lg border px-3 py-2 mb-5 ${
+                      p.id === "starter"
+                        ? "border-white/25 bg-white/[0.04] text-white/60"
+                        : "border-white/35 bg-white/[0.06] text-white/80"
+                    }`}
+                  >
+                    {p.id === "starter" ? (
+                      <AlertTriangle size={13} className="shrink-0 mt-0.5 text-white/60" aria-hidden="true" />
+                    ) : (
+                      <CheckCircle2 size={13} className="shrink-0 mt-0.5 text-white" aria-hidden="true" />
+                    )}
+                    {p.note}
+                  </p>
+                )}
 
                 <a
                   href={wa(`Halo Hitou! Saya mau pesan paket ${p.name} — harga ${p.price}.`)}

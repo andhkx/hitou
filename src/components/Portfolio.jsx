@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { ArrowUpRight, Check, ExternalLink, MessageCircle } from "lucide-react";
+import { ArrowUpRight, Check, ExternalLink, FolderGit2, MessageCircle, Play } from "lucide-react";
 import BorderGlow from "./reactbits/BorderGlow/BorderGlow.jsx";
 import LogoLoop from "./reactbits/LogoLoop/LogoLoop.jsx";
 import { projects, techStack, wa } from "@/data/portfolio";
@@ -114,15 +114,30 @@ export default function Portfolio() {
                   ))}
                 </ul>
 
-                <a
-                  href={p.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-auto inline-flex items-center gap-1.5 text-[13px] font-semibold text-white/70 hover:text-white transition-colors"
-                >
-                  {p.linkLabel}
-                  <ExternalLink size={14} aria-hidden="true" />
-                </a>
+                <div className="flex flex-wrap gap-2.5 mt-auto pt-3">
+                  {p.links.map((l) => (
+                    <a
+                      key={l.label}
+                      href={l.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`inline-flex items-center gap-1.5 text-[12px] font-semibold rounded-lg px-3.5 py-2 transition-all duration-300 active:scale-[0.99] ${
+                        l.type === "primary"
+                          ? "border border-white/30 text-white hover:bg-white/10 hover:border-white/50"
+                          : "border border-white/10 text-white/60 hover:text-white hover:border-white/30 hover:bg-white/[0.05]"
+                      }`}
+                    >
+                      {l.label.includes("Repo") ? (
+                        <FolderGit2 size={14} aria-hidden="true" />
+                      ) : l.label.includes("Video") ? (
+                        <Play size={14} aria-hidden="true" />
+                      ) : (
+                        <ExternalLink size={14} aria-hidden="true" />
+                      )}
+                      {l.label}
+                    </a>
+                  ))}
+                </div>
               </div>
             </BorderGlow>
           </motion.div>

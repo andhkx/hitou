@@ -1,8 +1,8 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import { MessageCircle, Quote } from "lucide-react";
-import { testimonialsPlaceholder, wa } from "@/data/portfolio";
+import { Quote, Star } from "lucide-react";
+import { testimonials } from "@/data/portfolio";
 
 const EASE = [0.16, 1, 0.3, 1];
 
@@ -12,7 +12,7 @@ export default function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="w-full max-w-[900px] mx-auto px-8 md:px-12 lg:px-20 py-24 relative z-10 text-white"
+      className="w-full max-w-[1450px] mx-auto px-8 md:px-12 lg:px-20 py-24 relative z-10 text-white"
     >
       <motion.div
         initial={reduce ? false : { opacity: 0, y: 40 }}
@@ -21,33 +21,48 @@ export default function Testimonials() {
         transition={{ duration: 0.8, ease: EASE }}
         className="text-center mb-12"
       >
-        <h1 className="text-3xl md:text-5xl font-bold mb-3">Apa Kata Klien?</h1>
+        <h1 className="text-3xl md:text-5xl font-bold mb-3">Apa Kata Mereka?</h1>
         <p className="text-white/55 max-w-xl mx-auto text-sm md:text-base">
           Pengalaman orang-orang yang sudah punya website.
         </p>
       </motion.div>
 
-      <motion.div
-        initial={reduce ? false : { opacity: 0, y: 30, scale: 0.98 }}
-        whileInView={{ opacity: 1, y: 0, scale: 1 }}
-        viewport={{ once: true, amount: 0.4 }}
-        transition={{ duration: 0.7, ease: EASE }}
-        className="rounded-2xl border border-dashed border-white/15 bg-white/[0.03] backdrop-blur-xl p-8 text-center"
-      >
-        <Quote size={28} className="text-white/20 mx-auto mb-4" aria-hidden="true" />
-        <p className="text-[15px] text-white/60 italic leading-relaxed max-w-lg mx-auto">
-          “{testimonialsPlaceholder}”
-        </p>
-        <a
-          href={wa("Halo Andhika! Saya mau jadi klien pertamamu.")}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-6 inline-flex items-center gap-2 rounded-xl bg-white text-black text-sm font-bold px-5 py-3 transition-all duration-300 hover:bg-white/90 active:scale-[0.99]"
-        >
-          <MessageCircle size={15} aria-hidden="true" />
-          Mau Jadi yang Pertama?
-        </a>
-      </motion.div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {testimonials.map((t, i) => (
+          <motion.div
+            key={t.id}
+            initial={reduce ? false : { opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.08 * i, ease: EASE }}
+            className="rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-6 transition-all duration-300 hover:bg-white/[0.06] hover:border-white/20"
+          >
+            <div className="flex gap-0.5 mb-4">
+              {[...Array(t.rating)].map((_, s) => (
+                <Star
+                  key={s}
+                  size={16}
+                  className="text-white/70 fill-white/60"
+                  aria-hidden="true"
+                />
+              ))}
+            </div>
+            <Quote size={22} className="text-white/15 mb-3" aria-hidden="true" />
+            <p className="text-sm md:text-[15px] text-white/60 italic leading-relaxed mb-5">
+              “{t.quote}”
+            </p>
+            <div className="flex items-center gap-3">
+              <span className="w-10 h-10 rounded-full bg-white/10 border border-white/15 flex items-center justify-center text-xl shrink-0">
+                {t.avatar}
+              </span>
+              <div className="min-w-0">
+                <p className="font-bold text-white text-sm truncate">{t.name}</p>
+                <p className="text-xs text-white/50 truncate">{t.role}</p>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
     </section>
   );
 }
