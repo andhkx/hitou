@@ -24,36 +24,63 @@ export default function Pricing() {
       >
         <h2 className="text-3xl md:text-5xl font-bold mb-3">Paket Harga</h2>
         <p className="text-white/55 max-w-xl mx-auto text-sm md:text-base px-2">
-          Mulai dari Rp 300k — tanpa biaya tersembunyi.
+          Pilih yang pas di kantong. Nggak ada biaya tersembunyi.
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 max-w-[1200px] mx-auto">
         {pricing.map((p, i) => {
+          const dark = p.popular; // kartu featured: putih solid, teks gelap
+
+          const t = {
+            label: dark ? "text-black/50" : "text-white/40",
+            desc: dark ? "text-black/60" : "text-white/50",
+            feature: dark ? "text-black/75" : "text-white/75",
+            icon: dark ? "text-black" : "text-white",
+            forLabel: dark ? "text-black/50" : "text-white/40",
+            badge: dark
+              ? "border-black/30 bg-black/[0.06] text-black/80 shadow-[0_0_10px_rgba(0,0,0,0.08)]"
+              : "border-white/40 bg-white/[0.06] text-white/85 shadow-[0_0_10px_rgba(255,255,255,0.12)]",
+            badgeExample: dark
+              ? "border-black/40 bg-black/[0.08] text-black shadow-[0_0_12px_rgba(0,0,0,0.12)] hover:bg-black/15"
+              : "border-white/50 bg-white/[0.08] text-white shadow-[0_0_12px_rgba(255,255,255,0.18)] hover:bg-white/15",
+            note: dark
+              ? "border-black/20 bg-black/[0.04] text-black/60"
+              : "border-white/25 bg-white/[0.04] text-white/60",
+            cta: dark
+              ? "bg-black text-white hover:bg-black/85 shadow-[0_0_25px_rgba(0,0,0,0.25)]"
+              : "bg-white text-black hover:bg-white/90",
+          };
+
           const cardInner = (
-            <div className="p-5 sm:p-6 flex flex-col h-full relative">
-              <p className="font-mono text-[13px] sm:text-[14px] font-bold tracking-[0.25em] text-white uppercase mb-2">
+            <div
+              className={`p-5 sm:p-6 flex flex-col h-full relative ${
+                dark ? "bg-white text-black" : "text-white"
+              } ${dark ? "rounded-[24px] border border-white/30 shadow-[0_0_45px_rgba(255,255,255,0.22)]" : ""}`}
+            >
+              <p
+                className={`font-mono text-[13px] sm:text-[14px] font-bold tracking-[0.25em] uppercase mb-2 ${
+                  dark ? "text-black" : "text-white"
+                }`}
+              >
                 {p.name}
               </p>
 
-              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40 mb-1">
+              <p className={`font-mono text-[10px] uppercase tracking-[0.2em] mb-1 ${t.label}`}>
                 {p.id === "kantong" ? "Harga" : "Mulai dari"}
               </p>
               <h3 className="text-[26px] sm:text-3xl md:text-4xl font-extrabold tracking-tight leading-tight mb-2">
                 {p.price}
               </h3>
-              <p className="text-[13px] text-white/50 leading-relaxed mb-4">{p.desc}</p>
+              <p className={`text-[13px] leading-relaxed mb-4 ${t.desc}`}>{p.desc}</p>
 
               <div className="mb-6">
-                <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/40 mb-2">
+                <p className={`font-mono text-[10px] uppercase tracking-[0.15em] mb-2 ${t.forLabel}`}>
                   Cocok buat
                 </p>
                 <div className="flex flex-wrap gap-1.5">
                   {p.for.split(", ").map((item) => (
-                    <span
-                      key={item}
-                      className="border border-white/40 bg-white/[0.06] rounded-full px-2.5 py-1 text-[11px] text-white/85 shadow-[0_0_10px_rgba(255,255,255,0.12)]"
-                    >
+                    <span key={item} className={`border rounded-full px-2.5 py-1 text-[11px] ${t.badge}`}>
                       {item}
                     </span>
                   ))}
@@ -62,7 +89,7 @@ export default function Pricing() {
                       href={p.example}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 border border-white/50 bg-white/[0.08] rounded-full px-2.5 py-1 text-[11px] text-white shadow-[0_0_12px_rgba(255,255,255,0.18)] hover:bg-white/15 transition-colors"
+                      className={`inline-flex items-center gap-1 border rounded-full px-2.5 py-1 text-[11px] transition-colors ${t.badgeExample}`}
                     >
                       contoh: {p.example.replace("https://", "")}
                       <ArrowUpRight size={11} aria-hidden="true" />
@@ -73,8 +100,8 @@ export default function Pricing() {
 
               <ul className="space-y-2.5 mb-5 flex-1">
                 {p.features.map((f) => (
-                  <li key={f} className="flex items-start gap-2.5 text-[13px] text-white/75">
-                    <Check size={15} className="text-white shrink-0 mt-0.5" aria-hidden="true" />
+                  <li key={f} className={`flex items-start gap-2.5 text-[13px] ${t.feature}`}>
+                    <Check size={15} className={`shrink-0 mt-0.5 ${t.icon}`} aria-hidden="true" />
                     {f}
                   </li>
                 ))}
@@ -82,16 +109,12 @@ export default function Pricing() {
 
               {p.note && (
                 <p
-                  className={`inline-flex items-start gap-2 font-mono text-[10px] tracking-wide leading-relaxed rounded-lg border px-3 py-2 mb-5 ${
-                    p.id === "kantong"
-                      ? "border-white/25 bg-white/[0.04] text-white/60"
-                      : "border-white/35 bg-white/[0.06] text-white/80"
-                  }`}
+                  className={`inline-flex items-start gap-2 font-mono text-[10px] tracking-wide leading-relaxed rounded-lg border px-3 py-2 mb-5 ${t.note}`}
                 >
                   {p.id === "kantong" ? (
-                    <AlertTriangle size={13} className="shrink-0 mt-0.5 text-white/60" aria-hidden="true" />
+                    <AlertTriangle size={13} className={`shrink-0 mt-0.5 ${t.icon}`} aria-hidden="true" />
                   ) : (
-                    <CheckCircle2 size={13} className="shrink-0 mt-0.5 text-white" aria-hidden="true" />
+                    <CheckCircle2 size={13} className={`shrink-0 mt-0.5 ${t.icon}`} aria-hidden="true" />
                   )}
                   {p.note}
                 </p>
@@ -104,11 +127,7 @@ export default function Pricing() {
                 )}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`mt-auto w-full rounded-xl py-4 text-sm font-bold text-center transition-all duration-300 active:scale-[0.99] ${
-                  p.popular
-                    ? "bg-white text-black hover:bg-white/90 shadow-[0_0_25px_rgba(255,255,255,0.2)]"
-                    : "bg-white text-black hover:bg-white/90"
-                }`}
+                className={`mt-auto w-full rounded-xl py-4 text-sm font-bold text-center transition-all duration-300 active:scale-[0.99] ${t.cta}`}
               >
                 {p.cta}
               </a>
@@ -122,27 +141,29 @@ export default function Pricing() {
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.7, delay: 0.08 * i, ease: EASE }}
-              className={`relative h-full self-stretch ${
-                p.popular ? "z-10 xl:scale-[1.02]" : ""
-              }`}
+              className="relative h-full self-stretch"
             >
               {p.popular && (
-                <span className="absolute -top-4 left-1/2 -translate-x-1/2 z-30 inline-flex items-center gap-1.5 rounded-full bg-white text-black text-[11px] font-extrabold tracking-wide px-4 py-1.5 shadow-[0_0_20px_rgba(255,255,255,0.4)] whitespace-nowrap">
+                <span className="absolute -top-4 left-1/2 -translate-x-1/2 z-30 inline-flex items-center gap-1.5 rounded-full bg-black text-white text-[11px] font-extrabold tracking-wide px-4 py-1.5 shadow-[0_0_20px_rgba(0,0,0,0.4)] whitespace-nowrap">
                   <Sparkles size={12} aria-hidden="true" />
                   PALING LARIS
                 </span>
               )}
-              <BorderGlow
-                className={`h-full ${p.popular ? "border-white/50 shadow-[0_0_50px_rgba(255,255,255,0.12)]" : ""}`}
-                backgroundColor="#181818"
-                borderRadius={24}
-                edgeSensitivity={41}
-                glowColor="0 0 100"
-                glowIntensity={p.popular ? 1.6 : 1}
-                fillOpacity={p.popular ? 0.5 : 0.45}
-              >
-                {cardInner}
-              </BorderGlow>
+              {dark ? (
+                cardInner
+              ) : (
+                <BorderGlow
+                  className="h-full"
+                  backgroundColor="#181818"
+                  borderRadius={24}
+                  edgeSensitivity={41}
+                  glowColor="0 0 100"
+                  glowIntensity={1}
+                  fillOpacity={0.45}
+                >
+                  {cardInner}
+                </BorderGlow>
+              )}
             </motion.div>
           );
         })}

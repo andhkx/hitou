@@ -36,9 +36,9 @@ export const profile = {
 export const pricing = [
   {
     id: "kantong",
-    name: "SESUAI KANTO",
+    name: "SESUAI KANTONG",
     price: "Fleksibel",
-    popular: false,
+    popular: true,
     desc: "Budget pas-pasan? Ngobrol dulu aja — seharga jajan seblak pun tetap dilayani.",
     for: "profil pribadi, jasa foto, katering, UMKM kecil",
     features: [
@@ -56,7 +56,7 @@ export const pricing = [
     id: "standar",
     name: "STANDAR",
     price: "Rp 250rb",
-    popular: true,
+    popular: false,
     desc: "Cocok buat yang baru mulai atau mau sekadar hadir dulu di internet.",
     for: "UMKM, katering, jasa foto, profil usaha",
     features: [
