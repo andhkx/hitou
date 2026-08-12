@@ -24,10 +24,10 @@ export const profile = {
   heroMicrocopy: "Mulai dari Rp 300k · Beres 3–5 hari · Dijamin suka",
   typedDescriptions: [
     "Mau bikin website UMKM biar bisa dijangkau banyak orang? Hitou solusinya!.",
-    "Modal 300K udah punya website + bisa diakses orang,.",
-    "Udah pernah bikin platform booking travel yang live & aplikasi bimbingan sekolah yang dipakai beneran.",
+    "Modal 300K udah punya website + bisa diakses orang loh, kapan lagi murah, praktis, dan bagus kaya gini.",
+    "2026 wajib banget punya website, ningkatin branding, dijangkau semua orang, gaperlu repot repot bikin katalog kaena Hitou udah pasti bikinin.",
   ],
-  bio: "Jasa pembuatan website untuk UMKM & personal — cepat, murah, terpercaya.",
+  bio: "Jasa pembuatan website untuk UMKM & personal — langsung jadi, cepat, dan praktis.",
   heroTags: ["Laravel", "Next.js", "React", "Flask"],
   ctaPrimary: "Pesan Sekarang",
   ctaSecondary: "Lihat Paket",
