@@ -124,18 +124,12 @@ const SpecularButton = ({
     const fx = fxRef.current;
     if (!btn || !fx) return;
 
-    // Lazy init: tunda setup WebGL (shader compile) agar tidak memblok
-    // window TTI/TBT yang diukur audit.
-    let disposed = false;
-    let ioCleanup = () => {};
-    let initTimer = setTimeout(() => {
-      if (disposed) return;
-      const dpr = window.devicePixelRatio || 1;
-      const renderer = new Renderer({ alpha: true, premultipliedAlpha: true, antialias: true, dpr });
-      const gl = renderer.gl;
-      gl.clearColor(0, 0, 0, 0);
-      gl.enable(gl.BLEND);
-      gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+    const dpr = window.devicePixelRatio || 1;
+    const renderer = new Renderer({ alpha: true, premultipliedAlpha: true, antialias: true, dpr });
+    const gl = renderer.gl;
+    gl.clearColor(0, 0, 0, 0);
+    gl.enable(gl.BLEND);
+    gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
 
     const geometry = new Triangle(gl);
     if (geometry.attributes.uv) delete geometry.attributes.uv;
@@ -257,20 +251,13 @@ const SpecularButton = ({
     );
     io.observe(btn);
 
-      ioCleanup = () => {
-        cancelAnimationFrame(raf);
-        io.disconnect();
-        ro.disconnect();
-        window.removeEventListener("pointermove", onPointerMove);
-        if (gl.canvas.parentNode === fx) fx.removeChild(gl.canvas);
-        gl.getExtension("WEBGL_lose_context")?.loseContext();
-      };
-    }, 4000);
-
     return () => {
-      disposed = true;
-      clearTimeout(initTimer);
-      ioCleanup();
+      cancelAnimationFrame(raf);
+      io.disconnect();
+      ro.disconnect();
+      window.removeEventListener("pointermove", onPointerMove);
+      if (gl.canvas.parentNode === fx) fx.removeChild(gl.canvas);
+      gl.getExtension("WEBGL_lose_context")?.loseContext();
     };
   }, []);
 

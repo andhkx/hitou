@@ -23,25 +23,12 @@ export default function Hero() {
     // Kartu 3D hanya untuk layar >= 768px (mobile: bundle three/rapier tidak
     // di-download sama sekali — hemat payload & main-thread).
     if (typeof window !== "undefined" && window.innerWidth < 768) return;
-
-    // 1) Preload aset 3D ke cache HTTP (mount jadi instan nanti)
-    const preload = setTimeout(() => {
-      fetch("/assets/lanyard/card.glb").catch(() => {});
-      fetch("/assets/lanyard/lanyard.png").catch(() => {});
-    }, 1500);
-
-    // 2) Mount 3D saat interaksi pertama user (scroll/klik/geser) atau
-    //    fallback 18 detik — audit tanpa interaksi tidak pernah init 3D.
-    const trigger = () => setReady(true);
-    const events = ["pointerdown", "wheel", "scroll", "touchstart"];
-    events.forEach((ev) => window.addEventListener(ev, trigger, { passive: true, once: true }));
-    const fallback = setTimeout(trigger, 18000);
-
-    return () => {
-      clearTimeout(preload);
-      clearTimeout(fallback);
-      events.forEach((ev) => window.removeEventListener(ev, trigger));
-    };
+    if (typeof window.requestIdleCallback === "function") {
+      const id = requestIdleCallback(() => setReady(true), { timeout: 12000 });
+      return () => cancelIdleCallback(id);
+    }
+    const t = setTimeout(() => setReady(true), 2000);
+    return () => clearTimeout(t);
   }, []);
 
   return (
@@ -142,7 +129,7 @@ export default function Hero() {
             speed={0.4}
             followMouse
             proximity={250}
-            autoAnimate={false}
+            autoAnimate
             onClick={() => window.open(wa("Halo Hitou! Saya mau pesan website."), "_blank")}
           >
             <MessageCircle size={16} aria-hidden="true" />
