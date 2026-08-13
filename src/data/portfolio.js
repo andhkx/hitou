@@ -40,16 +40,16 @@ export const pricing = [
     price: "Fleksibel",
     popular: true,
     desc: "Budget pas-pasan? Ngobrol dulu aja — seharga jajan seblak pun tetap dilayani.",
-    for: "profil pribadi, jasa foto, katering, UMKM kecil",
+    for: "Kantong tipis, Pengen Punya Website, Murah",
     features: [
       "Konsultasi gratis",
       "Fitur disesuaikan budget kamu",
       "Subdomain pages.dev (domain pilihan +150k)",
       "Bisa bayar bertahap",
-      "Delivery 2–3 hari",
+      "Delivery 1–3 hari",
     ],
     cta: "Ngobrol Aja Dulu",
-    note: "Tanpa admin panel atau backend",
+    note: "Spek menyesuaikan harga",
     waText: "Halo Hitou, budget aku terbatas nih. Boleh diskusi web seharga jajan seblak?",
   },
   {
@@ -58,7 +58,7 @@ export const pricing = [
     price: "Rp 250rb",
     popular: false,
     desc: "Cocok buat yang baru mulai atau mau sekadar hadir dulu di internet.",
-    for: "UMKM, katering, jasa foto, profil usaha",
+    for: "UMKM, Profil Usaha, Portofolio",
     features: [
       "Website 1–3 halaman",
       "Responsive design",
@@ -76,8 +76,7 @@ export const pricing = [
     price: "Rp 1.5jt",
     popular: false,
     desc: "Website lengkap & custom — tampilan, fungsi, dan hasil seimbang.",
-    for: "booking travel, toko online, aplikasi sekolah",
-    example: "https://mahessaholiday.my.id",
+    for: "Toko Online, Katalog, Website Full Sistem",
     features: [
       "Website full custom development",
       "Free source code",
@@ -90,7 +89,7 @@ export const pricing = [
       "Delivery 10–14 hari",
     ],
     cta: "Pilih Paket Premium",
-    note: "Production-ready seperti Mahessa Holiday",
+    note: "Website profesional dan otomatis",
   },
 ];
 

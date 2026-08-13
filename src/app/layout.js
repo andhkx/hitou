@@ -14,14 +14,14 @@ const dmMono = DM_Mono({
 });
 
 export const metadata = {
-  title: "Jasa Pembuatan Website Murah | Hitou Studio",
+  title: "Hitou | Bikin Website Sesuai Kantong",
   description:
     "Jasa pembuatan website murah untuk UMKM & personal. Harga menyesuaikan kantong, mulai Rp 250rb, domain & hosting termasuk. Konsultasi gratis via WhatsApp.",
   verification: {
     google: "Nj-LODOTWbShquXrYB_bzPA3rhF12vEOPOCLtYok9Hw",
   },
   openGraph: {
-    title: "Jasa Pembuatan Website Murah | Hitou Studio",
+    title: "Hitou | Bikin Website Sesuai Kantong",
     description:
       "Jasa pembuatan website murah untuk UMKM & personal. Mulai Rp 250rb, domain & hosting termasuk, konsultasi gratis.",
     type: "website",
