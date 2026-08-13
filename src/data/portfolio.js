@@ -165,7 +165,7 @@ export const testimonials = [
   {
     id: 1,
     quote:
-      "Website Mahessa yang Andhika bikin sangat profesional, fitur lengkap, dan support-nya responsif. Hasilnya benar-benar membuat bisnis kami lebih kredibel di mata customer.",
+      "Website Mahessa yang Hitou bikin sangat profesional, fitur lengkap, dan support-nya responsif. Hasilnya benar-benar membuat bisnis kami lebih kredibel di mata customer.",
     name: "CEO Mahessa Trans Holiday",
     role: "Pemilik Mahessa Trans Holiday",
     rating: 5,
@@ -173,7 +173,7 @@ export const testimonials = [
   {
     id: 2,
     quote:
-      "Andhika menunjukkan kemampuan teknis yang solid. BK System-nya well-structured, problem-solving yang matang, dan penguasaan coding yang impressive untuk usia sekarang.",
+      "BK System-nya well-structured, problem-solving yang matang, dan penguasaan coding yang impressive untuk usia sekarang.",
     name: "Pak Gugum Gumilar, S.T, M.T",
     role: "Penguji Tugas Akhir",
     rating: 5,
@@ -181,7 +181,7 @@ export const testimonials = [
   {
     id: 3,
     quote:
-      "Andhika punya dedikasi tinggi, belajarnya cepat, dan potensi besar di bidang teknologi. Saya yakin dia akan sukses sebagai developer profesional.",
+      "Aplikasi yang dibuatnya sangat bagus dan bisa diimplementasikan di sekolah, dengan banyak fitur dan menu yang sangat membantu.",
     name: "Ibu Tini Hermawati, S.Psi",
     role: "Guru BK",
     rating: 5,
@@ -263,7 +263,7 @@ export const techStack = [
 
 export const socials = [
   { label: "WhatsApp", handle: "+62 817-9172-900", icon: "whatsapp", url: wa() },
-  { label: "Instagram", handle: "@andhkx_", icon: "instagram", url: "https://www.instagram.com/andhkx_" },
+  { label: "Instagram", handle: "@hitoustudio", icon: "instagram", url: "https://www.instagram.com/hitoustudio" },
   { label: "LinkedIn", handle: "@andhika-andriana-putra", icon: "linkedin", url: "https://www.linkedin.com/in/andhika-andriana-putra-1aa031388" },
   { label: "GitHub", handle: "@andhkx", icon: "github", url: "https://github.com/andhkx" },
 ];
