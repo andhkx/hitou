@@ -85,7 +85,7 @@ export const pricing = [
       "Website full custom development (design + fitur custom)",
       "Free source code (kamu punya akses penuh)",
       "Admin panel & database (kelola konten sendiri)",
-      "Domain .com included (tahun pertama Rp 130k/tahun)",
+      "Domain .com included (tahun pertama Rp 220k/tahun)",
       "Hosting Cloudflare Pages (performa enterprise)",
       "Payment gateway integration (Midtrans, Stripe, GCash)",
       "Analytics & conversion tracking setup",
@@ -239,7 +239,7 @@ export const faqs = {
     },
     {
       q: "Domain & hosting di paket ini gimana?",
-      a: "Kamu pakai subdomain gratis (contoh: tokomu.pages.dev) yang aman & fast. Jika mau domain custom (.com/.my.id), itu tambahan Rp 30-130k/tahun, tapi kami bantu setup.",
+      a: "Kamu pakai subdomain gratis (contoh: tokomu.pages.dev) yang aman & fast. Jika mau domain custom (.com/.my.id), itu tambahan Rp 30-220k/tahun, tapi kami bantu setup.",
     },
     {
       q: "Support selama apa? Kalau error nanti gimana?",
@@ -299,7 +299,7 @@ export const faqs = {
     },
     {
       q: "Domain & hosting apa yang included?",
-      a: "Domain .com included gratis tahun pertama (~Rp 130k). Hosting Cloudflare Pages gratis selamanya. Tahun kedua, domain perpanjang Rp 130-160rb/tahun ke registrar.",
+      a: "Domain .com included gratis tahun pertama (Rp 220k). Hosting Cloudflare Pages gratis selamanya. Tahun kedua, domain perpanjang Rp 220rb/tahun.",
     },
     {
       q: "Support setelah launch berapa lama?",
