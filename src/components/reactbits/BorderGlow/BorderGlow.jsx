@@ -1,7 +1,10 @@
-"use client";
+﻿"use client";
 
 import { useRef, useCallback, useEffect } from "react";
 import "./BorderGlow.css";
+
+// Skip semua kerja pointer di touch/hp - hindari forced layout saat scroll menyentuh kartu
+const IS_FINE_POINTER = typeof window !== "undefined" ? window.matchMedia("(hover: hover) and (pointer: fine)").matches : false;
 
 // React Bits - BorderGlow (JS port) - https://www.reactbits.dev
 // Monokrom default (putih) agar konsisten tema Hitou Studio.
@@ -117,7 +120,7 @@ export default function BorderGlow({
   const handlePointerMove = useCallback(
     (e) => {
       const card = cardRef.current;
-      if (!card) return;
+      if (!card || !IS_FINE_POINTER) return;
 
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;

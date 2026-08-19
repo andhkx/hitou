@@ -108,7 +108,7 @@ export const projects = [
     tech: ["Laravel", "MySQL", "SEO Optimized"],
     points: ["Admin panel", "Package management", "Integrasi WhatsApp", "Blog"],
     year: "2026",
-    image: "/assets/projects/1.jpg",
+    image: "/assets/projects/1.webp",
     links: [
       { label: "Kunjungi Website", url: "https://mahessaholiday.my.id", type: "primary" },
       { label: "Lihat Repo", url: "https://github.com/andhkx/MahessaTransHoliday", type: "secondary" },
@@ -122,7 +122,7 @@ export const projects = [
     tech: ["Flask", "SQL", "Multi-role (5 roles)"],
     points: ["Dashboard Interaktif", "Master Data", "Generate Surat", "35+ Fitur"],
     year: "2025",
-    image: "/assets/projects/2.jpg",
+    image: "/assets/projects/2.webp",
     links: [
       { label: "Lihat Video YT", url: "https://youtu.be/VncL3zn87rU?si=ynTrhIagEgPv9hy0", type: "primary" },
       { label: "Lihat Repo", url: "https://github.com/andhkx/AplikasiBimbinganDanPenyuluhanBK", type: "secondary" },
@@ -369,7 +369,7 @@ export const contactInfo = {
 };
 
 export const about = {
-  photo: "/assets/profile.jpg",
+  photo: "/assets/profile.webp",
   paragraph:
     "Saya Andhika, web developer muda dari Cimahi yang passionate bikin website untuk UMKM & personal. Percaya bahwa technology harus accessible untuk semua, tidak peduli budget. Mari wujudkan online presence kamu, mulai dari sekarang.",
 };

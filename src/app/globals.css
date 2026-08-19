@@ -151,3 +151,25 @@ textarea {
     cursor: none !important;
   }
 }
+
+/* Mobile smooth-scroll fixes: render near-viewport only + anchor offset */
+section[id] {
+  scroll-margin-top: 5.5rem;
+}
+
+@supports (content-visibility: auto) {
+  main section[id] {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 800px;
+  }
+}
+
+/* Kurangi beban orb blur di mobile */
+@media (max-width: 767px) {
+  .bg-orb {
+    opacity: 0.16;
+  }
+    .bg-orb-soft {
+    display: none;
+  }
+}
