@@ -40,11 +40,11 @@ export const pricing = [
     price: "Fleksibel",
     popular: true,
     desc: "Budget pas-pasan? Ngobrol dulu aja — seharga jajan seblak pun tetap dilayani.",
-    for: "Kantong tipis, Pengen Punya Website, Murah",
+    for: "Kantong Tipis, Pengen Punya Website, Murah",
     features: [
       "Konsultasi gratis",
       "Fitur disesuaikan budget kamu",
-      "Subdomain pages.dev (domain pilihan +150k)",
+      "Subdomain pages.dev (pilih domain dikenakan tambahan)",
       "Bisa bayar bertahap",
       "Delivery 1–3 hari",
     ],
@@ -58,11 +58,11 @@ export const pricing = [
     price: "Rp 250rb",
     popular: false,
     desc: "Cocok buat yang baru mulai atau mau sekadar hadir dulu di internet.",
-    for: "UMKM, Profil Usaha, Portofolio",
+    for: "UMKM, Katalog Produk, Portofolio",
     features: [
       "Website 1–3 halaman",
       "Responsive design",
-      "Domain .com included (tahun pertama)",
+      "Domain .my.id/.biz.id included (tahun pertama)",
       "Hosting Cloudflare Pages",
       "2–3x revisi",
       "Delivery 3–5 hari",
@@ -191,15 +191,15 @@ export const testimonials = [
 export const faqs = [
   {
     q: "Berapa lama website dibuat?",
-    a: "Tergantung paket: Starter 3–5 hari, Standar 5–7 hari, Premium 10–14 hari. Untuk request cepat, bisa kita diskusikan.",
+    a: "Tergantung paket: Fleksibel 3–5 hari, Standar 5–7 hari, Premium 10–14 hari. Untuk request cepat, bisa kita diskusikan.",
   },
   {
     q: "Bisa revisi berapa kali?",
-    a: "Starter: 2–3x, Standar: 3–5x, Premium: bebas revisi. Semua revisi gratis sampai kamu puas.",
+    a: "Fleksibel: 2–3x, Standar: 3–5x, Premium: bebas revisi. Semua revisi gratis sampai kamu puas.",
   },
   {
     q: "Setelah website live, ada support?",
-    a: "Ya! Starter: 1 minggu, Standar: 2 minggu, Premium: 1 bulan. Setelah itu bisa maintenance tahunan atau support berbayar.",
+    a: "Ya! Fleksibel: 1 minggu, Standar: 2 minggu, Premium: 1 bulan. Setelah itu bisa maintenance tahunan atau support berbayar.",
   },
   {
     q: "Bisa pakai template atau custom?",
@@ -207,7 +207,7 @@ export const faqs = [
   },
   {
     q: "Bagaimana soal domain & hosting?",
-    a: "Hosting pakai Cloudflare Pages (gratis & cepat). Paket Standar & Premium: domain .com included tahun pertama (via Cloudflare Registrar, ±Rp 130k/tahun setelahnya). Paket Sesuai Kantong: pakai subdomain gratis (namausaha.pages.dev) — mau domain sendiri? Tambah ±Rp 150k.",
+    a: "Hosting pakai Cloudflare Pages (gratis & cepat). Premium: domain .com included tahun pertama (±Rp 130k/tahun). Standar: domain .my.id/.biz.id included tahun pertama (±30k/tahun). Paket Fleksibel: pakai subdomain gratis (namausaha.pages.dev) — mau domain sendiri? hubungi Hitou",
   },
   {
     q: "Bisa integrasi payment gateway?",
