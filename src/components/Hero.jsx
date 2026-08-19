@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
@@ -21,14 +21,20 @@ export default function Hero() {
 
   useEffect(() => {
     // Kartu 3D hanya untuk layar >= 768px (mobile: bundle three/rapier tidak
-    // di-download sama sekali — hemat payload & main-thread).
+    // di-download sama sekali â€” hemat payload & main-thread).
     if (typeof window !== "undefined" && window.innerWidth < 768) return;
-    if (typeof window.requestIdleCallback === "function") {
-      const id = requestIdleCallback(() => setReady(true), { timeout: 12000 });
-      return () => cancelIdleCallback(id);
-    }
-    const t = setTimeout(() => setReady(true), 2000);
-    return () => clearTimeout(t);
+    const activate = () => setReady(true);
+    const events = ["pointerdown", "wheel", "touchstart", "keydown"];
+    const onInteract = () => {
+      events.forEach((ev) => window.removeEventListener(ev, onInteract));
+      activate();
+    };
+    events.forEach((ev) => window.addEventListener(ev, onInteract, { passive: true, once: true }));
+    const t = setTimeout(activate, 18000);
+    return () => {
+      events.forEach((ev) => window.removeEventListener(ev, onInteract));
+      clearTimeout(t);
+    };
   }, []);
 
   return (
@@ -55,8 +61,8 @@ export default function Hero() {
           className="mb-5"
         >
           <span className="font-mono text-[12px] text-secondary tracking-[0.2em] uppercase">
-            <span className="hero-star text-white" aria-hidden="true">✦</span>{" "}
-            {profile.eyebrow.replace("✦ ", "")}
+            <span className="hero-star text-white" aria-hidden="true">âœ¦</span>{" "}
+            {profile.eyebrow.replace("âœ¦ ", "")}
           </span>
         </motion.div>
 
@@ -182,7 +188,7 @@ export default function Hero() {
           <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-muted">
             Scroll
           </span>
-          <span className="text-base text-secondary leading-none">↓</span>
+          <span className="text-base text-secondary leading-none">â†“</span>
         </div>
       </motion.div>
     </section>

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion, useReducedMotion } from "motion/react";
 import { AlertTriangle, ArrowUpRight, Check, CheckCircle2, Sparkles } from "lucide-react";
@@ -33,11 +33,11 @@ export default function Pricing() {
           const dark = p.popular; // kartu featured: putih solid, teks gelap
 
           const t = {
-            label: dark ? "text-black/60" : "text-white/40",
+            label: dark ? "text-black/70" : "text-white/60",
             desc: dark ? "text-black/70" : "text-white/50",
             feature: dark ? "text-black/80" : "text-white/75",
             icon: dark ? "text-black" : "text-white",
-            forLabel: dark ? "text-black/60" : "text-white/40",
+            forLabel: dark ? "text-black/70" : "text-white/60",
             badge: dark
               ? "border-black/40 bg-black/[0.06] text-black/80"
               : "border-white/40 bg-white/[0.06] text-white/85 shadow-[0_0_10px_rgba(255,255,255,0.12)]",
@@ -123,7 +123,7 @@ export default function Pricing() {
               <a
                 href={wa(
                   p.waText ??
-                    `Halo Hitou! Saya mau pesan paket ${p.name} — mulai dari ${p.price}.`
+                    `Halo Hitou! Saya mau pesan paket ${p.name} â€” mulai dari ${p.price}.`
                 )}
                 target="_blank"
                 rel="noopener noreferrer"

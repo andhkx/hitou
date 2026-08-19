@@ -38,7 +38,7 @@ export default function FAQ() {
           const pkg = pricing.find((p) => p.id === gid);
           return (
             <div key={gid}>
-              <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-white/45 mb-4 flex items-center gap-2.5">
+              <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-white/60 mb-4 flex items-center gap-2.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" aria-hidden="true" />
                 {pkg?.name ?? gid}
                 <span className="text-white/30 tracking-normal normal-case">- {pkg?.price ?? ""}</span>

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
@@ -54,7 +54,7 @@ export default function Portfolio() {
     >
       <SectionHead
         title="Portofolio"
-        sub="Hasil kerja terbaru — live production dan project sekolah."
+        sub="Hasil kerja terbaru â€” live production dan project sekolah."
       />
 
       <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
@@ -98,7 +98,7 @@ export default function Portfolio() {
 
                 <div className="flex items-start justify-between gap-3">
                   <h3 className="text-lg font-bold">{p.title}</h3>
-                  <span className="font-mono text-[11px] text-white/35 shrink-0">{p.year}</span>
+                  <span className="font-mono text-[11px] text-white/55 shrink-0">{p.year}</span>
                 </div>
                 <p className="text-sm text-white/55 leading-relaxed">{p.desc}</p>
 
@@ -168,11 +168,11 @@ export default function Portfolio() {
             fillOpacity={0.5}
           >
             <div className="p-6 flex flex-col justify-center gap-5 text-center h-full">
-              <span className="text-3xl">✨</span>
+              <span className="text-3xl">âœ¨</span>
               <div>
                 <h3 className="text-xl font-extrabold mb-2">Punya Project Seperti Ini?</h3>
                 <p className="text-sm text-white/55 leading-relaxed">
-                  Website kamu bisa jadi di sini — mulai dari Rp 250rb, warna dan fitur sesuai keinginan.
+                  Website kamu bisa jadi di sini â€” mulai dari Rp 250rb, warna dan fitur sesuai keinginan.
                 </p>
               </div>
               <a
