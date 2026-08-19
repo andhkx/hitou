@@ -63,7 +63,7 @@ export const pricing = [
     features: [
       "Website 1–3 halaman dengan desain modern",
       "Fully responsive (mobile, tablet, desktop)",
-      "Domain .my.id/.biz.id included (tahun pertama ~Rp 30k/tahun)",
+      "Domain .my.id/.biz.id included (tahun pertama Rp 30k/tahun)",
       "Hosting Cloudflare Pages (super cepat & gratis)",
       "SEO basic setup (mudah ditemukan Google)",
       "Contact form & WhatsApp integration",
@@ -85,7 +85,7 @@ export const pricing = [
       "Website full custom development (design + fitur custom)",
       "Free source code (kamu punya akses penuh)",
       "Admin panel & database (kelola konten sendiri)",
-      "Domain .com included (tahun pertama ~Rp 130k/tahun)",
+      "Domain .com included (tahun pertama Rp 130k/tahun)",
       "Hosting Cloudflare Pages (performa enterprise)",
       "Payment gateway integration (Midtrans, Stripe, GCash)",
       "Analytics & conversion tracking setup",
@@ -223,11 +223,11 @@ export const faqs = {
   kantong: [
     {
       q: "Berapa budget minimal untuk paket Sesuai Kantong?",
-      a: "Mulai dari Rp 50rb sudah bisa. Tapi untuk hasil optimal, kami rekomendasikan minimal Rp 100-200rb agar bisa dapat website yang benar-benar berfungsi & user-friendly.",
+      a: "Mulai dari Rp 50rb sudah bisa. Tapi ngobrol aja dulu sesuaikan dengan kebutuhan.",
     },
     {
       q: "Website dengan budget 50rb bakal kayak apa?",
-      a: "Akan menjadi website sederhana tapi fungsional — landing page 1-2 halaman, kontak form, link WhatsApp. Cocok untuk yang mau coba online pertama kali.",
+      a: "Akan menjadi website sederhana tapi fungsional — landing page 1 halaman, kontak form, link WhatsApp. Cocok untuk yang mau coba online pertama kali.",
     },
     {
       q: "Bisa revisi berapa kali di paket Sesuai Kantong?",
@@ -257,11 +257,11 @@ export const faqs = {
     },
     {
       q: "Bisa revisi berapa kali? Revisi apa aja?",
-      a: "3–5x revisi gratis untuk: layout, warna, text, spacing, & minor tweak. Revisi besar (tambah halaman, fitur baru) dihitung terpisah.",
+      a: "3–5x revisi gratis untuk: layout, warna, text, spacing, dll. Revisi besar (tambah halaman, fitur baru) dihitung terpisah.",
     },
     {
       q: "Domain apa yang included?",
-      a: "Domain .my.id atau .biz.id included gratis tahun pertama (~Rp 30k). Tahun kedua tinggal perpanjang Rp 30rb ke registrar. Atau pakai domain sendiri, kami setup gratis.",
+      a: "Domain .my.id atau .biz.id included gratis tahun pertama (Rp 30k). Tahun kedua tinggal perpanjang Rp 30rb. Atau pakai domain sendiri, kami setup gratis.",
     },
     {
       q: "Apakah ada admin panel? Bisa edit sendiri?",
@@ -287,7 +287,7 @@ export const faqs = {
     },
     {
       q: "Payment gateway apa yang bisa diintegrasikan?",
-      a: "Midtrans (bank transfer, e-wallet, cicilan), Stripe (kartu kredit internasional), GCash (Filipina), atau custom payment sesuai kebutuhan. Biaya transaksi ditanggung customer, kami hanya setup.",
+      a: "Midtrans (bank transfer, e-wallet, cicilan), Stripe (kartu kredit internasional), atau custom payment sesuai kebutuhan. Biaya transaksi ditanggung customer, kami hanya setup.",
     },
     {
       q: "Bisa unlimited revisi? Seberapa 'unlimited'?",
