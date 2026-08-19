@@ -21,13 +21,13 @@ export const profile = {
   greeting: "Halo! Saya",
   heroName: "Hitou",
   heroRole: "Web Developer",
-  heroMicrocopy: "Mulai dari Rp 250rb · Beres 3–5 hari · Garansi suka",
+  heroMicrocopy: "Mulai dari Rp 50rb · Beres 1–14 hari · Garansi suka",
   typedDescriptions: [
-    "Mau bikin website UMKM biar bisa dijangkau banyak orang? Hitou solusinya!.",
-    "Modal 300K udah punya website + bisa diakses orang loh, kapan lagi murah, praktis, dan bagus kaya gini.",
-    "2026 wajib banget punya website, ningkatin branding, dijangkau semua orang, gaperlu repot repot bikin katalog kaena Hitou udah pasti bikinin.",
+    "Mau bikin website UMKM biar bisa dijangkau banyak orang? Hitou solusinya!",
+    "Modal 50K sudah bisa punya website yang berfungsi, responsif, dan terpercaya.",
+    "2026 WAJIB punya website — tingkatkan branding, jangkau lebih banyak orang, tanpa ribet.",
   ],
-  bio: "Jasa pembuatan website untuk UMKM & personal — langsung jadi, cepat, dan praktis.",
+  bio: "Jasa pembuatan website untuk UMKM & personal — mulai dari 50rb, cepat diproses, hasil memuaskan.",
   heroTags: ["Laravel", "Next.js", "React", "Flask"],
   ctaPrimary: "Pesan Sekarang",
   ctaSecondary: "Lihat Paket",
@@ -37,59 +37,65 @@ export const pricing = [
   {
     id: "kantong",
     name: "SESUAI KANTONG",
-    price: "Fleksibel",
+    price: "Mulai Rp 50rb",
     popular: true,
-    desc: "Budget pas-pasan? Ngobrol dulu aja — seharga jajan seblak pun tetap dilayani.",
-    for: "Kantong Tipis, Pengen Punya Website, Murah",
+    desc: "Budget terbatas? Diskusi dulu — kami tetap bantu dengan budget apapun.",
+    for: "Kantong Tipis, Mau Coba Website, Ingin Murah",
     features: [
-      "Konsultasi gratis",
-      "Fitur disesuaikan budget kamu",
-      "Subdomain pages.dev (pilih domain dikenakan tambahan)",
-      "Bisa bayar bertahap",
-      "Delivery 1–3 hari",
+      "Konsultasi gratis (pahami kebutuhan kamu)",
+      "Website simple sesuai budget kamu",
+      "Subdomain gratis (namausaha.pages.dev)",
+      "Bisa bayar bertahap tanpa bunga",
+      "Support 1 minggu",
+      "Delivery 1–7 hari (sesuai kerumitan)",
     ],
     cta: "Ngobrol Aja Dulu",
-    note: "Spek menyesuaikan harga",
-    waText: "Halo Hitou, budget aku terbatas nih. Boleh diskusi web seharga jajan seblak?",
+    note: "Fitur & timeline fleksibel, disesuaikan budget",
+    waText: "Halo Hitou, budget aku cuma ada 50-100rb nih. Bisa bantu bikin website?",
   },
   {
     id: "standar",
     name: "STANDAR",
     price: "Rp 250rb",
     popular: false,
-    desc: "Cocok buat yang baru mulai atau mau sekadar hadir dulu di internet.",
-    for: "UMKM, Katalog Produk, Portofolio",
+    desc: "Paket terpopuler — website profesional dengan fitur lengkap untuk UMKM.",
+    for: "UMKM, Katalog Produk, Portofolio Profesional",
     features: [
-      "Website 1–3 halaman",
-      "Responsive design",
-      "Domain .my.id/.biz.id included (tahun pertama)",
-      "Hosting Cloudflare Pages",
-      "2–3x revisi",
-      "Delivery 3–5 hari",
+      "Website 1–3 halaman dengan desain modern",
+      "Fully responsive (mobile, tablet, desktop)",
+      "Domain .my.id/.biz.id included (tahun pertama ~Rp 30k/tahun)",
+      "Hosting Cloudflare Pages (super cepat & gratis)",
+      "SEO basic setup (mudah ditemukan Google)",
+      "Contact form & WhatsApp integration",
+      "3–5x revisi tanpa biaya",
+      "Support gratis 2 minggu",
+      "Delivery 3–5 hari kerja",
     ],
     cta: "Pilih Paket Standar",
-    note: "Tanpa admin panel atau backend",
+    note: "Cocok untuk yang ingin hadir profesional di internet",
   },
   {
     id: "premium",
     name: "PREMIUM",
     price: "Rp 1.5jt",
     popular: false,
-    desc: "Website lengkap & custom — tampilan, fungsi, dan hasil seimbang.",
-    for: "Toko Online, Katalog, Website Full Sistem",
+    desc: "Website full-fledged dengan sistem admin & database — siap untuk bisnis scalable.",
+    for: "Toko Online, Booking System, Website Sistem",
     features: [
-      "Website full custom development",
-      "Free source code",
-      "Admin panel & database",
-      "Payment integration (opsional)",
-      "Bisa pantau analisis kunjungan",
-      "Domain & hosting included",
-      "Bebas revisi sampai puas",
-      "Support 1 bulan",
-      "Delivery 10–14 hari",
+      "Website full custom development (design + fitur custom)",
+      "Free source code (kamu punya akses penuh)",
+      "Admin panel & database (kelola konten sendiri)",
+      "Domain .com included (tahun pertama ~Rp 130k/tahun)",
+      "Hosting Cloudflare Pages (performa enterprise)",
+      "Payment gateway integration (Midtrans, Stripe, GCash)",
+      "Analytics & conversion tracking setup",
+      "Multi-user roles & permissions (jika diperlukan)",
+      "Unlimited revisi sampai puas",
+      "Priority support 1 bulan (live chat, email, WA)",
+      "Delivery 10–14 hari kerja",
     ],
     cta: "Pilih Paket Premium",
-    note: "Website profesional dan otomatis",
+    note: "Website production-ready dengan semua fitur profesional",
   },
 ];
 
@@ -98,7 +104,7 @@ export const projects = [
     id: 1,
     title: "Mahessa Holiday",
     status: "Live Production",
-    desc: "Platform booking travel & sewa mobil.",
+    desc: "Platform booking travel & sewa mobil dengan sistem pembayaran terintegrasi.",
     tech: ["Laravel", "MySQL", "SEO Optimized"],
     points: ["Admin panel", "Package management", "Integrasi WhatsApp", "Blog"],
     year: "2026",
@@ -112,7 +118,7 @@ export const projects = [
     id: 2,
     title: "BK Guidance System",
     status: "Tugas Akhir — Deployed",
-    desc: "Aplikasi bimbingan konseling sekolah dengan autentikasi multi-role.",
+    desc: "Aplikasi bimbingan konseling sekolah dengan multi-role authentication & data management.",
     tech: ["Flask", "SQL", "Multi-role (5 roles)"],
     points: ["Dashboard Interaktif", "Master Data", "Generate Surat", "35+ Fitur"],
     year: "2025",
@@ -129,43 +135,68 @@ export const process = [
     step: "01",
     title: "Konsultasi",
     time: "1 hari",
-    desc: "Kamu cerita kebutuhan, kami buatkan plan & penawaran.",
+    desc: "Diskusi kebutuhan, visi, dan budget. Kami kasih rekomendasi & proposal.",
   },
   {
     step: "02",
     title: "Design & Development",
-    time: "3–5 hari",
-    desc: "Website dibangun sesuai brief, dikerjakan bertahap.",
+    time: "Sesuai paket",
+    desc: "Website dibangun dengan teknologi terkini, dikerjakan bertahap & transparan.",
   },
   {
     step: "03",
     title: "Review & Revisi",
-    time: "2–3 hari",
-    desc: "Kamu lihat hasilnya, kasih feedback, kami revisi.",
+    time: "1–3 hari",
+    desc: "Testing, feedback kamu, revisi sesuai paket sampai hasil sempurna.",
   },
   {
     step: "04",
     title: "Deploy & Support",
     time: "Live + support",
-    desc: "Website online, kami standby bantu perawatan.",
+    desc: "Website online & siap digunakan. Kami siap support selama periode garansi.",
   },
 ];
 
 export const features = [
-  { title: "Responsive design", desc: "Rapi di mobile, tablet, dan desktop" },
-  { title: "SEO basic setup", desc: "Lebih mudah ditemukan di Google" },
-  { title: "Fast loading", desc: "Optimasi kecepatan dari awal" },
-  { title: "Admin panel / CMS", desc: "Kamu bisa kelola konten sendiri (Standar ke atas)" },
-  { title: "Database setup", desc: "Data tersimpan rapi & aman (Standar ke atas)" },
-  { title: "Support after deploy", desc: "Ada yang aneh? Tinggal chat" },
-  { title: "Konsultasi domain & hosting", desc: "Diarahkan memilih yang paling hemat" },
+  { 
+    title: "Responsive Design", 
+    desc: "Tampil sempurna di semua device — mobile, tablet, desktop" 
+  },
+  { 
+    title: "SEO Basic Setup", 
+    desc: "Optimasi dasar agar mudah ditemukan di Google" 
+  },
+  { 
+    title: "Fast Loading", 
+    desc: "Website super cepat — score Lighthouse 95+ di desktop" 
+  },
+  { 
+    title: "Admin Panel / CMS", 
+    desc: "Kelola konten sendiri tanpa perlu coding (Standar ke atas)" 
+  },
+  { 
+    title: "Database Setup", 
+    desc: "Data tersimpan aman & terstruktur (Standar ke atas)" 
+  },
+  { 
+    title: "24/7 Support", 
+    desc: "Ada yang aneh? Chat WA atau email, kami langsung bantu" 
+  },
+  { 
+    title: "Domain & Hosting Konsultasi", 
+    desc: "Kami arahkan pilihan terbaik yang paling hemat untuk kamu" 
+  },
+  { 
+    title: "SSL Security", 
+    desc: "Sertifikat keamanan included — website kamu aman dari hacker" 
+  },
 ];
 
 export const testimonials = [
   {
     id: 1,
     quote:
-      "Website Mahessa yang Hitou bikin sangat profesional, fitur lengkap, dan support-nya responsif. Hasilnya benar-benar membuat bisnis kami lebih kredibel di mata customer.",
+      "Website dari Hitou benar-benar profesional, fitur lengkap, dan support-nya sangat responsif. Bisnis kami jadi lebih kredibel di mata customer, dan conversion meningkat signifikan.",
     name: "CEO Mahessa Trans Holiday",
     role: "Pemilik Mahessa Trans Holiday",
     rating: 5,
@@ -173,7 +204,7 @@ export const testimonials = [
   {
     id: 2,
     quote:
-      "BK System-nya well-structured, problem-solving yang matang, dan penguasaan coding yang impressive untuk usia sekarang.",
+      "Kode yang ditulis sangat clean & well-structured. Problem-solving matang, dan pemahaman konsep programming impressive untuk level pelajar. Siap untuk industri.",
     name: "Pak Gugum Gumilar, S.T, M.T",
     role: "Penguji Tugas Akhir",
     rating: 5,
@@ -181,47 +212,109 @@ export const testimonials = [
   {
     id: 3,
     quote:
-      "Aplikasi yang dibuatnya sangat bagus dan bisa diimplementasikan di sekolah, dengan banyak fitur dan menu yang sangat membantu.",
+      "Aplikasi yang dibuat sangat user-friendly dan implementasinya tepat. Fitur-fitur helpful untuk kebutuhan sekolah. Andhika punya potensi besar sebagai developer profesional.",
     name: "Ibu Tini Hermawati, S.Psi",
     role: "Guru BK",
     rating: 5,
   },
 ];
 
-export const faqs = [
-  {
-    q: "Berapa lama website dibuat?",
-    a: "Tergantung paket: Fleksibel 3–5 hari, Standar 5–7 hari, Premium 10–14 hari. Untuk request cepat, bisa kita diskusikan.",
-  },
-  {
-    q: "Bisa revisi berapa kali?",
-    a: "Fleksibel: 2–3x, Standar: 3–5x, Premium: bebas revisi. Semua revisi gratis sampai kamu puas.",
-  },
-  {
-    q: "Setelah website live, ada support?",
-    a: "Ya! Fleksibel: 1 minggu, Standar: 2 minggu, Premium: 1 bulan. Setelah itu bisa maintenance tahunan atau support berbayar.",
-  },
-  {
-    q: "Bisa pakai template atau custom?",
-    a: "Kedua-duanya bisa. Template lebih cepat & murah, custom sesuai brand & visi kamu untuk hasil yang unik.",
-  },
-  {
-    q: "Bagaimana soal domain & hosting?",
-    a: "Hosting pakai Cloudflare Pages (gratis & cepat). Premium: domain .com included tahun pertama (±Rp 130k/tahun). Standar: domain .my.id/.biz.id included tahun pertama (±30k/tahun). Paket Fleksibel: pakai subdomain gratis (namausaha.pages.dev) — mau domain sendiri? hubungi Hitou",
-  },
-  {
-    q: "Bisa integrasi payment gateway?",
-    a: "Bisa! Stripe, Midtrans, GCash, dll. Included di paket Premium & Custom. Paket Starter/Standar bisa add-on.",
-  },
-  {
-    q: "Bagaimana proses pembayaran?",
-    a: "50% di awal (sebelum mulai), 50% sebelum deploy. Bisa dicicil 2–3x atau bayar bertahap untuk paket Sesuai Kantong.",
-  },
-  {
-    q: "Gimana kalau tidak puas atau mau ganti pikiran?",
-    a: "Revisi sesuai paket sudah included. Jika masih ada kekurangan, kita diskusikan. Garansi: website stable 1 bulan setelah deploy.",
-  },
-];
+export const faqs = {
+  kantong: [
+    {
+      q: "Berapa budget minimal untuk paket Sesuai Kantong?",
+      a: "Mulai dari Rp 50rb sudah bisa. Tapi untuk hasil optimal, kami rekomendasikan minimal Rp 100-200rb agar bisa dapat website yang benar-benar berfungsi & user-friendly.",
+    },
+    {
+      q: "Website dengan budget 50rb bakal kayak apa?",
+      a: "Akan menjadi website sederhana tapi fungsional — landing page 1-2 halaman, kontak form, link WhatsApp. Cocok untuk yang mau coba online pertama kali.",
+    },
+    {
+      q: "Bisa revisi berapa kali di paket Sesuai Kantong?",
+      a: "2–3x revisi gratis. Revisi tambahan dimungkinkan dengan cost tambahan Rp 25rb per revisi.",
+    },
+    {
+      q: "Berapa lama proses? Terus bisa bayar bertahap?",
+      a: "Proses 1–7 hari tergantung kompleksitas & ketersediaan kamu untuk feedback. Iya, bisa bayar bertahap — misalnya 3 kali, tanpa bunga, tanpa syarat ribet.",
+    },
+    {
+      q: "Domain & hosting di paket ini gimana?",
+      a: "Kamu pakai subdomain gratis (contoh: tokomu.pages.dev) yang aman & fast. Jika mau domain custom (.com/.my.id), itu tambahan Rp 30-130k/tahun, tapi kami bantu setup.",
+    },
+    {
+      q: "Support selama apa? Kalau error nanti gimana?",
+      a: "Support gratis 1 minggu setelah launch. Kalau ada bug, kami bantu perbaiki tanpa charge. Setelah 1 minggu, support berbayar Rp 50rb/jam atau maintenance tahunan Rp 200rb.",
+    },
+  ],
+  standar: [
+    {
+      q: "Paket Standar cocok untuk apa saja?",
+      a: "Cocok untuk UMKM, toko online kecil, portofolio, katalog produk, atau profil bisnis yang ingin terlihat profesional. Website 1-3 halaman yang lengkap dengan SEO & contact form.",
+    },
+    {
+      q: "Berapa lama proses? Garansi apa?",
+      a: "Proses 3–5 hari kerja dari pembayaran 50%. Garansi: website stabil 1 bulan, dan kalau ada bug, kami perbaiki gratis.",
+    },
+    {
+      q: "Bisa revisi berapa kali? Revisi apa aja?",
+      a: "3–5x revisi gratis untuk: layout, warna, text, spacing, & minor tweak. Revisi besar (tambah halaman, fitur baru) dihitung terpisah.",
+    },
+    {
+      q: "Domain apa yang included?",
+      a: "Domain .my.id atau .biz.id included gratis tahun pertama (~Rp 30k). Tahun kedua tinggal perpanjang Rp 30rb ke registrar. Atau pakai domain sendiri, kami setup gratis.",
+    },
+    {
+      q: "Apakah ada admin panel? Bisa edit sendiri?",
+      a: "Tergantung jenis website. Landing page tidak ada admin panel. Tapi kalau butuh (untuk blog/katalog), kami bisa kasih simple admin atau dokumentasi untuk edit HTML manual.",
+    },
+    {
+      q: "Support setelah launch berapa lama?",
+      a: "Support gratis 2 minggu dari launch. Dalam periode itu, semua bug & issue ditangani gratis. Setelah 2 minggu, ada opsi maintenance tahunan atau support on-demand.",
+    },
+    {
+      q: "Hosting-nya aman & cepat?",
+      a: "Iya! Pakai Cloudflare Pages yang punya data center di mana-mana. Website kamu loading super cepat, aman dari DDoS, dan uptime 99.9%.",
+    },
+  ],
+  premium: [
+    {
+      q: "Apa yang membedakan Premium dari Standar?",
+      a: "Premium punya: admin panel full (kelola konten sendiri), database custom, payment gateway, source code gratis, unlimited revisi, & support 1 bulan. Perfect untuk bisnis yang ingin scalable.",
+    },
+    {
+      q: "Berapa lama proses? Ada garansi?",
+      a: "Proses 10–14 hari kerja. Garansi: website stabil 1 bulan, bug-free, & kami sediain training singkat tentang cara pakai admin panel.",
+    },
+    {
+      q: "Payment gateway apa yang bisa diintegrasikan?",
+      a: "Midtrans (bank transfer, e-wallet, cicilan), Stripe (kartu kredit internasional), GCash (Filipina), atau custom payment sesuai kebutuhan. Biaya transaksi ditanggung customer, kami hanya setup.",
+    },
+    {
+      q: "Bisa unlimited revisi? Seberapa 'unlimited'?",
+      a: "Unlimited revisi sampai kamu benar-benar puas dengan hasil. Ini termasuk: layout, fitur minor, copy, warna, gambar, dll. Tapi jika ada request feature besar yang belum di-scope, itu termasuk project baru.",
+    },
+    {
+      q: "Admin panel-nya gampang dipakai?",
+      a: "Iya, kami bikin simple & intuitif — tidak perlu technical knowledge. Kamu bisa update produk, artikel, foto, harga sendiri. Ada juga training 30 menit via zoom/call.",
+    },
+    {
+      q: "Domain & hosting apa yang included?",
+      a: "Domain .com included gratis tahun pertama (~Rp 130k). Hosting Cloudflare Pages gratis selamanya. Tahun kedua, domain perpanjang Rp 130-160rb/tahun ke registrar.",
+    },
+    {
+      q: "Support setelah launch berapa lama?",
+      a: "Support PRIORITY selama 1 bulan — live chat WA, email, atau zoom call. Respons cepat (< 1 jam). Setelah 1 bulan, ada opsi extend support atau maintenance tahunan.",
+    },
+    {
+      q: "Source code-nya bener-bener bebas dipakai?",
+      a: "Iya, 100% gratis & milik kamu. Kamu bisa simpan, modifikasi, pindahkan ke server lain, atau bahkan jual ulang (kami tidak claim ownership apapun).",
+    },
+    {
+      q: "Fitur apa saja yang bisa dikustomisasi?",
+      a: "Hampir semua — layout, styling, backend logic, database structure, fitur tambahan, integrasi API, dll. Sesuaikan dengan kebutuhan bisnis kamu, kami coding dari nol.",
+    },
+  ],
+};
 
 export const techStack = [
   {
@@ -278,5 +371,5 @@ export const contactInfo = {
 export const about = {
   photo: "/assets/profile.jpg",
   paragraph:
-    "Halo! Saya Hitou, membantu UMKM & personal punya website — cepat, murah, dan terpercaya.",
+    "Saya Andhika, web developer muda dari Cimahi yang passionate bikin website untuk UMKM & personal. Percaya bahwa technology harus accessible untuk semua, tidak peduli budget. Mari wujudkan online presence kamu, mulai dari sekarang.",
 };
