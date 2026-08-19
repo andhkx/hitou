@@ -41,7 +41,7 @@ export default function FAQ() {
               <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-white/60 mb-4 flex items-center gap-2.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" aria-hidden="true" />
                 {pkg?.name ?? gid}
-                <span className="text-white/30 tracking-normal normal-case">- {pkg?.price ?? ""}</span>
+                <span className="text-white/55 tracking-normal normal-case">- {pkg?.price ?? ""}</span>
               </p>
               <div className="space-y-3">
                 {list.map((f, i) => {
