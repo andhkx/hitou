@@ -56,7 +56,7 @@ export default function FAQ() {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, amount: 0.5 }}
                       transition={{ duration: 0.5, delay: 0.04 * i, ease: EASE }}
-                      className={`rounded-2xl border backdrop-blur-xl transition-colors duration-300 ${
+                      className={`rounded-2xl border transition-colors duration-300 ${
                         isOpen
                           ? "border-white/25 bg-white/[0.06]"
                           : "border-white/10 bg-white/[0.04] hover:border-white/20"

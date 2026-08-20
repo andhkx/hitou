@@ -34,7 +34,7 @@ export default function Process() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.7, delay: 0.08 * i, ease: EASE }}
-            className="relative rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-6 overflow-hidden"
+            className="relative rounded-2xl border border-white/10 bg-white/[0.04] p-6 overflow-hidden"
           >
             <span className="absolute -top-3 -right-2 text-[64px] font-extrabold text-white/[0.06] leading-none select-none">
               {p.step}

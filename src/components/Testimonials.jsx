@@ -50,7 +50,7 @@ export default function Testimonials() {
             transition={{ duration: 0.7, delay: 0.08 * i, ease: EASE }}
             className="h-full"
           >
-            <div className="flex h-full flex-col rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-5">
+            <div className="flex h-full flex-col rounded-3xl border border-white/10 bg-white/[0.04] p-5">
               <div className="flex items-center gap-3 mb-4">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-green-500/20 text-[13px] font-bold text-green-400 border border-green-500/30">
                   {initials(t.name)}

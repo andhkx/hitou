@@ -49,7 +49,7 @@ export default function Layanan() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.7, delay: 0.08 * i, ease: EASE }}
-              className="rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-5 flex flex-col h-full"
+              className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 flex flex-col h-full"
             >
               <div className="flex justify-center mb-4">
                 <DeviceMockup device="phone" float="tiny" crop="half">
