@@ -37,7 +37,7 @@ function SectionHead({ title, sub }) {
       transition={{ duration: 0.8, ease: EASE }}
       className="text-center mb-12"
     >
-      <h2 className="text-3xl md:text-5xl font-bold mb-3">{title}</h2>
+      <h2 className="text-2xl md:text-4xl font-bold mb-3">{title}</h2>
       {sub && (
         <p className="text-white/55 max-w-xl mx-auto text-sm md:text-base">{sub}</p>
       )}
@@ -45,19 +45,23 @@ function SectionHead({ title, sub }) {
   );
 }
 
-export default function Portfolio({ limit, viewAllHref, showLogoLoop = true, showCtaCard = true }) {
+export default function Portfolio({ limit, viewAllHref, hideHeading, showLogoLoop = true, showCtaCard = true }) {
   const reduce = useReducedMotion();
   const list = limit ? projects.slice(0, limit) : projects;
 
   return (
     <section
       id="portfolio"
-      className="w-full max-w-[1450px] mx-auto px-8 md:px-12 lg:px-20 pt-24 pb-24 text-white relative z-10"
+      className={`w-full max-w-[1450px] mx-auto px-8 md:px-12 lg:px-20 ${
+        hideHeading ? "pt-8 pb-20" : "pt-16 pb-20"
+      } text-white relative z-10`}
     >
+      {!hideHeading && (
       <SectionHead
         title="Portofolio"
         sub="Hasil kerja terbaru — live production dan project sekolah."
       />
+      )}
 
       <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
         {list.map((p, i) => (

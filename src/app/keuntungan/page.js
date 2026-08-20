@@ -1,5 +1,4 @@
 import Background from "@/components/Background";
-import IntroLoader from "@/components/IntroLoader";
 import Navbar from "@/components/Navbar";
 import PageHeader from "@/components/PageHeader";
 import Keuntungan from "@/components/Keuntungan";
@@ -23,7 +22,6 @@ export const metadata = {
 export default function KeuntunganPage() {
   return (
     <main className="relative overflow-hidden">
-      <IntroLoader />
       <Background />
       <Navbar />
       <div className="relative z-[2]">

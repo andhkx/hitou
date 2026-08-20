@@ -19,7 +19,7 @@ export default function Layanan() {
   return (
     <section
       id="layanan"
-      className="w-full max-w-[1450px] mx-auto px-6 md:px-12 lg:px-20 py-24 relative z-10 text-white"
+      className="w-full max-w-[1450px] mx-auto px-6 md:px-12 lg:px-20 py-16 relative z-10 text-white"
     >
       <motion.div
         initial={reduce ? false : { opacity: 0, y: 40 }}
@@ -28,7 +28,7 @@ export default function Layanan() {
         transition={{ duration: 0.8, ease: EASE }}
         className="text-center mb-6"
       >
-        <h2 className="text-3xl md:text-5xl font-bold mb-3">Butuh Website Seperti Apa?</h2>
+        <h2 className="text-2xl md:text-4xl font-bold mb-3">Butuh Website Seperti Apa?</h2>
         <p className="text-white/55 max-w-xl mx-auto text-sm md:text-base px-2">
           Pilih kategori yang cocok dengan bisnis kamu, kami bikinkan dari nol.
         </p>
@@ -49,11 +49,11 @@ export default function Layanan() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.7, delay: 0.08 * i, ease: EASE }}
-              className="rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-6 flex flex-col h-full"
+              className="rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-5 flex flex-col h-full"
             >
-              <div className="flex justify-center mb-6">
-                <DeviceMockup device="phone" float="tiny">
-                  <div className="flex h-full flex-col items-center justify-center gap-2 px-6 text-center">
+              <div className="flex justify-center mb-4">
+                <DeviceMockup device="phone" float="tiny" crop="half">
+                  <div className="flex h-full flex-col items-center justify-center gap-2 px-5 text-center">
                     <Icon size={26} className="text-white/25" aria-hidden="true" />
                     <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/30 leading-relaxed">
                       Screenshot

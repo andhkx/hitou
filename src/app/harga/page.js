@@ -1,5 +1,4 @@
 import Background from "@/components/Background";
-import IntroLoader from "@/components/IntroLoader";
 import Navbar from "@/components/Navbar";
 import PageHeader from "@/components/PageHeader";
 import Pricing from "@/components/Pricing";
@@ -23,16 +22,15 @@ export const metadata = {
 export default function HargaPage() {
   return (
     <main className="relative overflow-hidden">
-      <IntroLoader />
       <Background />
       <Navbar />
       <div className="relative z-[2]">
         <PageHeader
           kicker="Paket Harga"
           title="Pilih sesuai kantong"
-          desc="Tidak ada biaya tersembunyi. Semua paket sudah termasuk konsultasi dan revisi sampai puas."
+          desc="Tanpa biaya tersembunyi. Konsultasi & revisi sampai puas sudah termasuk."
         />
-        <Pricing />
+        <Pricing hideHeading />
         <CTA />
       </div>
       <Footer />

@@ -8,15 +8,18 @@ import { pricing, wa } from "@/data/portfolio";
 
 const EASE = [0.16, 1, 0.3, 1];
 
-export default function Pricing({ limit, viewAllHref }) {
+export default function Pricing({ limit, viewAllHref, hideHeading }) {
   const reduce = useReducedMotion();
   const list = limit ? pricing.slice(0, limit) : pricing;
 
   return (
     <section
       id="pricing"
-      className="w-full max-w-[1450px] mx-auto px-4 sm:px-8 md:px-12 lg:px-20 pt-20 pb-24 relative z-10 text-white"
+      className={`w-full max-w-[1450px] mx-auto px-4 sm:px-8 md:px-12 lg:px-20 ${
+        hideHeading ? "pt-6 pb-20" : "pt-16 pb-20"
+      } relative z-10 text-white`}
     >
+      {!hideHeading && (
       <motion.div
         initial={reduce ? false : { opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -24,11 +27,12 @@ export default function Pricing({ limit, viewAllHref }) {
         transition={{ duration: 0.8, ease: EASE }}
         className="text-center mb-12"
       >
-        <h2 className="text-3xl md:text-5xl font-bold mb-3">Paket Harga</h2>
+        <h2 className="text-2xl md:text-4xl font-bold mb-3">Paket Harga</h2>
         <p className="text-white/55 max-w-xl mx-auto text-sm md:text-base px-2">
           Pilih yang pas di kantong. Nggak ada biaya tersembunyi.
         </p>
       </motion.div>
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 max-w-[1200px] mx-auto">
         {list.map((p, i) => {

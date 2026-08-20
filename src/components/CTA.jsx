@@ -38,7 +38,7 @@ export default function CTA() {
   return (
     <section
       id="contact"
-      className="w-full max-w-[1200px] mx-auto px-8 md:px-12 lg:px-20 pt-24 pb-24 relative z-10 text-white"
+      className="w-full max-w-[1200px] mx-auto px-8 md:px-12 lg:px-20 pt-16 pb-20 relative z-10 text-white"
     >
       <motion.div
         initial={reduce ? false : { opacity: 0, y: 40 }}
@@ -58,7 +58,7 @@ export default function CTA() {
         <div className="p-8 md:p-12">
         <div className="flex flex-col lg:flex-row items-center gap-10">
           <div className="flex-1 text-center lg:text-left">
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-3">
+            <h2 className="text-2xl md:text-4xl font-extrabold tracking-tight mb-3">
               Siap Order Website?
             </h2>
             <p className="text-white/55 text-sm md:text-base mb-8 max-w-md mx-auto lg:mx-0">

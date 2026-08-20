@@ -18,16 +18,16 @@ export default function FAQ() {
   return (
     <section
       id="faq"
-      className="w-full max-w-[900px] mx-auto px-8 md:px-12 lg:px-20 py-24 relative z-10 text-white"
+      className="w-full max-w-[900px] mx-auto px-8 md:px-12 lg:px-20 py-16 relative z-10 text-white"
     >
       <motion.div
         initial={reduce ? false : { opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.4 }}
         transition={{ duration: 0.8, ease: EASE }}
-        className="text-center mb-12"
+        className="text-center mb-10"
       >
-        <h2 className="text-3xl md:text-5xl font-bold mb-3">FAQ</h2>
+        <h2 className="text-2xl md:text-4xl font-bold mb-3">FAQ</h2>
         <p className="text-white/55 max-w-xl mx-auto text-sm md:text-base">
           Pertanyaan berdasarkan paket yang sering ditanyakan.
         </p>

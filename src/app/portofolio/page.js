@@ -1,5 +1,4 @@
 import Background from "@/components/Background";
-import IntroLoader from "@/components/IntroLoader";
 import Navbar from "@/components/Navbar";
 import PageHeader from "@/components/PageHeader";
 import Portfolio from "@/components/Portfolio";
@@ -23,16 +22,15 @@ export const metadata = {
 export default function PortofolioPage() {
   return (
     <main className="relative overflow-hidden">
-      <IntroLoader />
       <Background />
       <Navbar />
       <div className="relative z-[2]">
         <PageHeader
           kicker="Portofolio"
           title="Beberapa proyek yang sudah dibuat"
-          desc="Website production yang berjalan maupun tugas akhir — hasilnya bisa kamu tiru untuk bisnis kamu."
+          desc="Website production dan tugas akhir yang selesai dikerjakan."
         />
-        <Portfolio showLogoLoop showCtaCard />
+        <Portfolio showLogoLoop showCtaCard hideHeading />
         <CTA />
       </div>
       <Footer />

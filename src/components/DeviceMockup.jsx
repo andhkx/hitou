@@ -1,12 +1,14 @@
 // Frame device (laptop / phone) murni CSS — ringan, GPU-friendly.
 // Isi layar: screenshot asli via `src`, atau placeholder sendiri via `children`.
 // Animasi float pakai transform; nonaktif saat reduced-motion (lihat globals.css).
+// `crop="half"`: frame phone nongol bagian atas, bawah kepotong + fade (pola layanan).
 export default function DeviceMockup({
   device = "phone",
   src,
   alt = "",
   className = "",
   float = "slow",
+  crop,
   children,
   style = {},
 }) {
@@ -36,11 +38,11 @@ export default function DeviceMockup({
     );
   }
 
-  return (
-    <div className={`relative ${floatClass} ${className}`} style={style}>
-      <div className="relative mx-auto w-[230px] rounded-[26px] border border-white/15 bg-[#0c0c0c] p-2 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.8)]">
-        <div className="absolute left-1/2 top-[7px] z-10 h-[18px] w-24 -translate-x-1/2 rounded-full bg-black/90" />
-        <div className="aspect-[9/19] w-full overflow-hidden rounded-[20px] bg-[#121212]">
+  const frame = (
+    <div className={`relative ${crop ? "" : floatClass}`} style={crop ? undefined : style}>
+      <div className={`relative rounded-[24px] border border-white/15 bg-[#0c0c0c] p-2 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.8)] ${crop ? "w-[200px]" : "mx-auto w-[230px]"}`}>
+        <div className="absolute left-1/2 top-[7px] z-10 h-[16px] w-20 -translate-x-1/2 rounded-full bg-black/90" />
+        <div className="aspect-[9/19] w-full overflow-hidden rounded-[18px] bg-[#121212]">
           {src ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img src={src} alt={alt} width={1080} height={2280} loading="lazy" decoding="async" className="h-full w-full object-cover" />
@@ -51,4 +53,17 @@ export default function DeviceMockup({
       </div>
     </div>
   );
+
+  if (crop === "half") {
+    return (
+      <div className={`relative ${floatClass} ${className}`} style={style}>
+        <div className="relative h-[270px] w-[200px] overflow-hidden rounded-b-[24px]">
+          {frame}
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#151515] via-[#151515]/60 to-transparent" />
+        </div>
+      </div>
+    );
+  }
+
+  return frame;
 }

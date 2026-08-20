@@ -26,10 +26,12 @@ Next.js 16 App Router portfolio application with React 19, Tailwind CSS v4, and 
 - **Perf budget** (target Lighthouse: mobile FCP <1s, LCP <2.5s, TBT <300ms):
   - **Tiada three.js/WebGL berat lagi.** `Lanyard.jsx` dihapus (sebabkan LCP desktop 4.2s). Jangan balik menambah 3D hero.
   - **`CursorGlow.jsx` dihapus + blok `cursor:none` di `globals.css` wajib juga dihapus** bersama custom cursor (kalau cursor dihapus tanpa blok CSS → kursor native hilang permanen di desktop).
-  - Mockup device = `DeviceMockup.jsx` (CSS frame laptop/phone + `animate-float-slow/tiny`, transform-only). Placeholder konten mockup layanan sengaja dikosongkan (belum diisi AI); isi via `children`, jangan divakum menambah file.
+  - Mockup device = `DeviceMockup.jsx` (CSS frame laptop/phone + `animate-float-slow/tiny`, transform-only). Placeholder konten mockup layanan sengaja dikosongkan (belum diisi AI); isi via `children`, jangan divakum menambah file. `crop="half"` → phone kepotong bawah (pola kartu layanan).
+  - **IntroLoader dihapus** — gak ada intro saat masuk/pindah page. Jangan balik pasang preloader overlay.
   - Swipe mobile = class CSS `.swipe-row` (scroll-snap-x) + hint `.swipe-hint`; desktop otomatis grid 3 kolom. JANGAN ganti jadi drag library.
   - `SpecularButton.jsx`: WebGL effect early-returns di coarse pointer + reduced-motion. Keep that gate.
-  - `IntroLoader.jsx`: mobile duration 400ms vs desktop 600ms. `Hero.jsx` Typewriter: static text saat reduced-motion OR coarse pointer.
+  - `Hero.jsx` Typewriter: static text saat reduced-motion OR coarse pointer.
+- **Font**: `Plus_Jakarta_Sans` (var `--font-jakarta`) untuk sans/heading; `DM_Mono` (`--font-dm-mono`) hanya label kecil. Jangan kembalikan Syne. Heading section `text-2xl md:text-4xl` (bukan 5xl). Subpage `PageHeader` kompak + `hideHeading` di Pricing/Portfolio biar gak dobel judul.
 - **Coarse-pointer gate pattern**: `useSyncExternalStore` pada `matchMedia("(pointer: coarse)")` dengan `() => false` sbg server snapshot (lihat `Hero.jsx`). Jangan panggil `window` di module scope client component (mereka SSR).
 - **Keuntungan page**: slides bersifat client; navigasi via tombol prev/next + dots + step label + keyboard ←/→ (bukan swipe). Nama usaha personalisasi string — fallback `"Toko Kamu"` saat kosong. Mockup Google/WA/CSS murni.
 - `sitemap.xml/route.ts` cepat-cepat sync dengan route baru (4 URL). Tiap page baru: `metadata` + `alternates.canonical` unik.

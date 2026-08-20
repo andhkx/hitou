@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import Background from "@/components/Background";
-import IntroLoader from "@/components/IntroLoader";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Layanan from "@/components/Layanan";
@@ -40,7 +39,6 @@ function KeuntunganTeaser() {
 export default function Home() {
   return (
     <main className="relative overflow-hidden">
-      <IntroLoader />
       <Background />
       <Navbar />
       <div className="relative z-[2]">

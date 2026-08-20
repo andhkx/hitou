@@ -50,7 +50,7 @@ export default function Hero() {
             initial={reduce ? false : { opacity: 0, y: 60, scale: 0.92 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 1, delay: 0.5, ease: EASE }}
-            className="text-[clamp(38px,7vw,68px)] font-extrabold leading-[1.02] tracking-[-0.03em] text-foreground mb-6"
+            className="text-[clamp(32px,6vw,52px)] font-extrabold leading-[1.05] tracking-[-0.03em] text-foreground mb-6"
           >
             {profile.heroRole}
             <span className="text-secondary">.</span>

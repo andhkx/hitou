@@ -20,7 +20,7 @@ export default function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="w-full max-w-[1450px] mx-auto px-6 md:px-12 lg:px-20 py-24 relative z-10 text-white"
+      className="w-full max-w-[1450px] mx-auto px-6 md:px-12 lg:px-20 py-16 relative z-10 text-white"
     >
       <motion.div
         initial={reduce ? false : { opacity: 0, y: 40 }}
@@ -29,7 +29,7 @@ export default function Testimonials() {
         transition={{ duration: 0.8, ease: EASE }}
         className="text-center mb-12"
       >
-        <h2 className="text-3xl md:text-5xl font-bold mb-3">Kata Mereka</h2>
+        <h2 className="text-2xl md:text-4xl font-bold mb-3">Kata Mereka</h2>
         <p className="text-white/55 max-w-xl mx-auto text-sm md:text-base px-2">
           Pengalaman orang-orang yang sudah punya website.
         </p>
