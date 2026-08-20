@@ -1,25 +1,20 @@
 ﻿"use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import { AlertTriangle, ArrowRight, ArrowUpRight, Check, CheckCircle2, Sparkles } from "lucide-react";
-import Link from "next/link";
+import { AlertTriangle, ArrowUpRight, Check, CheckCircle2, Sparkles } from "lucide-react";
 import BorderGlow from "./reactbits/BorderGlow/BorderGlow.jsx";
 import { pricing, wa } from "@/data/portfolio";
 
 const EASE = [0.16, 1, 0.3, 1];
 
-export default function Pricing({ limit, viewAllHref, hideHeading }) {
+export default function Pricing() {
   const reduce = useReducedMotion();
-  const list = limit ? pricing.slice(0, limit) : pricing;
 
   return (
     <section
       id="pricing"
-      className={`w-full max-w-[1450px] mx-auto px-4 sm:px-8 md:px-12 lg:px-20 ${
-        hideHeading ? "pt-6 pb-20" : "pt-16 pb-20"
-      } relative z-10 text-white`}
+      className="w-full max-w-[1450px] mx-auto px-4 sm:px-8 md:px-12 lg:px-20 pt-20 pb-24 relative z-10 text-white"
     >
-      {!hideHeading && (
       <motion.div
         initial={reduce ? false : { opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -27,15 +22,14 @@ export default function Pricing({ limit, viewAllHref, hideHeading }) {
         transition={{ duration: 0.8, ease: EASE }}
         className="text-center mb-12"
       >
-        <h2 className="text-2xl md:text-4xl font-bold mb-3">Paket Harga</h2>
+        <h2 className="text-3xl md:text-5xl font-bold mb-3">Paket Harga</h2>
         <p className="text-white/55 max-w-xl mx-auto text-sm md:text-base px-2">
           Pilih yang pas di kantong. Nggak ada biaya tersembunyi.
         </p>
       </motion.div>
-      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 max-w-[1200px] mx-auto">
-        {list.map((p, i) => {
+        {pricing.map((p, i) => {
           const dark = p.popular; // kartu featured: putih solid, teks gelap
 
           const t = {
@@ -73,7 +67,7 @@ export default function Pricing({ limit, viewAllHref, hideHeading }) {
               </p>
 
               <p className={`font-mono text-[10px] uppercase tracking-[0.2em] mb-1 ${t.label}`}>
-                {p.id === "kantong" ? "Mulai dari" : "Mulai dari"}
+                {p.id === "kantong" ? "Harga" : "Mulai dari"}
               </p>
               <h3 className="text-[26px] sm:text-3xl md:text-4xl font-extrabold tracking-tight leading-tight mb-2">
                 {p.price}
@@ -129,7 +123,7 @@ export default function Pricing({ limit, viewAllHref, hideHeading }) {
               <a
                 href={wa(
                   p.waText ??
-                    `Halo Hitou! Saya mau pesan paket ${p.name} — mulai dari ${p.price}.`
+                    `Halo Hitou! Saya mau pesan paket ${p.name} â€” mulai dari ${p.price}.`
                 )}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -184,24 +178,6 @@ export default function Pricing({ limit, viewAllHref, hideHeading }) {
           );
         })}
       </div>
-
-      {viewAllHref && (
-        <motion.div
-          initial={reduce ? false : { opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: EASE }}
-          className="mt-12 text-center"
-        >
-          <Link
-            href={viewAllHref}
-            className="inline-flex items-center gap-2 rounded-xl border border-white/25 text-white text-sm font-semibold px-6 py-3.5 transition-all duration-300 hover:bg-white/10 hover:border-white/50"
-          >
-            Lihat Semua Paket
-            <ArrowRight size={16} aria-hidden="true" />
-          </Link>
-        </motion.div>
-      )}
     </section>
   );
 }

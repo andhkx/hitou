@@ -8,26 +8,24 @@ import { faqs, pricing } from "@/data/portfolio";
 const EASE = [0.16, 1, 0.3, 1];
 
 const GROUPS = ["kantong", "standar", "premium"];
-const VISIBLE = 3;
 
 export default function FAQ() {
   const reduce = useReducedMotion();
   const [open, setOpen] = useState("");
-  const [expand, setExpand] = useState({});
 
   return (
     <section
       id="faq"
-      className="w-full max-w-[900px] mx-auto px-8 md:px-12 lg:px-20 py-16 relative z-10 text-white"
+      className="w-full max-w-[900px] mx-auto px-8 md:px-12 lg:px-20 py-24 relative z-10 text-white"
     >
       <motion.div
         initial={reduce ? false : { opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.4 }}
         transition={{ duration: 0.8, ease: EASE }}
-        className="text-center mb-10"
+        className="text-center mb-12"
       >
-        <h2 className="text-2xl md:text-4xl font-bold mb-3">FAQ</h2>
+        <h2 className="text-3xl md:text-5xl font-bold mb-3">FAQ</h2>
         <p className="text-white/55 max-w-xl mx-auto text-sm md:text-base">
           Pertanyaan berdasarkan paket yang sering ditanyakan.
         </p>
@@ -46,7 +44,7 @@ export default function FAQ() {
                 <span className="text-white/55 tracking-normal normal-case">- {pkg?.price ?? ""}</span>
               </p>
               <div className="space-y-3">
-                {list.slice(0, expand[gid] ? list.length : VISIBLE).map((f, i) => {
+                {list.map((f, i) => {
                   const k = `${gid}-${i}`;
                   const isOpen = open === k;
                   return (
@@ -56,7 +54,7 @@ export default function FAQ() {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, amount: 0.5 }}
                       transition={{ duration: 0.5, delay: 0.04 * i, ease: EASE }}
-                      className={`rounded-2xl border transition-colors duration-300 ${
+                      className={`rounded-2xl border backdrop-blur-xl transition-colors duration-300 ${
                         isOpen
                           ? "border-white/25 bg-white/[0.06]"
                           : "border-white/10 bg-white/[0.04] hover:border-white/20"
@@ -91,19 +89,6 @@ export default function FAQ() {
                   );
                 })}
               </div>
-              {list.length > VISIBLE && (
-                <button
-                  onClick={() => setExpand((p) => ({ ...p, [gid]: !p[gid] }))}
-                  className="mt-3 inline-flex items-center gap-1.5 font-mono text-[12px] text-white/60 hover:text-white transition-colors"
-                >
-                  {expand[gid] ? "Tutup" : `Lihat ${list.length - VISIBLE} pertanyaan lainnya`}
-                  <ChevronDown
-                    size={14}
-                    aria-hidden="true"
-                    className={`transition-transform duration-300 ${expand[gid] ? "rotate-180" : ""}`}
-                  />
-                </button>
-              )}
             </div>
           );
         })}

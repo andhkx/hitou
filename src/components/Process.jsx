@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import { process, processBadges } from "@/data/portfolio";
+import { process } from "@/data/portfolio";
 
 const EASE = [0.16, 1, 0.3, 1];
 
@@ -11,7 +11,7 @@ export default function Process() {
   return (
     <section
       id="process"
-      className="w-full max-w-[1450px] mx-auto px-8 md:px-12 lg:px-20 py-16 relative z-10 text-white"
+      className="w-full max-w-[1450px] mx-auto px-8 md:px-12 lg:px-20 py-24 relative z-10 text-white"
     >
       <motion.div
         initial={reduce ? false : { opacity: 0, y: 40 }}
@@ -20,7 +20,7 @@ export default function Process() {
         transition={{ duration: 0.8, ease: EASE }}
         className="text-center mb-12"
       >
-        <h2 className="text-2xl md:text-4xl font-bold mb-3">Gimana Prosesnya?</h2>
+        <h2 className="text-3xl md:text-5xl font-bold mb-3">Gimana Prosesnya?</h2>
         <p className="text-white/55 max-w-xl mx-auto text-sm md:text-base">
           Simpel, jelas, dan kamu selalu tahu progress-nya.
         </p>
@@ -34,7 +34,7 @@ export default function Process() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.7, delay: 0.08 * i, ease: EASE }}
-            className="relative rounded-2xl border border-white/10 bg-white/[0.04] p-6 overflow-hidden"
+            className="relative rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-6 overflow-hidden"
           >
             <span className="absolute -top-3 -right-2 text-[64px] font-extrabold text-white/[0.06] leading-none select-none">
               {p.step}
@@ -47,22 +47,6 @@ export default function Process() {
               {p.time}
             </span>
             <p className="text-[13px] text-white/55 leading-relaxed">{p.desc}</p>
-          </motion.div>
-        ))}
-      </div>
-
-      <div className="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
-        {processBadges.map((b, i) => (
-          <motion.div
-            key={b.title}
-            initial={reduce ? false : { opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.5, delay: 0.06 * i, ease: EASE }}
-            className="rounded-xl border border-white/10 bg-black/20 px-4 py-3.5"
-          >
-            <p className="text-[13px] font-bold text-white/85">{b.title}</p>
-            <p className="text-[12px] text-white/50 mt-0.5">{b.desc}</p>
           </motion.div>
         ))}
       </div>

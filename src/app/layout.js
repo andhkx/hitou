@@ -1,10 +1,10 @@
-import { Plus_Jakarta_Sans, DM_Mono } from "next/font/google";
+import { Syne, DM_Mono } from "next/font/google";
 import "./globals.css";
 
-const jakarta = Plus_Jakarta_Sans({
+const syne = Syne({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-jakarta",
+  variable: "--font-syne",
 });
 
 const dmMono = DM_Mono({
@@ -54,7 +54,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="id" className={`${jakarta.variable} ${dmMono.variable}`}>
+    <html lang="id" className={`${syne.variable} ${dmMono.variable}`}>
       <body className="min-h-full flex flex-col bg-background text-foreground">
         {children}
       </body>
