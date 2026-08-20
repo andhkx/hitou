@@ -9,20 +9,27 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 <!-- END:nextjs-agent-rules -->
 
 ## Overview
-Next.js 16 App Router portfolio application with React 19, Tailwind CSS v4, and React Compiler enabled.
-
-## Environment & Shell Gotchas
-- Windows PowerShell environment: run commands via `npm.cmd` rather than `npm` when calling scripts directly, or execute `npm.cmd run <script>`.
-- Keep the `<!-- BEGIN:nextjs-agent-rules -->` block in `AGENTS.md` to avoid uncommitted diff noise when `next dev` runs.
+Next.js 16 App Router portfolio application with React 19, Tailwind CSS v4, and React Compiler enabled. LANDS `static export` (`output: "export"`). 4 routes: `/`, `/harga`, `/portofolio`, `/keuntungan` (story-slides). Style dipengaruhi `https://dibikinin.com` (mockup device, swipe horizontal mobile, testimoni chat WA, slide keuntungan interaktif).
 
 ## Commands
-- Dev server: `npm.cmd run dev`
-- Build: `npm.cmd run build`
-- Start: `npm.cmd run start`
-- Lint: `npm.cmd run lint` (runs `eslint`)
+- Dev: `npm.cmd run dev` · Build: `npm.cmd run build` · Start: `npm.cmd run start` (serves export) · Lint: `npm.cmd run lint`
+- Panggil npm via `npm.cmd run <script>` (Windows PowerShell; `npm` kadang gagal).
+- Lint rule ketat: no `setState` langsung dalam effect body (`react-hooks/set-state-in-effect`) — pindahkan ke event handler / gunakan `useMotionValue`.
 
 ## Tech Stack & Conventions
-- Next.js 16 (App Router in `src/app`)
-- React 19 with `reactCompiler: true` set in `next.config.mjs`
-- Tailwind CSS v4 via `@tailwindcss/postcss` and `@import "tailwindcss";` in `src/app/globals.css`
-- Path alias: `@/*` maps to `./src/*` (configured in `jsconfig.json`)
+- Next.js 16 (App Router in `src/app`), React 19 + `reactCompiler: true`, Tailwind CSS v4 (`@import "tailwindcss";` in `src/app/globals.css`), alias `@/*` → `./src/*`.
+- Semua copy data di `src/data/portfolio.js` (layanan, pricing, projects, keuntunganSlides, testimonials). Konten halaman/edit copy DI SINI, jangan hardcode di JSX.
+- Navbar/Footer pakai `navLinks` (object `{label, href}/`). Aktif menu via `usePathname` (bukan scroll spy).
+
+## Repo Gotchas (verified)
+- **Keep source files UTF-8.** Past edits stored double-encoded emoji literally (`âœ¨`, `âœ¦`, `â†“`, `â€”`). Write real Unicode chars (`✨`, `✦`, `↓`, `—`) directly. Data file `src/data/portfolio.js` always clean — compare against it.
+- **Perf budget** (target Lighthouse: mobile FCP <1s, LCP <2.5s, TBT <300ms):
+  - **Tiada three.js/WebGL berat lagi.** `Lanyard.jsx` dihapus (sebabkan LCP desktop 4.2s). Jangan balik menambah 3D hero.
+  - **`CursorGlow.jsx` dihapus + blok `cursor:none` di `globals.css` wajib juga dihapus** bersama custom cursor (kalau cursor dihapus tanpa blok CSS → kursor native hilang permanen di desktop).
+  - Mockup device = `DeviceMockup.jsx` (CSS frame laptop/phone + `animate-float-slow/tiny`, transform-only). Placeholder konten mockup layanan sengaja dikosongkan (belum diisi AI); isi via `children`, jangan divakum menambah file.
+  - Swipe mobile = class CSS `.swipe-row` (scroll-snap-x) + hint `.swipe-hint`; desktop otomatis grid 3 kolom. JANGAN ganti jadi drag library.
+  - `SpecularButton.jsx`: WebGL effect early-returns di coarse pointer + reduced-motion. Keep that gate.
+  - `IntroLoader.jsx`: mobile duration 400ms vs desktop 600ms. `Hero.jsx` Typewriter: static text saat reduced-motion OR coarse pointer.
+- **Coarse-pointer gate pattern**: `useSyncExternalStore` pada `matchMedia("(pointer: coarse)")` dengan `() => false` sbg server snapshot (lihat `Hero.jsx`). Jangan panggil `window` di module scope client component (mereka SSR).
+- **Keuntungan page**: slides bersifat client; navigasi via tombol prev/next + dots + step label + keyboard ←/→ (bukan swipe). Nama usaha personalisasi string — fallback `"Toko Kamu"` saat kosong. Mockup Google/WA/CSS murni.
+- `sitemap.xml/route.ts` cepat-cepat sync dengan route baru (4 URL). Tiap page baru: `metadata` + `alternates.canonical` unik.

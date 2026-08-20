@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import { process } from "@/data/portfolio";
+import { process, processBadges } from "@/data/portfolio";
 
 const EASE = [0.16, 1, 0.3, 1];
 
@@ -47,6 +47,22 @@ export default function Process() {
               {p.time}
             </span>
             <p className="text-[13px] text-white/55 leading-relaxed">{p.desc}</p>
+          </motion.div>
+        ))}
+      </div>
+
+      <div className="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
+        {processBadges.map((b, i) => (
+          <motion.div
+            key={b.title}
+            initial={reduce ? false : { opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.5, delay: 0.06 * i, ease: EASE }}
+            className="rounded-xl border border-white/10 bg-black/20 px-4 py-3.5"
+          >
+            <p className="text-[13px] font-bold text-white/85">{b.title}</p>
+            <p className="text-[12px] text-white/50 mt-0.5">{b.desc}</p>
           </motion.div>
         ))}
       </div>

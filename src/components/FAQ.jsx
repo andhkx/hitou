@@ -8,10 +8,12 @@ import { faqs, pricing } from "@/data/portfolio";
 const EASE = [0.16, 1, 0.3, 1];
 
 const GROUPS = ["kantong", "standar", "premium"];
+const VISIBLE = 3;
 
 export default function FAQ() {
   const reduce = useReducedMotion();
   const [open, setOpen] = useState("");
+  const [expand, setExpand] = useState({});
 
   return (
     <section
@@ -44,7 +46,7 @@ export default function FAQ() {
                 <span className="text-white/55 tracking-normal normal-case">- {pkg?.price ?? ""}</span>
               </p>
               <div className="space-y-3">
-                {list.map((f, i) => {
+                {list.slice(0, expand[gid] ? list.length : VISIBLE).map((f, i) => {
                   const k = `${gid}-${i}`;
                   const isOpen = open === k;
                   return (
@@ -89,6 +91,19 @@ export default function FAQ() {
                   );
                 })}
               </div>
+              {list.length > VISIBLE && (
+                <button
+                  onClick={() => setExpand((p) => ({ ...p, [gid]: !p[gid] }))}
+                  className="mt-3 inline-flex items-center gap-1.5 font-mono text-[12px] text-white/60 hover:text-white transition-colors"
+                >
+                  {expand[gid] ? "Tutup" : `Lihat ${list.length - VISIBLE} pertanyaan lainnya`}
+                  <ChevronDown
+                    size={14}
+                    aria-hidden="true"
+                    className={`transition-transform duration-300 ${expand[gid] ? "rotate-180" : ""}`}
+                  />
+                </button>
+              )}
             </div>
           );
         })}

@@ -143,14 +143,7 @@ textarea {
   }
 }
 
-/* Cursor custom: sembunyikan arrow default HANYA untuk perangkat mouse
-   (touch/hp tidak terpengaruh — tetap pakai pointer native).
-   Pakai * + !important agar utility Tailwind cursor-pointer tidak menang. */
-@media (hover: hover) and (pointer: fine) {
-  * {
-    cursor: none !important;
-  }
-}
+/* Cursor custom dihapus — pakai cursor native (a11y + hemat main-thread). */
 
 /* Mobile smooth-scroll fixes: render near-viewport only + anchor offset */
 section[id] {
@@ -171,5 +164,96 @@ section[id] {
   }
     .bg-orb-soft {
     display: none;
+  }
+}
+
+/* ----- Floating mockup (device) ----- */
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--tilt, 0deg));
+  }
+  50% {
+    transform: translateY(-14px) rotate(var(--tilt, 0deg));
+  }
+}
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes float-tiny {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+.animate-float-tiny {
+  animation: float-tiny 4.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-slow,
+  .animate-float-tiny {
+    animation: none;
+  }
+}
+
+/* ----- Jam berputar (keuntungan) ----- */
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-spin-slow {
+    animation: none;
+  }
+}
+
+/* ----- Swipe horizontal (mobile), grid (desktop) ----- */
+.swipe-row {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 0.5rem;
+}
+.swipe-row::-webkit-scrollbar {
+  display: none;
+}
+.swipe-row > * {
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  width: min(84vw, 400px);
+}
+@media (min-width: 768px) {
+  .swipe-row {
+    display: grid;
+    overflow-x: visible;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+  .swipe-row > * {
+    width: auto;
+  }
+}
+
+.swipe-hint {
+  display: none;
+}
+@media (max-width: 767px) {
+  .swipe-hint {
+    display: flex;
   }
 }

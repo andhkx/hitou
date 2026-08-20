@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { navLinks, socials, contactInfo, profile } from "@/data/portfolio";
 
 export default function Footer() {
@@ -25,15 +26,23 @@ export default function Footer() {
           </h3>
           <ul className="space-y-2.5">
             {navLinks.map((link) => (
-              <li key={link.id}>
-                <a
-                  href={`#${link.id}`}
+              <li key={link.href}>
+                <Link
+                  href={link.href}
                   className="text-sm text-white/60 hover:text-white transition-colors"
                 >
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
+            <li>
+              <Link
+                href="/#layanan"
+                className="text-sm text-white/60 hover:text-white transition-colors"
+              >
+                Layanan
+              </Link>
+            </li>
           </ul>
         </div>
         <div>

@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { ArrowUpRight, Check, ExternalLink, FolderGit2, MessageCircle, Play } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, ExternalLink, FolderGit2, MessageCircle, Play } from "lucide-react";
+import Link from "next/link";
 import BorderGlow from "./reactbits/BorderGlow/BorderGlow.jsx";
 import LogoLoop from "./reactbits/LogoLoop/LogoLoop.jsx";
 import { projects, techStack, wa } from "@/data/portfolio";
@@ -44,8 +45,9 @@ function SectionHead({ title, sub }) {
   );
 }
 
-export default function Portfolio() {
+export default function Portfolio({ limit, viewAllHref, showLogoLoop = true, showCtaCard = true }) {
   const reduce = useReducedMotion();
+  const list = limit ? projects.slice(0, limit) : projects;
 
   return (
     <section
@@ -54,11 +56,11 @@ export default function Portfolio() {
     >
       <SectionHead
         title="Portofolio"
-        sub="Hasil kerja terbaru â€” live production dan project sekolah."
+        sub="Hasil kerja terbaru — live production dan project sekolah."
       />
 
       <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-        {projects.map((p, i) => (
+        {list.map((p, i) => (
           <motion.div
             key={p.id}
             initial={reduce ? false : { opacity: 0, y: 32 }}
@@ -151,13 +153,14 @@ export default function Portfolio() {
           </motion.div>
         ))}
 
-        <motion.div
-          initial={reduce ? false : { opacity: 0, y: 32 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.7, delay: 0.16, ease: EASE }}
-          className="h-full"
-        >
+        {showCtaCard && (
+          <motion.div
+            initial={reduce ? false : { opacity: 0, y: 32 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.7, delay: 0.16, ease: EASE }}
+            className="h-full"
+          >
           <BorderGlow
             className="h-full"
             backgroundColor="#181818"
@@ -168,11 +171,11 @@ export default function Portfolio() {
             fillOpacity={0.5}
           >
             <div className="p-6 flex flex-col justify-center gap-5 text-center h-full">
-              <span className="text-3xl">âœ¨</span>
+              <span className="text-3xl">✨</span>
               <div>
                 <h3 className="text-xl font-extrabold mb-2">Punya Project Seperti Ini?</h3>
                 <p className="text-sm text-white/55 leading-relaxed">
-                  Website kamu bisa jadi di sini â€” mulai dari Rp 250rb, warna dan fitur sesuai keinginan.
+                  Website kamu bisa jadi di sini — mulai dari Rp 250rb, warna dan fitur sesuai keinginan.
                 </p>
               </div>
               <a
@@ -186,7 +189,7 @@ export default function Portfolio() {
               </a>
               <div>
                 <a
-                  href="#pricing"
+                  href="/harga"
                   className="inline-flex items-center gap-1 text-[13px] font-semibold text-white/70 hover:text-white transition-colors"
                 >
                   atau lihat paket dulu
@@ -196,8 +199,10 @@ export default function Portfolio() {
             </div>
           </BorderGlow>
         </motion.div>
+        )}
       </div>
 
+      {showLogoLoop && (
       <motion.div
         initial={reduce ? false : { opacity: 0, y: 32 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -222,6 +227,25 @@ export default function Portfolio() {
           />
         </div>
       </motion.div>
+      )}
+
+      {viewAllHref && (
+        <motion.div
+          initial={reduce ? false : { opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: EASE }}
+          className="mt-12 text-center"
+        >
+          <Link
+            href={viewAllHref}
+            className="inline-flex items-center gap-2 rounded-xl border border-white/25 text-white text-sm font-semibold px-6 py-3.5 transition-all duration-300 hover:bg-white/10 hover:border-white/50"
+          >
+            Lihat Semua Portofolio
+            <ArrowRight size={16} aria-hidden="true" />
+          </Link>
+        </motion.div>
+      )}
     </section>
   );
 }

@@ -1,196 +1,177 @@
 ﻿"use client";
 
-import { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
+import { useSyncExternalStore } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { ArrowDown, MessageCircle } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, MessageCircle } from "lucide-react";
 import Typewriter from "./reactbits/TextAnimations/Typewriter/Typewriter.jsx";
 import SpecularButton from "./reactbits/SpecularButton/SpecularButton.jsx";
+import DeviceMockup from "./DeviceMockup.jsx";
 import { profile, wa } from "@/data/portfolio";
-
-const Lanyard = dynamic(
-  () => import("./reactbits/Backgrounds/Lanyard/Lanyard.jsx"),
-  { ssr: false }
-);
 
 const EASE = [0.16, 1, 0.3, 1];
 
+const coarseMedia =
+  typeof window !== "undefined" ? window.matchMedia("(pointer: coarse)") : null;
+
+function subscribeCoarse(callback) {
+  coarseMedia?.addEventListener("change", callback);
+  return () => coarseMedia?.removeEventListener("change", callback);
+}
+
+function getCoarse() {
+  return coarseMedia?.matches ?? false;
+}
+
 export default function Hero() {
   const reduce = useReducedMotion();
-  const [ready, setReady] = useState(false);
-
-  useEffect(() => {
-    // Kartu 3D hanya untuk layar >= 768px (mobile: bundle three/rapier tidak
-    // di-download sama sekali â€” hemat payload & main-thread).
-    if (typeof window !== "undefined" && window.innerWidth < 768) return;
-    const activate = () => setReady(true);
-    const events = ["pointerdown", "wheel", "touchstart", "keydown"];
-    const onInteract = () => {
-      events.forEach((ev) => window.removeEventListener(ev, onInteract));
-      activate();
-    };
-    events.forEach((ev) => window.addEventListener(ev, onInteract, { passive: true, once: true }));
-    const t = setTimeout(activate, 18000);
-    return () => {
-      events.forEach((ev) => window.removeEventListener(ev, onInteract));
-      clearTimeout(t);
-    };
-  }, []);
+  const coarse = useSyncExternalStore(subscribeCoarse, getCoarse, () => false);
 
   return (
     <section
       id="home"
-      className="px-6 md:pl-[260px] md:pr-[60px] min-h-[100dvh] flex items-center justify-start relative overflow-hidden"
+      className="px-6 md:px-12 lg:px-20 min-h-[100dvh] flex items-center relative overflow-hidden pt-28 md:pt-20 pb-20"
     >
-      {ready && (
-        <div className="hidden md:block absolute inset-0 z-0 opacity-70 lg:opacity-100 pointer-events-auto">
-          {/* PENGATURAN KARTU 3D:
-              position = posisi kamera: [x, y, z] -> z 20 = dekat/besar, 25 = jauh/kecil
-              fov      = zoom lensa: 13 = kartu besar, 18 = kartu kecil
-              gravity  = gravitasi: -40 = normal, -20 = kartu lebih melayang
-              lanyardWidth = lebar tali: 2 = sedang, 3 = tebal, 1 = tipis */}
-          <Lanyard position={[0, 0, 22]} fov={13} gravity={[0, -40, 0]} lanyardWidth={1} />
+      <div className="w-full max-w-[1200px] mx-auto grid lg:grid-cols-2 gap-12 lg:gap-10 items-center">
+        <div className="relative z-10">
+          <motion.div
+            initial={reduce ? false : { opacity: 0, filter: "blur(12px)", y: 30 }}
+            animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+            transition={{ duration: 1, delay: 0.2, ease: EASE }}
+            className="mb-5"
+          >
+            <span className="font-mono text-[12px] text-secondary tracking-[0.2em] uppercase">
+              <span className="hero-star text-white" aria-hidden="true">✦</span>{" "}
+              {profile.eyebrow.replace("✦ ", "")}
+            </span>
+          </motion.div>
+
+          <motion.h1
+            initial={reduce ? false : { opacity: 0, y: 60, scale: 0.92 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 1, delay: 0.5, ease: EASE }}
+            className="text-[clamp(38px,7vw,68px)] font-extrabold leading-[1.02] tracking-[-0.03em] text-foreground mb-6"
+          >
+            {profile.heroRole}
+            <span className="text-secondary">.</span>
+          </motion.h1>
+
+          <motion.div
+            initial={reduce ? false : { opacity: 0, y: 40, filter: "blur(6px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 1, delay: 0.65, ease: EASE }}
+            className="mb-8 w-full max-w-[520px]"
+          >
+            {reduce || coarse ? (
+              <p className="text-[15px] text-secondary leading-[1.9]">
+                {profile.typedDescriptions[0]}
+              </p>
+            ) : (
+              <div className="min-h-[96px] md:min-h-[66px]">
+                <div className="text-[15px] text-secondary leading-[1.9]">
+                  <Typewriter
+                    text={profile.typedDescriptions}
+                    speed={30}
+                    waitTime={1500}
+                    deleteSpeed={12}
+                    loop={true}
+                    showCursor={true}
+                    cursorChar="_"
+                  />
+                </div>
+              </div>
+            )}
+          </motion.div>
+
+          <motion.div
+            initial={reduce ? false : { opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.85, ease: EASE }}
+            className="flex items-center gap-3 flex-wrap mb-5"
+          >
+            <SpecularButton
+              size="lg"
+              radius={14}
+              tint="#ffffff"
+              tintOpacity={0.05}
+              blur={6}
+              textColor="#ffffff"
+              lineColor="#ffffff"
+              baseColor="#9a9a9a"
+              intensity={1.1}
+              shineSize={8}
+              shineFade={35}
+              thickness={1.2}
+              speed={0.4}
+              followMouse
+              proximity={250}
+              autoAnimate
+              onClick={() => window.open(wa("Halo Hitou! Saya mau pesan website."), "_blank")}
+            >
+              <MessageCircle size={16} aria-hidden="true" />
+              {profile.ctaPrimary}
+            </SpecularButton>
+            <Link
+              href="/harga"
+              className="inline-flex items-center gap-2 rounded-lg border border-white/25 text-white text-[15px] font-semibold px-6 py-3.5 transition-all duration-300 hover:bg-white/10 hover:border-white/50"
+            >
+              {profile.ctaSecondary}
+              <ArrowRight size={16} aria-hidden="true" />
+            </Link>
+          </motion.div>
+
+          <motion.p
+            initial={reduce ? false : { opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 1, ease: EASE }}
+            className="font-mono text-[11px] tracking-[0.12em] uppercase text-muted mb-7"
+          >
+            {profile.heroMicrocopy}
+          </motion.p>
+
+          <motion.div
+            initial={reduce ? false : { opacity: 0, y: 30, scale: 0.88 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 1, delay: 1.15, ease: EASE }}
+            className="flex gap-2 flex-wrap"
+          >
+            {profile.heroTags.map((tag) => (
+              <span
+                key={tag}
+                className="font-mono text-[11px] text-secondary border border-border rounded-full px-3 py-[5px] bg-card"
+              >
+                {tag}
+              </span>
+            ))}
+          </motion.div>
         </div>
-      )}
 
-      <div className="md:max-w-[640px] w-full relative z-10">
-        <motion.div
-          initial={reduce ? false : { opacity: 0, filter: "blur(12px)", y: 30 }}
-          animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-          transition={{ duration: 1, delay: 0.2, ease: EASE }}
-          className="mb-5"
-        >
-          <span className="font-mono text-[12px] text-secondary tracking-[0.2em] uppercase">
-            <span className="hero-star text-white" aria-hidden="true">âœ¦</span>{" "}
-            {profile.eyebrow.replace("âœ¦ ", "")}
-          </span>
-        </motion.div>
-
-        <motion.p
-          initial={reduce ? false : { opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.35, ease: EASE }}
-          className="text-2xl md:text-3xl text-secondary mb-2"
-        >
-          {profile.greeting}{" "}
-          <span className="font-bold text-foreground">{profile.heroName}</span>
-        </motion.p>
-
-        <motion.h1
-          initial={reduce ? false : { opacity: 0, y: 60, scale: 0.92 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 1, delay: 0.5, ease: EASE }}
-          className="text-[clamp(38px,7vw,72px)] font-extrabold leading-[1.02] tracking-[-0.03em] text-foreground mb-6"
-        >
-          {profile.heroRole}
-          <span className="text-secondary">.</span>
-        </motion.h1>
-
-        <motion.div
-          initial={reduce ? false : { opacity: 0, y: 40, filter: "blur(6px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 1, delay: 0.65, ease: EASE }}
-          className="mb-8 w-full max-w-[520px]"
-        >
-          {reduce ? (
-            <p className="text-[15px] text-secondary leading-[1.9]">
-              {profile.typedDescriptions[0]}
-            </p>
-          ) : (
-            <div className="min-h-[96px] md:min-h-[66px]">
-              <div className="text-[15px] text-secondary leading-[1.9]">
-                <Typewriter
-                  text={profile.typedDescriptions}
-                  speed={30}
-                  waitTime={1500}
-                  deleteSpeed={12}
-                  loop={true}
-                  showCursor={true}
-                  cursorChar="_"
-                />
+        {/* Kanan: mockup device melayang (desktop) */}
+        <div className="hidden lg:block relative z-0 h-[460px] select-none">
+          <div className="absolute left-0 top-8 w-[300px] -rotate-6">
+            <DeviceMockup device="phone" src="/assets/projects/2.webp" alt="Screenshot aplikasi BK Guidance System" />
+          </div>
+          <div className="absolute right-0 top-0 w-[420px] rotate-2">
+            <DeviceMockup device="laptop" src="/assets/projects/1.webp" alt="Screenshot website Mahessa Holiday" float="tiny" />
+          </div>
+          <div className="absolute bottom-6 right-8 animate-float-tiny">
+            <div className="flex items-center gap-3 rounded-2xl border border-white/15 bg-white/[0.06] backdrop-blur-xl px-4 py-3 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.8)]">
+              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-green-500/20 text-green-400">
+                <MessageCircle size={16} aria-hidden="true" />
+              </span>
+              <div>
+                <p className="text-[12px] font-bold leading-tight">Respon cepat.</p>
+                <p className="font-mono text-[10px] text-white/50">via WhatsApp</p>
               </div>
             </div>
-          )}
-        </motion.div>
-
-        <motion.div
-          initial={reduce ? false : { opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.85, ease: EASE }}
-          className="flex items-center gap-3 flex-wrap mb-5"
-        >
-          <SpecularButton
-            size="lg"
-            radius={14}
-            tint="#ffffff"
-            tintOpacity={0.05}
-            blur={6}
-            textColor="#ffffff"
-            lineColor="#ffffff"
-            baseColor="#9a9a9a"
-            intensity={1.1}
-            shineSize={8}
-            shineFade={35}
-            thickness={1.2}
-            speed={0.4}
-            followMouse
-            proximity={250}
-            autoAnimate
-            onClick={() => window.open(wa("Halo Hitou! Saya mau pesan website."), "_blank")}
-          >
-            <MessageCircle size={16} aria-hidden="true" />
-            {profile.ctaPrimary}
-          </SpecularButton>
-          <a
-            href="#pricing"
-            className="inline-flex items-center gap-2 rounded-lg border border-white/25 text-white text-[15px] font-semibold px-6 py-3.5 transition-all duration-300 hover:bg-white/10 hover:border-white/50"
-          >
-            {profile.ctaSecondary}
-            <ArrowDown size={16} aria-hidden="true" />
-          </a>
-        </motion.div>
-
-        <motion.div
-          initial={reduce ? false : { opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1, ease: EASE }}
-          className="mb-8"
-        >
-          <p className="font-mono text-[11px] tracking-[0.12em] uppercase text-muted">
-            {profile.heroMicrocopy}
-          </p>
-        </motion.div>
-
-        <motion.div
-          initial={reduce ? false : { opacity: 0, y: 30, scale: 0.88 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 1, delay: 1.15, ease: EASE }}
-          className="flex gap-2 flex-wrap mb-7"
-        >
-          {profile.heroTags.map((tag) => (
-            <span
-              key={tag}
-              className="font-mono text-[11px] text-secondary border border-border rounded-full px-3 py-[5px] bg-card"
-            >
-              {tag}
-            </span>
-          ))}
-        </motion.div>
+          </div>
+        </div>
       </div>
 
-      <motion.div
-        initial={reduce ? false : { opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 1.6, ease: EASE }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 pointer-events-none"
-      >
-        <div className="flex items-center justify-center gap-2">
-          <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-muted">
-            Scroll
-          </span>
-          <span className="text-base text-secondary leading-none">â†“</span>
-        </div>
-      </motion.div>
+      {/* Mockup phone kecil untuk mobile (di bawah copy) */}
+      <div className="lg:hidden mt-14 flex justify-center">
+        <DeviceMockup device="phone" src="/assets/projects/2.webp" alt="Screenshot aplikasi BK Guidance System" />
+      </div>
     </section>
   );
 }

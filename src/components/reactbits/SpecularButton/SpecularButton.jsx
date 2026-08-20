@@ -124,6 +124,11 @@ const SpecularButton = ({
     const fx = fxRef.current;
     if (!btn || !fx) return;
 
+    // Hemat: tanpa WebGL di layar sentuh & saat reduced-motion (guna utama
+    // hanya memberi kesan glossy desktop; tombol tetap tampil via CSS).
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
     const dpr = window.devicePixelRatio || 1;
     const renderer = new Renderer({ alpha: true, premultipliedAlpha: true, antialias: true, dpr });
     const gl = renderer.gl;

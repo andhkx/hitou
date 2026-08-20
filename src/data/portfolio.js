@@ -4,10 +4,93 @@ export const wa = (message = "") =>
   `https://wa.me/628179172900${message ? `?text=${encodeURIComponent(message)}` : ""}`;
 
 export const navLinks = [
-  { id: "home", label: "Beranda" },
-  { id: "pricing", label: "Paket" },
-  { id: "portfolio", label: "Portofolio" },
-  { id: "contact", label: "Kontak" },
+  { label: "Beranda", href: "/" },
+  { label: "Harga", href: "/harga" },
+  { label: "Portofolio", href: "/portofolio" },
+  { label: "Keuntungan", href: "/keuntungan" },
+];
+
+export const layanan = [
+  {
+    id: "umkm",
+    title: "Website UMKM",
+    desc: "Landing page profesional buat toko, jasa, atau usaha personal. Murah, cepat, langsung terlihat kredibel.",
+    points: ["1 halaman fokus promosi", "Profil & info kontak", "Tombol WhatsApp", "Rapi di Google"],
+    starter: "Mulai Rp 50rb",
+    paket: "Paket Sesuai Kantong–Standar",
+  },
+  {
+    id: "katalog",
+    title: "Website Katalog",
+    desc: "Toko online display produk — baju, kuliner, elektronik, apa pun. Produk rapi, pelanggan gampang pesan.",
+    points: ["Katalog produk + foto", "Harga & stok up-to-date", "Pesan via WhatsApp", "Kelola admin sendiri"],
+    starter: "Mulai Rp 250rb",
+    paket: "Paket Standar",
+  },
+  {
+    id: "store",
+    title: "Store / Top Up Game",
+    desc: "Website buat jual voucher, top up, joki, atau akun. Sistem pesanan cepat, aman, dan terintegrasi pembayaran.",
+    points: ["Katalog game & layanan", "Pemesanan otomatis", "Integrasi pembayaran", "Database + admin panel"],
+    starter: "Mulai Rp 1.5jt",
+    paket: "Paket Premium",
+  },
+];
+
+export const processBadges = [
+  {
+    title: "Update di Tiap Tahap",
+    desc: "Kamu selalu tahu progressnya — nggak ditinggal diam.",
+  },
+  {
+    title: "Tepat Waktu",
+    desc: "Pengerjaan sesuai target yang disepakati.",
+  },
+  {
+    title: "Kualitas Terjaga",
+    desc: "Desain modern, responsif, dan teruji.",
+  },
+  {
+    title: "Support Penuh",
+    desc: "Tetap kami bantu setelah website live.",
+  },
+];
+
+export const keuntunganSlides = [
+  {
+    title: "Bayangkan bisnis kamu tanpa website.",
+    body: "Sekarang jualan cuma lewat sosmed — produk nyarinya susah, chat numpuk, dan posisimu nggak kelihatan. Padahal calon pelanggan udah mulai cari bisnis kamu di Google.",
+  },
+  {
+    title: "Siapa nama usaha kamu?",
+    body: "Kasih tahu nama toko atau usahamu — nama itu bakal ikut di setiap contoh di halaman ini.",
+    input: true,
+  },
+  {
+    title: "Bisnis kamu ketemu di Google.",
+    body: "Punya website = muncul di hasil pencarian. Pelanggan nemuin nama, produk, dan cara pesan — bukan cuma akun sosmed yang rawan ketinggalan.",
+  },
+  {
+    title: "Aktif 24 jam, nggak pernah libur.",
+    body: "Website jalan terus walau kamu tidur. Pelanggan lihat produk, cek harga, dan mulai pesan kapan saja — sistem langsung menjawab.",
+  },
+  {
+    title: "Pertanyaan umum jadi jawaban instan.",
+    body: "Produk, harga, cara pesan, sampai pertanyaan yang biasa kamu jawab berulang — semua sudah terjawab di website. Kamu tinggal terima order.",
+  },
+  {
+    title: "Siap mulai?",
+    body: "Bikin website untuk bisnis kamu sekarang — konsultasi gratis, tanpa komitmen, langsung dibalas.",
+  },
+];
+
+export const keuntunganSteps = [
+  "Bayangkan",
+  "Nama Usaha",
+  "Ditemukan",
+  "24 Jam",
+  "Praktis",
+  "Mulai",
 ];
 
 export const profile = {
@@ -37,7 +120,7 @@ export const pricing = [
   {
     id: "kantong",
     name: "SESUAI KANTONG",
-    price: "Mulai Rp 50rb",
+    price: "Rp 50rb",
     popular: true,
     desc: "Budget terbatas? Diskusi dulu — kami tetap bantu dengan budget apapun.",
     for: "Kantong Tipis, Mau Coba Website, Ingin Murah",

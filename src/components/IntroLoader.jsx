@@ -1,24 +1,39 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { profile } from "@/data/portfolio";
 
 const EASE = [0.22, 1, 0.36, 1];
 const DURATION = 600;
 
+const coarseMedia =
+  typeof window !== "undefined" ? window.matchMedia("(pointer: coarse)") : null;
+
+function subscribeCoarse(callback) {
+  coarseMedia?.addEventListener("change", callback);
+  return () => coarseMedia?.removeEventListener("change", callback);
+}
+
+function getCoarse() {
+  return coarseMedia?.matches ?? false;
+}
+
 export default function IntroLoader() {
   const reduce = useReducedMotion();
+  const coarse = useSyncExternalStore(subscribeCoarse, getCoarse, () => false);
   const [progress, setProgress] = useState(0);
   const [visible, setVisible] = useState(!reduce);
 
   useEffect(() => {
     if (reduce) return;
+    // Mobile: loader dipersingkat (hemat main-thread & mempercepat FCP).
+    const dur = coarse ? 400 : DURATION;
     document.body.style.overflow = "hidden";
     const start = performance.now();
     let raf;
     const tick = (now) => {
-      const t = Math.min(1, (now - start) / DURATION);
+      const t = Math.min(1, (now - start) / dur);
       setProgress(Math.round(t * 100));
       if (t < 1) raf = requestAnimationFrame(tick);
     };
@@ -26,13 +41,13 @@ export default function IntroLoader() {
     const done = setTimeout(() => {
       setVisible(false);
       document.body.style.overflow = "";
-    }, DURATION + 250);
+    }, dur + 250);
     return () => {
       cancelAnimationFrame(raf);
       clearTimeout(done);
       document.body.style.overflow = "";
     };
-  }, [reduce]);
+  }, [reduce, coarse]);
 
   return (
     <AnimatePresence>
@@ -41,7 +56,7 @@ export default function IntroLoader() {
           aria-hidden="true"
           className="fixed inset-0 z-[100] bg-[#0a0a0a] flex items-center justify-center"
           exit={{ opacity: 0, y: -48, filter: "blur(8px)" }}
-          transition={{ duration: 0.7, ease: EASE }}
+          transition={{ duration: coarse ? 0.4 : 0.7, ease: EASE }}
         >
           <div className="flex flex-col items-center gap-6 px-6">
             <motion.span
