@@ -54,7 +54,7 @@ export default function Portfolio() {
     >
       <SectionHead
         title="Portofolio"
-        sub="Hasil kerja terbaru â€” live production dan project sekolah."
+        sub="Hasil kerja terbaru — live production dan project sekolah."
       />
 
       <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
@@ -168,11 +168,11 @@ export default function Portfolio() {
             fillOpacity={0.5}
           >
             <div className="p-6 flex flex-col justify-center gap-5 text-center h-full">
-              <span className="text-3xl">âœ¨</span>
+              <span className="text-3xl">✨</span>
               <div>
                 <h3 className="text-xl font-extrabold mb-2">Punya Project Seperti Ini?</h3>
                 <p className="text-sm text-white/55 leading-relaxed">
-                  Website kamu bisa jadi di sini â€” mulai dari Rp 250rb, warna dan fitur sesuai keinginan.
+                  Website kamu bisa jadi di sini — mulai dari Rp 250rb, warna dan fitur sesuai keinginan.
                 </p>
               </div>
               <a
@@ -186,7 +186,7 @@ export default function Portfolio() {
               </a>
               <div>
                 <a
-                  href="#pricing"
+                  href="/harga"
                   className="inline-flex items-center gap-1 text-[13px] font-semibold text-white/70 hover:text-white transition-colors"
                 >
                   atau lihat paket dulu

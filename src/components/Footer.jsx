@@ -1,47 +1,45 @@
 "use client";
 
+import Link from "next/link";
 import { navLinks, socials, contactInfo, profile } from "@/data/portfolio";
 
 export default function Footer() {
   return (
-    <footer className="w-full border-t border-white/10 bg-[#101010] relative z-10">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr] gap-10">
+    <footer className="relative z-10 w-full border-t border-white/10 bg-[#080a0d]">
+      <div className="mx-auto grid max-w-[1300px] grid-cols-1 gap-10 px-5 py-12 sm:grid-cols-2 md:px-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
           <div className="mb-3">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/assets/logo_hitou.png"
               alt="Hitou Studio"
-              width={100}
-              height={50}
+              width={110}
+              height={24}
               className="h-7 w-auto object-contain brightness-0 invert"
             />
           </div>
-          <p className="text-sm text-white/55 leading-relaxed max-w-xs">{profile.bio}</p>
+          <p className="max-w-xs text-sm leading-relaxed text-white/55">{profile.bio}</p>
         </div>
         <div>
-          <h3 className="font-mono text-[11px] uppercase tracking-[0.2em] text-white/45 mb-4">
-            Menu
+          <h3 className="mb-4 font-mono text-[11px] uppercase tracking-[0.2em] text-[#53bdeb]">
+            Navigasi
           </h3>
           <ul className="space-y-2.5">
             {navLinks.map((link) => (
-              <li key={link.id}>
-                <a
-                  href={`#${link.id}`}
-                  className="text-sm text-white/60 hover:text-white transition-colors"
-                >
+              <li key={link.href}>
+                <Link href={link.href} className="text-sm text-white/60 transition-colors hover:text-white">
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
         </div>
         <div>
-          <h3 className="font-mono text-[11px] uppercase tracking-[0.2em] text-white/45 mb-4">
-            Services
+          <h3 className="mb-4 font-mono text-[11px] uppercase tracking-[0.2em] text-[#53bdeb]">
+            Layanan
           </h3>
           <ul className="space-y-2.5">
-            {["Web Development", "UI / UX Design", "REST API", "Deployment"].map((s) => (
+            {["Website UMKM", "Katalog Produk", "Top Up & JB Game", "Sistem Custom"].map((s) => (
               <li key={s}>
                 <span className="text-sm text-white/60">{s}</span>
               </li>
@@ -49,7 +47,7 @@ export default function Footer() {
           </ul>
         </div>
         <div>
-          <h3 className="font-mono text-[11px] uppercase tracking-[0.2em] text-white/45 mb-4">
+          <h3 className="mb-4 font-mono text-[11px] uppercase tracking-[0.2em] text-[#53bdeb]">
             Social
           </h3>
           <ul className="space-y-2.5">
@@ -59,7 +57,7 @@ export default function Footer() {
                   href={s.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-white/60 hover:text-white transition-colors"
+                  className="text-sm text-white/60 transition-colors hover:text-white"
                 >
                   {s.label}
                 </a>
@@ -69,9 +67,9 @@ export default function Footer() {
         </div>
       </div>
       <div className="border-t border-white/10">
-        <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <p className="text-xs text-white/55">{contactInfo.footer}</p>
-          <p className="text-xs text-white/55">Built with Next.js &amp; React Bits</p>
+        <div className="mx-auto flex max-w-[1300px] flex-col items-center justify-between gap-2 px-5 py-5 sm:flex-row md:px-12">
+          <p className="text-xs text-white/50">{contactInfo.footer}</p>
+          <p className="text-xs text-white/50">Dark Dibikinin-style website for Hitou</p>
         </div>
       </div>
     </footer>

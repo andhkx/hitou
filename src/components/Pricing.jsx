@@ -123,7 +123,7 @@ export default function Pricing() {
               <a
                 href={wa(
                   p.waText ??
-                    `Halo Hitou! Saya mau pesan paket ${p.name} â€” mulai dari ${p.price}.`
+                    `Halo Hitou! Saya mau pesan paket ${p.name} — mulai dari ${p.price}.`
                 )}
                 target="_blank"
                 rel="noopener noreferrer"
