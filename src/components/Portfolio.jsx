@@ -21,7 +21,7 @@ function SectionHead({ title, sub }) {
   );
 }
 
-export default function Portfolio({ limit, viewAllHref, hideHeading, showLogoLoop = true, showCtaCard = true }) {
+export default function Portfolio({ limit, viewAllHref, hideHeading, showLogoLoop = false, showCtaCard = false }) {
   const reduce = useReducedMotion();
   const list = limit ? projects.slice(0, limit) : projects;
 

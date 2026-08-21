@@ -49,19 +49,16 @@ export default function Hero() {
           initial={reduce ? false : { opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
-          className="relative mx-auto w-full max-w-[560px]"
+          className="relative mx-auto w-full max-w-[620px] animate-float-slow"
         >
-          <div className="rounded-[20px] border border-white/15 bg-[#10141c] p-2 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.8)]">
-            <div className="flex gap-1.5 px-2 pb-2">
-              <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
-              <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
-              <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
-            </div>
-            <div className="aspect-[3/2] overflow-hidden rounded-[12px] bg-black">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/assets/contoh_website_hitou.png" alt="Contoh website dibuat Hitou" width="1536" height="1024" className="h-full w-full object-cover" />
-            </div>
-          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/assets/contoh_website_hitou.png"
+            alt="Contoh website dibuat Hitou"
+            width="1536"
+            height="1024"
+            className="h-auto w-full object-contain drop-shadow-[0_30px_70px_rgba(0,0,0,0.65)]"
+          />
         </motion.div>
       </div>
     </section>

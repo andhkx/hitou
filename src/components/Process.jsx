@@ -3,51 +3,41 @@
 import { motion, useReducedMotion } from "motion/react";
 import { process } from "@/data/portfolio";
 
-const EASE = [0.16, 1, 0.3, 1];
+const EASE = [0.4, 0, 0.2, 1];
 
 export default function Process() {
   const reduce = useReducedMotion();
 
   return (
-    <section
-      id="process"
-      className="w-full max-w-[1450px] mx-auto px-8 md:px-12 lg:px-20 py-24 relative z-10 text-white"
-    >
-      <motion.div
-        initial={reduce ? false : { opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.4 }}
-        transition={{ duration: 0.8, ease: EASE }}
-        className="text-center mb-12"
-      >
-        <h2 className="text-3xl md:text-5xl font-bold mb-3">Gimana Prosesnya?</h2>
-        <p className="text-white/55 max-w-xl mx-auto text-sm md:text-base">
-          Simpel, jelas, dan kamu selalu tahu progress-nya.
-        </p>
+    <section id="process" className="relative z-10 mx-auto w-full max-w-[1300px] px-5 py-16 text-white sm:px-8 md:px-12 md:py-24">
+      <motion.div initial={reduce ? false : { opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.5, ease: EASE }} className="mb-8 text-center">
+        <h2 className="mb-3 text-2xl font-extrabold tracking-tight sm:text-3xl md:text-5xl">Cara Kerja</h2>
+        <p className="mx-auto max-w-xl text-sm leading-relaxed text-white/60 md:text-base">Gampang, cepat, dan transparan.</p>
       </motion.div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        {process.map((p, i) => (
-          <motion.div
-            key={p.step}
-            initial={reduce ? false : { opacity: 0, y: 32 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.7, delay: 0.08 * i, ease: EASE }}
-            className="relative rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-6 overflow-hidden"
-          >
-            <span className="absolute -top-3 -right-2 text-[64px] font-extrabold text-white/[0.06] leading-none select-none">
-              {p.step}
-            </span>
-            <span className="font-mono text-[11px] text-white/80 tracking-[0.2em]">
-              STEP {p.step}
-            </span>
-            <h3 className="text-[16px] font-bold mt-2 mb-1">{p.title}</h3>
-            <span className="inline-block font-mono text-[10px] text-white/45 border border-white/10 rounded-full px-2.5 py-0.5 mb-3 bg-black/20">
-              {p.time}
-            </span>
-            <p className="text-[13px] text-white/55 leading-relaxed">{p.desc}</p>
-          </motion.div>
+      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+        {process.slice(0, 4).map((p, i) => (
+          <motion.article key={p.step} initial={reduce ? false : { opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.5, delay: i * 0.06, ease: EASE }} className="relative overflow-hidden rounded-[24px] border border-white/10 bg-[#14181f] p-6">
+            <span className="absolute -right-2 -top-3 text-[60px] font-extrabold leading-none text-white/[0.06] select-none">{p.step}</span>
+            <span className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#53bdeb]/20 bg-[#53bdeb]/10 text-[#53bdeb] font-mono text-[12px] font-extrabold">{p.step}</span>
+            <h3 className="mb-2 text-[18px] font-extrabold text-white">{p.title}</h3>
+            <p className="mb-3 text-[11px] font-mono uppercase tracking-[0.18em] text-white/40">{p.time}</p>
+            <p className="text-sm leading-relaxed text-white/60">{p.desc}</p>
+          </motion.article>
+        ))}
+      </div>
+
+      <div className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        {[
+          ["Update di Tiap Tahap", "Kamu selalu tahu progressnya — nggak ditinggal diam."],
+          ["Tepat Waktu", "Pengerjaan sesuai target yang disepakati."],
+          ["Kualitas Terjaga", "Desain modern, responsif, dan teruji."],
+          ["Support Penuh", "Tetap kami bantu setelah website live."],
+        ].map(([title, desc]) => (
+          <div key={title} className="rounded-[18px] border border-white/10 bg-white/[0.03] p-4">
+            <p className="mb-1 text-sm font-extrabold text-white">{title}</p>
+            <p className="text-[13px] leading-relaxed text-white/50">{desc}</p>
+          </div>
         ))}
       </div>
     </section>
