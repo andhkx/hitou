@@ -1,80 +1,70 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import { Quote, Star } from "lucide-react";
+import { CheckCheck, ArrowRight, Star } from "lucide-react";
 import { testimonials } from "@/data/portfolio";
 
-const EASE = [0.16, 1, 0.3, 1];
+const EASE = [0.4, 0, 0.2, 1];
 
 function initials(name) {
   const words = name.replace(/[.,]/g, "").split(/\s+/).filter(Boolean);
   if (words.length === 0) return "?";
-  const first = words[0][0] ?? "";
-  const second = words[1]?.[0] ?? "";
-  return (first + second).toUpperCase();
+  return ((words[0][0] ?? "") + (words[1]?.[0] ?? "")).toUpperCase();
 }
 
 export default function Testimonials() {
   const reduce = useReducedMotion();
 
   return (
-    <section
-      id="testimonials"
-      className="w-full max-w-[1450px] mx-auto px-8 md:px-12 lg:px-20 py-24 relative z-10 text-white"
-    >
+    <section id="testimonials" className="relative z-10 mx-auto w-full max-w-[1300px] px-5 py-16 text-white sm:px-8 md:px-12 md:py-24">
       <motion.div
-        initial={reduce ? false : { opacity: 0, y: 40 }}
+        initial={reduce ? false : { opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.4 }}
-        transition={{ duration: 0.8, ease: EASE }}
-        className="text-center mb-12"
+        transition={{ duration: 0.5, ease: EASE }}
+        className="mb-8 text-center"
       >
-        <h2 className="text-3xl md:text-5xl font-bold mb-3">Apa Kata Mereka?</h2>
-        <p className="text-white/55 max-w-xl mx-auto text-sm md:text-base">
-          Pengalaman orang-orang yang sudah punya website.
-        </p>
+        <h2 className="mb-3 text-2xl font-extrabold tracking-tight sm:text-3xl md:text-5xl">Kata mereka setelah punya website.</h2>
+        <p className="mx-auto max-w-xl text-sm leading-relaxed text-white/60 md:text-base">Format chat, ringan, dan mudah dibaca di mobile.</p>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="flex gap-5 overflow-x-auto pb-4 scrollbar-none snap-x snap-mandatory md:grid md:grid-cols-3 md:overflow-visible md:pb-0">
         {testimonials.map((t, i) => (
-          <motion.div
+          <motion.article
             key={t.id}
-            initial={reduce ? false : { opacity: 0, y: 30 }}
+            initial={reduce ? false : { opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.7, delay: 0.08 * i, ease: EASE }}
-            className="rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-6 transition-all duration-300 hover:bg-white/[0.06] hover:border-white/20"
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.5, delay: i * 0.08, ease: EASE }}
+            className="flex w-[84vw] max-w-[360px] flex-shrink-0 snap-start flex-col rounded-[24px] border border-white/10 bg-[#14181f] p-5 md:w-auto"
           >
-            <div className="flex gap-0.5 mb-4">
-              {[...Array(t.rating)].map((_, s) => (
-                <span
-                  key={s}
-                  className="star-shine inline-flex"
-                  style={{ animationDelay: `${s * 0.18}s` }}
-                >
-                  <Star
-                    size={16}
-                    className="text-white/70 fill-white/60"
-                    aria-hidden="true"
-                  />
-                </span>
-              ))}
-            </div>
-            <Quote size={22} className="text-white/15 mb-3" aria-hidden="true" />
-            <p className="text-sm md:text-[15px] text-white/60 italic leading-relaxed mb-5">
-              “{t.quote}”
-            </p>
-            <div className="flex items-center gap-3">
-              <span className="w-10 h-10 rounded-full bg-white/10 border border-white/15 flex items-center justify-center text-[13px] font-bold text-white/80 shrink-0">
-                {initials(t.name)}
-              </span>
-              <div className="min-w-0">
-                <p className="font-bold text-white text-sm truncate">{t.name}</p>
-                <p className="text-xs text-white/50 truncate">{t.role}</p>
+            <div className="mb-4 flex items-center gap-3">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#53bdeb]/15 text-sm font-extrabold text-[#53bdeb]">{initials(t.name)}</span>
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-sm font-extrabold text-white">{t.name}</p>
+                <p className="text-[11px] text-green-400">online • {t.role}</p>
+              </div>
+              <div className="flex gap-0.5 text-white/65">
+                {[...Array(t.rating)].map((_, s) => <Star key={s} size={12} className="fill-white/60 text-white/60" aria-hidden="true" />)}
               </div>
             </div>
-          </motion.div>
+
+            <div className="rounded-2xl rounded-tl-sm border border-white/10 bg-white/[0.05] p-4">
+              <p className="text-sm leading-relaxed text-white/75">{t.quote}</p>
+            </div>
+
+            <div className="mt-3 flex items-center justify-between text-[11px] text-white/40">
+              <span>{("0" + (9 + i)).slice(-2)}.24</span>
+              <span className="inline-flex items-center gap-1 text-blue-400"><CheckCheck size={13} aria-hidden="true" /> read</span>
+            </div>
+          </motion.article>
         ))}
+      </div>
+
+      <div className="mt-10 text-center">
+        <a href="#contact" className="inline-flex items-center gap-2 rounded-xl border border-white/20 px-5 py-3.5 text-sm font-bold text-white hover:bg-white/[0.04]">
+          Chat Sekarang <ArrowRight size={16} aria-hidden="true" />
+        </a>
       </div>
     </section>
   );
